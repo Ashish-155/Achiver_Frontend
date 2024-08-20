@@ -163,16 +163,16 @@ const Dashboard = ({ name, ...props }) => {
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                            <div className='col-lg-6 col-sm-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
-                            <div className='col-lg-6 col-sm-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Week Due</p>
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
@@ -188,10 +188,10 @@ const Dashboard = ({ name, ...props }) => {
                                 />
 
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
@@ -207,10 +207,10 @@ const Dashboard = ({ name, ...props }) => {
                                 />
 
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
@@ -253,16 +253,16 @@ const Dashboard = ({ name, ...props }) => {
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                            <div className='col-lg-6 col-sm-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
-                            <div className='col-lg-6 col-sm-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Week Due</p>
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
@@ -278,10 +278,10 @@ const Dashboard = ({ name, ...props }) => {
                                 />
 
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
@@ -297,10 +297,10 @@ const Dashboard = ({ name, ...props }) => {
                                 />
 
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                                 <input className="form-control form_controlStyle2" type="text" placeholder="Key actions / Tactics" aria-label="example" />
                             </div>
-                            <div className='col-lg-6 col-sm-6 mb-2'>
+                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
                           
                                 <Select
                                     options={stageOptions}
