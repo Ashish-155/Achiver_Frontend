@@ -271,7 +271,7 @@ select {
   width: 100%;
   height: 100%;
   position: relative;
-  padding-block: 80px 30px;
+  padding-block: 0px 30px;
   overflow: hidden;
   isolation: isolate;
 }
@@ -784,4 +784,247 @@ select {
   .chart_postion {
     margin: auto;
   }
+}
+
+.top_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 15px;
+  padding-inline: 20px;
+  width: 100%;
+  border-radius: 14px;
+  background: #fff;
+  margin-bottom: 40px;
+}
+
+.top_header .dropdown {
+  margin-inline-start: auto;
+}
+
+.top_header .profile {
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
+  background: rgba(247, 248, 247, 0.44) !important;
+}
+
+.top_header .profile::after {
+  content: none !important;
+}
+
+.top_header .profile .profile-wrap i {
+  font-size: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ADADB1;
+}
+
+.top_header .profile .profile-wrap .exp-avtar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0px;
+  font-weight: 600;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.top_header .profile .profile-wrap .exp-avtar .prof-img {
+  width: 100%;
+  height: 100%;
+  flex: 0 0 auto;
+}
+
+.top_header .profile .profile-wrap .exp-avtar .user-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.top_header .profile .profile-wrap .profile-name-wrap {
+  flex: 1;
+  text-align: left;
+  max-width: 210px;
+}
+
+.top_header .profile .profile-wrap .profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.top_header .profile .profile-wrap.small-profile-wrap .exp-avtar {
+  width: 24px;
+  height: 24px;
+}
+
+.top_header .profile .profile-wrap .profile-name-desc {
+  flex: 1;
+}
+
+.profile_info {
+  height: 100vh;
+  padding-block: 30px;
+}
+
+.upload {
+  cursor: pointer;
+}
+
+.card-box {
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e7eaed;
+  padding: 50px 40px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  height: calc(100vh - 60px);
+  position: relative;
+}
+
+.card-box form input[type="file"] {
+  display: none;
+  cursor: pointer;
+}
+
+.card-box .avatar-xl {
+  height: 130px;
+  width: 130px;
+}
+
+.card-box .logout {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 25px;
+  transition: all 0.4s ease-in-out;
+}
+
+.card-box .logout i {
+  color: #018B72;
+}
+
+.card-box .logout:hover i {
+  color: #FF0000;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1abc9c;
+}
+
+.nav-pills .nav-link {
+  border-radius: .25rem;
+}
+
+.navtab-bg li > a {
+  background-color: #f7f7f7;
+  margin: 0 5px;
+}
+
+.nav-pills > li > a,
+.nav-tabs > li > a {
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.mb-4,
+.my-4 {
+  margin-bottom: 2.25rem !important;
+}
+
+.tab-content {
+  padding: 20px 0 0 0;
+}
+
+.progress-sm {
+  height: 5px;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.table .thead-light th {
+  color: #6c757d;
+  background-color: #f1f5f7;
+  border-color: #dee2e6;
+}
+
+.social-list-item {
+  height: 2rem;
+  width: 2rem;
+  line-height: calc(2rem - 4px);
+  display: block;
+  border: 2px solid #adb5bd;
+  border-radius: 50%;
+  color: #adb5bd;
+}
+
+.text-purple {
+  color: #6559cc !important;
+}
+
+.border-purple {
+  border-color: #6559cc !important;
+}
+
+.timeline {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.timeline:before {
+  background-color: #dee2e6;
+  bottom: 0;
+  content: "";
+  left: 50%;
+  position: absolute;
+  top: 30px;
+  width: 2px;
+  z-index: 0;
+}
+
+.timeline .time-show {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  position: relative;
+}
+
+.timeline .timeline-box {
+  background: #fff;
+  display: block;
+  margin: 15px 0;
+  position: relative;
+  padding: 20px;
+}
+
+.timeline .timeline-album {
+  margin-top: 12px;
+}
+
+.timeline .timeline-album a {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.timeline .timeline-album img {
+  height: 36px;
+  width: auto;
+  border-radius: 3px;
 }
