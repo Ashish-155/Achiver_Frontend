@@ -1,20 +1,98 @@
+import React, { useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
-const WeekGoalsDetails = () => {
+const WeekGoalsDetails = ({ name, ...props }) => {
+
+    const [showFirst, setShowFirst] = useState(false);
+    const handleCloseFirst = () => setShowFirst(false);
+    const handleShowFirst = () => setShowFirst(true);
+
+    // form validation
+
+    const [formData, setFormData] = useState({
+        keyAction: '',
+        who: '',
+        day: '',
+    });
+
+    const [errors, setErrors] = useState({
+        keyAction: '',
+        who: '',
+        day: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const validate = () => {
+        let valid = true;
+        const newErrors = {};
+
+        if (!formData.keyAction) {
+            valid = false;
+            newErrors.keyAction = 'Key Action is required';
+        }
+
+        if (!formData.who) {
+            valid = false;
+            newErrors.who = 'Who is required';
+        }
+
+        if (!formData.day) {
+            valid = false;
+            newErrors.day = 'Day is required';
+        }
+
+        setErrors(newErrors);
+        return valid;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (validate()) {
+            // Form is valid, submit the data
+            console.log('Form submitted:', formData);
+        }
+    };
+
+    // progress
+
     const now = 75;
     const now2 = 56;
-
 
     return (
         <>
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
+                        <div className='top_header'>
+                         
+                            <DropdownButton
+                            className='profile'
+                                align="end"
+                                title={
+                                    <div className="profile-wrap">
+                                        <i className="fi fi-sr-circle-user"></i>
+                                    </div>
+                                }
+                                id="dropdown-menu-align-end"
+                            >
+                            
+                                <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
+                                <Dropdown.Item eventKey="2">Logout</Dropdown.Item>
+                               
+                            </DropdownButton>
+
+                        </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
                             <div className='innerBox'>
-
-
                                 <div className='weekGoal details'>
                                     <div className='details_box'>
                                         <h3 className='heading3 mb-3'>Notifies to enter actual data every week</h3>
@@ -26,125 +104,30 @@ const WeekGoalsDetails = () => {
                                             <p className='para2 text-black'> Contact management team and form a mid week meeting</p>
                                         </div>
                                     </div>
-
-                                    <div className='my-3 item_box'>
-
-                                        {/* <Accordion defaultActiveKey="0">
-                                            <Accordion.Item eventKey="0">
-                                                <Accordion.Header className='custom_head'>Accordion Item #1</Accordion.Header>
-                                                <Accordion.Body>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                    culpa qui officia deserunt mollit anim id est laborum.
-                                                </Accordion.Body>
-                                            </Accordion.Item>
-                                            <Accordion.Item eventKey="1">
-                                                <Accordion.Header>Accordion Item #2</Accordion.Header>
-                                                <Accordion.Body>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                    culpa qui officia deserunt mollit anim id est laborum.
-                                                </Accordion.Body>
-                                            </Accordion.Item>
-                                        </Accordion> */}
+                                    <div className='mt-3 item_box'>
                                         <div className='task_card'>
                                             <div className='card_header'>
                                                 <h3 className='heading3 textGray'>Add a Task</h3>
-                                                <i className="fi fi-rr-add textMarker fs-5"></i>
+                                                <button onClick={handleShowFirst}>
+                                                    <i className="fi fi-rr-add textMarker fs-5"></i>
+                                                </button>
                                             </div>
                                             <div className='card_body'>
-                                                <form>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Key Action / Tactics</label>
-                                                        {/* <input className="form-control form_controlStyle3" type="text" placeholder="Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to " aria-label="example" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' /> */}
-                                                        <textarea className="form-control form_controlStyle3" id="exampleFormControlTextarea1" placeholder='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' rows="2" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to '></textarea>
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Who</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Veenet" aria-label="example" value='Veenet' />
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Day</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Wednesday" aria-label="example" value='Wednesday' />
-                                                    </div>
-                                                </form>
+                                                <div className='delete'><i class="fi fi-br-trash"></i></div>
+                                                <p className="text-muted mb-2 font-13">
+                                                    <strong> Key Action / Tactics :</strong>
+                                                    <span className="ml-2"> Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to </span>
+                                                </p>
+                                                <p className="text-muted mb-2 font-13">
+                                                    <strong> Who :</strong>
+                                                    <span className="ml-2">Veenet </span>
+                                                </p>
+                                                <p className="text-muted font-13">
+                                                    <strong> Day :</strong>
+                                                    <span className="ml-2">Wednesday </span>
+                                                </p>
                                             </div>
-                                            <div className='card_body'>
-                                                <form>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Key Action / Tactics</label>
-                                                        {/* <input className="form-control form_controlStyle3" type="text" placeholder="Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to " aria-label="example" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' /> */}
-                                                        <textarea className="form-control form_controlStyle3" id="exampleFormControlTextarea1" placeholder='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' rows="2" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to '></textarea>
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Who</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Veenet" aria-label="example" value='Veenet' />
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Day</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Wednesday" aria-label="example" value='Wednesday' />
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div className='card_body'>
-                                                <form>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Key Action / Tactics</label>
-                                                        {/* <input className="form-control form_controlStyle3" type="text" placeholder="Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to " aria-label="example" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' /> */}
-                                                        <textarea className="form-control form_controlStyle3" id="exampleFormControlTextarea1" placeholder='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' rows="2" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to '></textarea>
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Who</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Veenet" aria-label="example" value='Veenet' />
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Day</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Wednesday" aria-label="example" value='Wednesday' />
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div className='card_body'>
-                                                <form>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Key Action / Tactics</label>
-                                                        {/* <input className="form-control form_controlStyle3" type="text" placeholder="Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to " aria-label="example" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' /> */}
-                                                        <textarea className="form-control form_controlStyle3" id="exampleFormControlTextarea1" placeholder='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' rows="2" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to '></textarea>
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Who</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Veenet" aria-label="example" value='Veenet' />
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Day</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Wednesday" aria-label="example" value='Wednesday' />
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div className='card_body'>
-                                                <form>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Key Action / Tactics</label>
-                                                        {/* <input className="form-control form_controlStyle3" type="text" placeholder="Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to " aria-label="example" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' /> */}
-                                                        <textarea className="form-control form_controlStyle3" id="exampleFormControlTextarea1" placeholder='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to ' rows="2" value='Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to '></textarea>
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Who</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Veenet" aria-label="example" value='Veenet' />
-                                                    </div>
-                                                    <div className='form_group'>
-                                                        <label className='label'>Day</label>
-                                                        <input className="form-control form_controlStyle3" type="text" placeholder="Wednesday" aria-label="example" value='Wednesday' />
-                                                    </div>
-                                                </form>
-                                            </div>
+
                                         </div>
                                         <div className='execution'>
                                             <h2 className='heading2 textGray'>Weekly Execution Score</h2>
@@ -183,18 +166,70 @@ const WeekGoalsDetails = () => {
                                                 <span className="value">2368</span>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
 
 
+
+
+
+
+            <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
+                <Offcanvas.Header closeButton className='px-0'>
+
+                </Offcanvas.Header>
+                <Offcanvas.Body className='p-0'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='form_group'>
+                            <label className='label'>Key Action / Tactics</label>
+                            <textarea
+                                className={`form-control form_control ${errors.keyAction && 'is-invalid'}`}
+                                placeholder='Enter key action'
+                                rows='2'
+                                name='keyAction'
+                                value={formData.keyAction}
+                                onChange={handleChange}
+                            />
+                            {errors.keyAction && <div className="invalid-feedback">{errors.keyAction}</div>}
+                        </div>
+
+                        <div className='form_group'>
+                            <label className='label'>Who</label>
+                            <input
+                                className={`form-control form_control ${errors.who && 'is-invalid'}`}
+                                type='text'
+                                placeholder='Enter who'
+                                name='who'
+                                value={formData.who}
+                                onChange={handleChange}
+                            />
+                            {errors.who && <div className="invalid-feedback">{errors.who}</div>}
+                        </div>
+
+                        <div className='form_group'>
+                            <label className='label'>Day</label>
+                            <input
+                                className={`form-control form_control ${errors.day && 'is-invalid'}`}
+                                type='text'
+                                placeholder='Enter day'
+                                name='day'
+                                value={formData.day}
+                                onChange={handleChange}
+                            />
+                            {errors.day && <div className="invalid-feedback">{errors.day}</div>}
+                        </div>
+
+                        <button type='submit' className='primaryBtn'>
+                            Submit
+                        </button>
+                    </form>
+                </Offcanvas.Body>
+            </Offcanvas>
 
         </>
     )

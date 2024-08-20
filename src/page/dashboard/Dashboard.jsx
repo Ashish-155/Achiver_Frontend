@@ -8,30 +8,29 @@ const Dashboard = ({ name, ...props }) => {
     const [showFirst, setShowFirst] = useState(false);
     const [showSecond, setShowSecond] = useState(false);
     const [showThree, setShowThree] = useState(false);
-    const [showNext, setShowNext] = useState(false);
 
     const handleCloseFirst = () => setShowFirst(false);
-    const handleShowFirst = () => setShowFirst(true);
+    const handleShowFirst = (e) => {
+        e.preventDefault();
+        setShowFirst(true);
+        setShowSecond(false);
+        setShowThree(false);
+    };
 
     const handleCloseSecond = () => setShowSecond(false);
     const handleShowSecond = (e) => {
         e.preventDefault();
-        setShowFirst(false);
+        setShowFirst(true);
         setShowSecond(true);
+        setShowThree(false);
     };
 
     const handleCloseThree = () => setShowThree(false);
     const handleShowThree = (e) => {
         e.preventDefault();
+        setShowFirst(false);
         setShowSecond(false);
         setShowThree(true);
-    };
-
-    const handleCloseNext = () => setShowNext(false);
-    const handleShowNext = (e) => {
-        e.preventDefault();
-        setShowThree(false);
-        setShowNext(true);
     };
 
 
@@ -56,12 +55,12 @@ const Dashboard = ({ name, ...props }) => {
                         <div className='top_header'>
                             <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic" className='profile'>
-                                <div className="profile-wrap ">
-                                <i class="fi fi-sr-circle-user"></i>
-                                {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
-                                <div className="ps-2">
-                                {/* <h5 className="profile-name">Pratima Majumder</h5> */}
-                                </div></div>
+                                    <div className="profile-wrap ">
+                                        <i class="fi fi-sr-circle-user"></i>
+                                        {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
+                                        <div className="ps-2">
+                                            {/* <h5 className="profile-name">Pratima Majumder</h5> */}
+                                        </div></div>
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
@@ -69,7 +68,7 @@ const Dashboard = ({ name, ...props }) => {
                                     <Dropdown.Item href="">Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-                           
+
                         </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
@@ -146,43 +145,48 @@ const Dashboard = ({ name, ...props }) => {
             </div>
 
 
-            <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
-                <Offcanvas.Header closeButton className='px-0'>
-                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
-                        <p className='para3 textPrimary mb-2'>Set 12 Week Goals</p>
-                    </Offcanvas.Title>
+  
 
-                </Offcanvas.Header>
+            <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
+                <Offcanvas.Header closeButton className='px-0'></Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
+                        <div className='col-lg-12 col-sm-12 mb-2'>
+                                <div className='form_group'>
+                                    <label className='para3 textPrimary mb-1'>set start date</label>
 
+                                    <input type="date" id="date" name="date" className="form-control "></input>
+                                </div>
+                            </div>
+
+                            <div className='col-lg-12 col-sm-12 mb-2 mt-2'>
+                                
+                                    <p className='para3 textPrimary mb-1'>Set 12 Week Goals</p>
+                            </div>
                             <div className='col-lg-12 col-sm-12 mb-2'>
                                 <textarea className="form-control form_control" id="exampleFormControlTextarea1" placeholder='Get 3 crore revenue every week...' rows="4"></textarea>
                             </div>
                             <div className='col-lg-12'>
-                                <button onClick={handleShowSecond} className=" primaryBtn ">
-                                    Next
-                                </button>
+                                <button onClick={handleShowSecond} className="primaryBtn">Next</button>
                             </div>
                         </div>
                     </form>
-
                 </Offcanvas.Body>
             </Offcanvas>
 
+
             <Offcanvas show={showSecond} onHide={handleCloseSecond} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'>
-                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
+                <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
                         <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
                         <p className='heading3 textGreen mb-2'>Goals #1</p>
                     </Offcanvas.Title>
-
                 </Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                            <div className='col-lg-6 col-sm-6 col-6'>
+                        <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
                             <div className='col-lg-6 col-sm-6 col-6'>
@@ -251,28 +255,29 @@ const Dashboard = ({ name, ...props }) => {
                                 </button>
                             </div>
                             <div className='col-lg-12'>
-                                <button onClick={handleShowThree} className=" primaryBtn mt-0">
-                                    Next
-                                </button>
+                                <button onClick={handleShowThree} className="primaryBtn mt-0">Next</button>
+                            </div>
+                            <div className='col-lg-12'>
+                                <button onClick={handleShowFirst} className="primaryBtn">Back</button>
                             </div>
                         </div>
                     </form>
-
                 </Offcanvas.Body>
             </Offcanvas>
 
+
             <Offcanvas show={showThree} onHide={handleCloseThree} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'>
-                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
+                <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
                         <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
                         <p className='heading3 textGreen mb-2'>Goals #2</p>
                     </Offcanvas.Title>
-
+             
                 </Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                            <div className='col-lg-6 col-sm-6 col-6'>
+                        <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
                             <div className='col-lg-6 col-sm-6 col-6'>
@@ -336,20 +341,19 @@ const Dashboard = ({ name, ...props }) => {
 
                             </div>
                             <div className='col-lg-12'>
-                                <Link to='/week-target' className=" primaryBtn2 mb-3 mt-4">
-                                    Set another goal
-                                </Link>
+                                <Link to='/week-target' className="primaryBtn2 mb-3 mt-4">Set another goal</Link>
                             </div>
                             <div className='col-lg-12'>
-                                <button onClick={handleCloseNext} className=" primaryBtn mt-0">
-                                    Next
-                                </button>
+                                <Link to='/week-target' className="primaryBtn mt-0">Next</Link>
+                            </div>
+                            <div className='col-lg-12'>
+                                <button onClick={handleShowSecond} className="primaryBtn">Back</button>
                             </div>
                         </div>
                     </form>
-
                 </Offcanvas.Body>
             </Offcanvas>
+
         </>
     )
 }
