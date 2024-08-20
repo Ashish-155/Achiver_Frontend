@@ -5,6 +5,7 @@ import Dashboard from '../page/dashboard/Dashboard';
 import WeekTarget from '../page/weekTarget/WeekTarget';
 import WeekGoals from '../page/weekGoals/WeekGoals';
 import WeekGoalsDetails from '../page/weekGoalsDetails/WeekGoalsDetails';
+import Profile from '../page/profile/Profile';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="/week-target" element={<WeekTarget />} />
         <Route path="/week-goals" element={<WeekGoals />} />
         <Route path="/week-goals-details" element={<WeekGoalsDetails />} />
+        <Route path="/profile" element={<Profile />} />
         
       </Routes>
     </>
