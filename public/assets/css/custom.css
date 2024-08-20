@@ -829,7 +829,7 @@ select {
   margin-inline-start: auto;
 }
 
-.top_header .profile .dropdown-toggle.btn.btn-primary {
+.top_header .profile.dropdown-toggle.btn.btn-primary {
   border-radius: 50% !important;
   width: 40px !important;
   height: 40px !important;
@@ -840,7 +840,7 @@ select {
   background: rgba(247, 248, 247, 0.44) !important;
 }
 
-.top_header .profile .dropdown-toggle.btn.btn-primary::after {
+.top_header .profile.dropdown-toggle.btn.btn-primary::after {
   content: none !important;
 }
 

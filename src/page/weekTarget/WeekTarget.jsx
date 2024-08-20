@@ -2,6 +2,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 const WeekTarget = ({ name, ...props }) => {
     const [showFirst, setShowFirst] = useState(false);
@@ -219,6 +220,9 @@ const WeekTarget = ({ name, ...props }) => {
                                         </div>
                                     </form>
                                 </div>
+                                <div className='group'>
+                                <Link to='/dashboard' className="primaryBtn">Back</Link>
+                            </div>
                             </div>
 
                         </div>
