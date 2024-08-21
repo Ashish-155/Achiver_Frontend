@@ -487,6 +487,11 @@ select {
             }
         }
     }
+
+    &.dsh_target {
+        // padding-block: 40px;
+        height: 100vh;
+    }
 }
 
 .bottom_offcanves {
@@ -544,7 +549,7 @@ select {
 .innerBox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 85vh;
+    height: calc(100vh - 180px);
     padding-inline: 5px;
 }
 
@@ -552,12 +557,13 @@ select {
 
 // ============================================== target start
 
+
 .target {
     background: $bg_rgba1;
     border-radius: 14px;
     padding: 20px;
     overflow: auto;
-    height: 85vh;
+    height: calc(100vh - 180px);
 
     .week_card {
         background: $white;
@@ -776,12 +782,13 @@ select {
             max-height: 880px;
             overflow: auto;
             position: relative;
+            padding-bottom: 20px;
 
             .card_header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-bottom: 15px;
+                margin-bottom: 0;
                 cursor: pointer;
                 position: sticky;
                 top: 0;
@@ -796,7 +803,9 @@ select {
                 border-radius: 14px;
                 padding: 20px;
                 margin-bottom: 20px;
-                margin: 20px;
+                margin-inline: 20px;
+                border: 1px solid #ADADB1;
+                position: relative;
 
                 &:last-child {
                     margin-bottom: 0;
@@ -809,6 +818,26 @@ select {
                         font-weight: 500;
                         color: $text_black500;
                         margin-bottom: 10px;
+                    }
+                }
+
+                .delete {
+                    position: absolute;
+                    top: -20px;
+                    right: 15px;
+                    background: rgb(255, 195, 195);
+                    color: $red;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 8px;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    i {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
                 }
             }
@@ -932,18 +961,25 @@ select {
     }
 
     .profile {
-        border-radius: 50% !important;
-        width: 40px !important;
-        height: 40px !important;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        padding: 0 !important;
-        background: $bg_rgba5 !important;
+        &.dropdown-toggle {
+            &.btn {
+                &.btn-primary {
+                    border-radius: 50% !important;
+                    width: 40px !important;
+                    height: 40px !important;
+                    display: flex !important;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0 !important;
+                    background: $bg_rgba5 !important;
 
-        &::after {
-            content: none !important;
+                    &::after {
+                        content: none !important;
+                    }
+                }
+            }
         }
+
 
         .profile-wrap {
 
@@ -1009,14 +1045,15 @@ select {
             }
 
         }
-        
+
     }
 }
 
-.profile_info{
+.profile_info {
     height: 100vh;
     padding-block: 30px;
 }
+
 .upload {
     cursor: pointer;
 }
@@ -1032,25 +1069,30 @@ select {
     border-radius: 14px;
     height: calc(100vh - 60px);
     position: relative;
+
     form input[type="file"] {
         display: none;
         cursor: pointer;
     }
+
     .avatar-xl {
         height: 130px;
         width: 130px;
     }
-    .logout{
+
+    .logout {
         position: absolute;
         right: 20px;
         top: 20px;
         font-size: 25px;
         transition: all 0.4s ease-in-out;
-        i{
+
+        i {
             color: $text_green;
         }
-        &:hover{
-            i{
+
+        &:hover {
+            i {
                 color: $red;
             }
         }

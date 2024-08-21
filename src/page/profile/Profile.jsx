@@ -57,6 +57,9 @@ const Profile = () => {
                                 <input type="File" name="fileToUpload" id="fileToUpload" />
                             </form>
 
+                            <p className="text-muted mb-2 font-13"><strong>Email :</strong> <span className="ml-2 ">ashish@gmail.com</span></p>
+                            <p className="text-muted mb-2 font-13"><strong>ISD_Code :</strong> <span className="ml-2 ">+91</span></p>
+                            <p className="text-muted mb-2 font-13"><strong>Whats_App :</strong> <span className="ml-2 ">7003957953</span></p>
 
                             <div className="text-left mt-4">
 

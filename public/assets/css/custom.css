@@ -382,6 +382,10 @@ select {
   background: #018B72;
 }
 
+.dashboard.dsh_target {
+  height: 100vh;
+}
+
 .bottom_offcanves {
   position: relative;
   isolation: isolate;
@@ -436,7 +440,7 @@ select {
 .innerBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 85vh;
+  height: calc(100vh - 180px);
   padding-inline: 5px;
 }
 
@@ -445,7 +449,7 @@ select {
   border-radius: 14px;
   padding: 20px;
   overflow: auto;
-  height: 85vh;
+  height: calc(100vh - 180px);
 }
 
 .target .week_card {
@@ -660,13 +664,14 @@ select {
   max-height: 880px;
   overflow: auto;
   position: relative;
+  padding-bottom: 20px;
 }
 
 .weekGoal.details .task_card .card_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   cursor: pointer;
   position: sticky;
   top: 0;
@@ -681,7 +686,9 @@ select {
   border-radius: 14px;
   padding: 20px;
   margin-bottom: 20px;
-  margin: 20px;
+  margin-inline: 20px;
+  border: 1px solid #ADADB1;
+  position: relative;
 }
 
 .weekGoal.details .task_card .card_body:last-child {
@@ -696,6 +703,26 @@ select {
   font-weight: 500;
   color: #131313;
   margin-bottom: 10px;
+}
+
+.weekGoal.details .task_card .card_body .delete {
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  background: #ffc3c3;
+  color: #FF0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.weekGoal.details .task_card .card_body .delete i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .weekGoal.details .execution {
@@ -802,7 +829,7 @@ select {
   margin-inline-start: auto;
 }
 
-.top_header .profile {
+.top_header .profile.dropdown-toggle.btn.btn-primary {
   border-radius: 50% !important;
   width: 40px !important;
   height: 40px !important;
@@ -813,7 +840,7 @@ select {
   background: rgba(247, 248, 247, 0.44) !important;
 }
 
-.top_header .profile::after {
+.top_header .profile.dropdown-toggle.btn.btn-primary::after {
   content: none !important;
 }
 

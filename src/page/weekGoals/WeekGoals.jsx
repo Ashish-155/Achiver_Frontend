@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const WeekGoals = () => {
 
@@ -12,6 +13,24 @@ const WeekGoals = () => {
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
+                    <div className='top_header'>
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic" className='profile'>
+                                <div className="profile-wrap ">
+                                <i class="fi fi-sr-circle-user"></i>
+                                {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
+                                <div className="ps-2">
+                                {/* <h5 className="profile-name">Pratima Majumder</h5> */}
+                                </div></div>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                                    <Dropdown.Item href="">Logout</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                           
+                        </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
                             <div className='innerBox'>
