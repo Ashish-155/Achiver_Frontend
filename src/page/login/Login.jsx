@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
 // import logo from '../../../../assets/image/logo.png';
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { LoginContext } from "../../ContextProvider/Context";
+import { BASE_URL } from "../../services/api";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +31,7 @@ const Login = () => {
             };
         });
     };
-
+    const { logindata, setLoginData } = useContext(LoginContext);
     const loginuser = async (e) => {
         e.preventDefault();
 
@@ -52,14 +54,14 @@ const Login = () => {
                 position: "top-center"
             });
         } else {
-            //   console.log("user login succesfully done");
 
             try {
                 const res = await axios.post(
-                    "http://localhost:5000/api/user/login",
+                    `${BASE_URL}/api/user/login`,
                     inpval
                 );
-                console.log(res);
+                // console.log(res);
+                setLoginData(res.data.data);
                 toast.success("Login successful!", {
                     position: "top-center"
                 });

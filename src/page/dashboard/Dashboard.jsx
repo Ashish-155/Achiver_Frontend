@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { toast } from 'react-toastify';
+import { LoginContext } from '../../ContextProvider/Context';
+import { BASE_URL } from '../../services/api';
+import axios from 'axios';
 
 const Dashboard = ({ name, ...props }) => {
     const [showFirst, setShowFirst] = useState(false);
@@ -36,6 +40,8 @@ const Dashboard = ({ name, ...props }) => {
 
 
 
+    const { logindata, setLoginData } = useContext(LoginContext);
+
     const stageOptions = [
         { value: ' Arunavaa D Bajpayi', label: ' Arunavaa D Bajpayi' },
         { value: ' Amit Das Gupta', label: ' Amit Das Gupta' },
@@ -47,6 +53,34 @@ const Dashboard = ({ name, ...props }) => {
 
     ]
 
+    const navigate = useNavigate();
+    const removeToken = () => {
+        localStorage.removeItem("token");
+        toast.success("Logged out successfully!");
+        navigate("/", { replace: true });
+    };
+
+    useEffect(() => {
+        const profile = async () => {
+            try {
+                const res = await axios.get(
+                    `${BASE_URL}/api/user/my-profile`,
+                    {
+                        headers: {
+                            Authorization: `${localStorage.getItem("token")}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setLoginData(res.data.data);
+                // console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        profile();
+    }, []);
+
 
     return (
         <>
@@ -56,20 +90,32 @@ const Dashboard = ({ name, ...props }) => {
                         <div className='top_header'>
                             <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic" className='profile'>
-                                <div className="profile-wrap ">
-                                <i class="fi fi-sr-circle-user"></i>
-                                {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
-                                <div className="ps-2">
-                                {/* <h5 className="profile-name">Pratima Majumder</h5> */}
-                                </div></div>
+                                    <div className="profile-wrap ">
+
+                                        {/* <i class="fi fi-sr-circle-user"></i> */}
+
+                                        {logindata.profile_image ? (
+                                            <img
+                                                className="rounded-circle avatar-xl img-thumbnail"
+                                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
+                                                alt={`${logindata.name}'s Profile`}
+                                            />
+                                        ) : (
+                                            // <p>No profile image available</p>
+                                            <i class="fi fi-sr-circle-user"></i>
+                                        )}
+                                        {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
+                                        <div className="ps-2">
+                                            {/* <h5 className="profile-name">Pratima Majumder</h5> */}
+                                        </div></div>
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="">Logout</Dropdown.Item>
+                                    <Dropdown.Item href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-                           
+
                         </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
