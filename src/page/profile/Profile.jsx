@@ -74,8 +74,6 @@ const Profile = () => {
                                 <p className="text-muted mb-1 font-13"><strong>Location :</strong> <span className="ml-2">{logindata.location}</span></p>
                                 <p className="text-muted mb-1 font-13"><strong>Date Of Birth :</strong> <span className="ml-2">{logindata.date_of_birth}</span></p>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
