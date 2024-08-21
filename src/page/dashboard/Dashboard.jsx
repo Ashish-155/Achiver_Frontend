@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { toast } from 'react-toastify';
+import { LoginContext } from '../../ContextProvider/Context';
+import { BASE_URL } from '../../services/api';
+import axios from 'axios';
 
 const Dashboard = ({ name, ...props }) => {
     const [showFirst, setShowFirst] = useState(false);
@@ -35,6 +39,8 @@ const Dashboard = ({ name, ...props }) => {
 
 
 
+    const { logindata, setLoginData } = useContext(LoginContext);
+
     const stageOptions = [
         { value: ' Arunavaa D Bajpayi', label: ' Arunavaa D Bajpayi' },
         { value: ' Amit Das Gupta', label: ' Amit Das Gupta' },
@@ -46,6 +52,34 @@ const Dashboard = ({ name, ...props }) => {
 
     ]
 
+    const navigate = useNavigate();
+    const removeToken = () => {
+        localStorage.removeItem("token");
+        toast.success("Logged out successfully!");
+        navigate("/", { replace: true });
+    };
+
+    useEffect(() => {
+        const profile = async () => {
+            try {
+                const res = await axios.get(
+                    `${BASE_URL}/api/user/my-profile`,
+                    {
+                        headers: {
+                            Authorization: `${localStorage.getItem("token")}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setLoginData(res.data.data);
+                // console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        profile();
+    }, []);
+
 
     return (
         <>
@@ -56,7 +90,19 @@ const Dashboard = ({ name, ...props }) => {
                             <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic" className='profile'>
                                     <div className="profile-wrap ">
-                                        <i class="fi fi-sr-circle-user"></i>
+
+                                        {/* <i class="fi fi-sr-circle-user"></i> */}
+
+                                        {logindata.profile_image ? (
+                                            <img
+                                                className="rounded-circle avatar-xl img-thumbnail"
+                                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
+                                                alt={`${logindata.name}'s Profile`}
+                                            />
+                                        ) : (
+                                            // <p>No profile image available</p>
+                                            <i class="fi fi-sr-circle-user"></i>
+                                        )}
                                         {/* <div className="exp-avtar gth-bg-warning text-white">MS</div> */}
                                         <div className="ps-2">
                                             {/* <h5 className="profile-name">Pratima Majumder</h5> */}
@@ -65,7 +111,7 @@ const Dashboard = ({ name, ...props }) => {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="">Logout</Dropdown.Item>
+                                    <Dropdown.Item href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
@@ -144,14 +190,14 @@ const Dashboard = ({ name, ...props }) => {
             </div>
 
 
-  
+
 
             <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'></Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                        <div className='col-lg-12 col-sm-12 mb-2'>
+                            <div className='col-lg-12 col-sm-12 mb-2'>
                                 <div className='form_group'>
                                     <label className='para3 textPrimary mb-1'>set start date</label>
 
@@ -160,8 +206,8 @@ const Dashboard = ({ name, ...props }) => {
                             </div>
 
                             <div className='col-lg-12 col-sm-12 mb-2 mt-2'>
-                                
-                                    <p className='para3 textPrimary mb-1'>Set 12 Week Goals</p>
+
+                                <p className='para3 textPrimary mb-1'>Set 12 Week Goals</p>
                             </div>
                             <div className='col-lg-12 col-sm-12 mb-2'>
                                 <textarea className="form-control form_control" id="exampleFormControlTextarea1" placeholder='Get 3 crore revenue every week...' rows="4"></textarea>
@@ -177,7 +223,7 @@ const Dashboard = ({ name, ...props }) => {
 
             <Offcanvas show={showSecond} onHide={handleCloseSecond} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'>
-                <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
+                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
                         <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
                         <p className='heading3 textGreen mb-2'>Goals #1</p>
                     </Offcanvas.Title>
@@ -185,7 +231,7 @@ const Dashboard = ({ name, ...props }) => {
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                        <div className='col-lg-6 col-sm-6 col-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
                             <div className='col-lg-6 col-sm-6 col-6'>
@@ -267,16 +313,16 @@ const Dashboard = ({ name, ...props }) => {
 
             <Offcanvas show={showThree} onHide={handleCloseThree} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'>
-                <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
+                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
                         <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
                         <p className='heading3 textGreen mb-2'>Goals #2</p>
                     </Offcanvas.Title>
-             
+
                 </Offcanvas.Header>
                 <Offcanvas.Body className='p-0'>
                     <form>
                         <div className='row'>
-                        <div className='col-lg-6 col-sm-6 col-6'>
+                            <div className='col-lg-6 col-sm-6 col-6'>
                                 <p className='para4 textPrimary mb-2'>Key actions / Tactics</p>
                             </div>
                             <div className='col-lg-6 col-sm-6 col-6'>

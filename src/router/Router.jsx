@@ -10,17 +10,17 @@ import Profile from '../page/profile/Profile';
 const Router = () => {
   return (
     <>
-     <Routes>
+      <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/week-target" element={<WeekTarget />} />
         <Route path="/week-goals" element={<WeekGoals />} />
         <Route path="/week-goals-details" element={<WeekGoalsDetails />} />
         <Route path="/profile" element={<Profile />} />
-        
+
       </Routes>
     </>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
