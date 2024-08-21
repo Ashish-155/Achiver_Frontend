@@ -3,6 +3,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Avatar from '../../component/avatar/Avatar';
+import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 
 const WeekGoals = () => {
 
@@ -13,21 +15,12 @@ const WeekGoals = () => {
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
-                        <div className='top_header'>
-                            <Dropdown>
-                                <Dropdown.Toggle id="dropdown-basic" className='profile'>
-                                    <div className="profile-wrap ">
-                                        <i class="fi fi-sr-circle-user"></i>
-                                        <div className="ps-2">
-                                        </div></div>
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="">Logout</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-
+                    <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                            <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link>
+                            <div className='d-flex justify-content-end align-items-center gap-2'>
+                            <Link to='/dashboard' className=' textPrimary '> <i class="fi fi-br-house-chimney fs-4 d-flex"></i></Link>
+                            <Avatar />
+                            </div>
                         </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
@@ -111,80 +104,7 @@ const WeekGoals = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className='weekGoal'>
-                                    <Link to='/week-goals-details' className='goalCard active '>
-                                        <div className='chip'><i class="fi fi-rr-calendar"></i> Week 1</div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Leads</p>
-                                            <p className='para2'><strong>200</strong></p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Lags</p>
-                                            <p className='para2'><strong>$4500</strong></p>
-                                        </div>
-                                        <div className='mt-4'>
-                                            <p className='para2 d-flex justify-content-start align-items-center gap-2'><i class="fi fi-rr-arrow-trend-down down"></i><span className='down'>20.5%</span> Low from Last Week</p>
-                                        </div>
-                                    </Link>
-                                    <Link to='/week-goals-details' className='goalCard ongoing'>
-                                        <div className='chip'><i class="fi fi-rr-calendar"></i> Week 2</div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Leads</p>
-                                            <p className='para2'><strong>200</strong></p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Lags</p>
-                                            <p className='para2'><strong>$4500</strong></p>
-                                        </div>
-                                        <div className='mt-4'>
-                                            <p className='para2 d-flex justify-content-start align-items-center gap-2'><i class="fi fi-rr-arrow-trend-down down"></i><span className='down'>20.5%</span> Low from Last Week</p>
-                                        </div>
-                                    </Link>
-                                    <Link to='/week-goals-details' className='goalCard '>
-                                        <div className='chip'><i class="fi fi-rr-calendar"></i> Week 3</div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Leads</p>
-                                            <p className='para2'><strong>200</strong></p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Lags</p>
-                                            <p className='para2'><strong>$4500</strong></p>
-                                        </div>
-                                        <div className='mt-4'>
-                                            <p className='para2 d-flex justify-content-start align-items-center gap-2'><i class="fi fi-rr-arrow-trend-up up"></i><span className='up'>20.5%</span> Low from Last Week</p>
-                                        </div>
-                                    </Link>
-                                    <Link to='/week-goals-details' className='goalCard'>
-                                        <div className='chip'><i class="fi fi-rr-calendar"></i> Week 4</div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Leads</p>
-                                            <p className='para2'><strong>200</strong></p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Lags</p>
-                                            <p className='para2'><strong>$4500</strong></p>
-                                        </div>
-                                        <div className='mt-4'>
-                                            <p className='para2 d-flex justify-content-start align-items-center gap-2'><i class="fi fi-rr-arrow-trend-up up"></i><span className='up'>20.5%</span> Low from Last Week</p>
-                                        </div>
-                                    </Link>
-                                    <Link to='/week-goals-details' className='goalCard'>
-                                        <div className='chip'><i class="fi fi-rr-calendar"></i> Week 5</div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Leads</p>
-                                            <p className='para2'><strong>200</strong></p>
-                                        </div>
-                                        <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
-                                            <p className='para2'>Target Lags</p>
-                                            <p className='para2'><strong>$4500</strong></p>
-                                        </div>
-                                        <div className='mt-4'>
-                                            <p className='para2 d-flex justify-content-start align-items-center gap-2'><i class="fi fi-rr-arrow-trend-down down"></i><span className='down'>20.5%</span> Low from Last Week</p>
-                                        </div>
-                                    </Link>
-
-
-                                </div>
+                               <AllGoalsBox />
                             </div>
 
                         </div>

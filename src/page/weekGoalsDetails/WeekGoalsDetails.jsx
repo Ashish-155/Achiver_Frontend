@@ -71,39 +71,37 @@ const WeekGoalsDetails = ({ name, ...props }) => {
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
-                    <div className='top_header'>
-                            <Dropdown>
-                                <Dropdown.Toggle id="dropdown-basic" className='profile'>
+                        <div className='top_header'>
+                            {/* <DropdownButton
+                                align="end"
+                                className='profile'
+                                title={
                                     <div className="profile-wrap ">
-                                        <i class="fi fi-sr-circle-user"></i>
-                                        <div className="ps-2">
-                                        </div></div>
-                                </Dropdown.Toggle>
+                                        {logindata.profile_image ? (
+                                            <img
+                                                className="rounded-circle avatar-xl img-thumbnail"
+                                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
+                                                alt={`${logindata.name}'s Profile`}
+                                            />
+                                        ) : (
+                                            <i class="fi fi-sr-circle-user"></i>
+                                        )}
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="">Logout</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                                    </div>
+                                }
+                                id="dropdown-menu-align-end"
+                            >
+                                <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
+
+                            </DropdownButton> */}
 
                         </div>
                         <div className='main_content'>
-                        <div className='d-flex justify-content-between align-items-center'>
-                            <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
-                            {/* <Dropdown>
-                                <Dropdown.Toggle id="dropdown-basic" className='profile'>
-                                    <div className="profile-wrap ">
-                                        <i class="fi fi-sr-circle-user"></i>
-                                        <div className="ps-2">
-                                        </div></div>
-                                </Dropdown.Toggle>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                                    <Dropdown.Item href="">Logout</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown> */}
-                        </div>
+                            </div>
                             <div className='innerBox'>
                                 <div className='weekGoal details'>
                                     <div className='details_box'>

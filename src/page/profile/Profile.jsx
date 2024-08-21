@@ -33,7 +33,9 @@ const Profile = () => {
                 <div className='container'>
                     <div className='main_content'>
                         <div className="card-box">
-                            <button className='logout'><i class="fi fi-br-power"></i></button>
+                        {/* <div className=' '>
+
+                        </div> */}
                             <form>
                                 <label for="fileToUpload" className='upload'>
                                     <div className="exp-avtar gth-bg-danger text-white profile-pic">
