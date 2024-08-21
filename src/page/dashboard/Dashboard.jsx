@@ -68,7 +68,6 @@ const Dashboard = ({ name, ...props }) => {
                                     <Dropdown.Item href="">Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-
                         </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>

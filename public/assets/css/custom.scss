@@ -369,7 +369,7 @@ select {
 .dashboard {
     background: linear-gradient(-25deg, $gradient_set2_1 0%, $gradient_set1_2 100%);
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     padding-block: 0px 30px;
     overflow: hidden;
@@ -549,7 +549,7 @@ select {
 .innerBox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 140px);
     padding-inline: 5px;
 }
 
@@ -944,6 +944,93 @@ select {
 
 //   ===================== profile
 
+.profile {
+    &.dropdown-toggle {
+        &.btn {
+            &.btn-primary {
+                border-radius: 50% !important;
+                width: 40px !important;
+                height: 40px !important;
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                padding: 0 !important;
+                background: $bg_rgba5 !important;
+
+                &::after {
+                    content: none !important;
+                }
+            }
+        }
+    }
+
+
+    .profile-wrap {
+
+        // display: flex;
+        // align-items: center;
+        i {
+            font-size: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $text_gray200;
+        }
+
+        .exp-avtar {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex: 0 0 auto;
+            justify-content: center;
+            align-items: center;
+            font-size: 11px;
+            letter-spacing: 0px;
+            font-weight: 600;
+            border-radius: 50%;
+            // border: 2px solid #c6c6c6;
+            overflow: hidden;
+
+            .prof-img {
+                width: 100%;
+                height: 100%;
+                flex: 0 0 auto;
+            }
+
+            .user-icon {
+                font-size: 14px;
+                line-height: 1;
+            }
+        }
+
+        .profile-name-wrap {
+            flex: 1;
+            text-align: left;
+            max-width: 210px;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0;
+            width: 100%;
+            //   color: $exp-primary-grey-3;
+        }
+
+        &.small-profile-wrap {
+            .exp-avtar {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .profile-name-desc {
+            flex: 1;
+        }
+
+    }
+
+}
 
 .top_header {
     display: flex;
@@ -952,9 +1039,9 @@ select {
     padding-block: 15px;
     padding-inline: 20px;
     width: 100%;
-    border-radius: 14px;
-    background: #fff;
-    margin-bottom: 40px;
+    // border-radius: 14px;
+    // background: #fff;
+    // margin-bottom: 40px;
 
     .dropdown {
         margin-inline-start: auto;
