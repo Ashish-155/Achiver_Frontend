@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { LoginContext } from '../../ContextProvider/Context';
 import { BASE_URL } from '../../services/api';
 import axios from 'axios';
-import { DropdownButton } from 'react-bootstrap';
+import { DropdownButton, Modal } from 'react-bootstrap';
 import Avatar from '../../component/avatar/Avatar';
 
 const Dashboard = ({ name, ...props }) => {
@@ -23,29 +23,29 @@ const Dashboard = ({ name, ...props }) => {
         setShowThree(false);
     };
 
-    const handleCloseSecond = () => setShowSecond(false);
-    const handleShowSecond = (e) => {
-        e.preventDefault();
+    // const handleCloseSecond = () => setShowSecond(false);
+    // const handleShowSecond = (e) => {
+    //     e.preventDefault();
 
-        if (validateFirstStep()) {
-            setShowFirst(true);
-            setShowSecond(true);
-            setShowThree(false);
-        }
-    };
+    //     if (validateFirstStep()) {
+    //         setShowFirst(true);
+    //         setShowSecond(true);
+    //         setShowThree(false);
+    //     }
+    // };
 
 
 
-    const handleCloseThree = () => setShowThree(false);
-    const handleShowThree = (e) => {
-        e.preventDefault();
+    // const handleCloseThree = () => setShowThree(false);
+    // const handleShowThree = (e) => {
+    //     e.preventDefault();
 
-        if (validateSecondStep()) {
-            setShowFirst(false);
-            setShowSecond(false);
-            setShowThree(true);
-        }
-    };
+    //     if (validateSecondStep()) {
+    //         setShowFirst(false);
+    //         setShowSecond(false);
+    //         setShowThree(true);
+    //     }
+    // };
 
 
     const { logindata, setLoginData } = useContext(LoginContext);
@@ -92,52 +92,35 @@ const Dashboard = ({ name, ...props }) => {
 
 
 
-    // form validation
+    //   modal
+    const [modalShow, setModalShow] = useState(false);
+
+    const openModalShow = () => setModalShow(true);
+    const closeModalShow = () => setModalShow(false);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setModalShow(true);
+      }, 1000); 
+
+      return () => clearTimeout(timer); 
+    }, []);
 
 
-
-
-    const [date, setDate] = useState('');
-    const [goal, setGoal] = useState('');
-    const [actions, setActions] = useState(['']);
-    const [weeks, setWeeks] = useState([null]);
-
-    const [errors, setErrors] = useState({});
-
-
-
-    const validateFirstStep = () => {
-        const newErrors = {};
-        if (!date) {
-            newErrors.date = 'Start date is required';
-        }
-        if (!goal.trim()) {
-            newErrors.goal = 'Goal description is required';
-        }
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
-    const validateSecondStep = () => {
-        const newErrors = {};
-        actions.forEach((action, index) => {
-            if (!action.trim()) {
-                newErrors[`action${index}`] = 'Action is required';
-            }
-            if (!weeks[index]) {
-                newErrors[`week${index}`] = 'Week selection is required';
-            }
-        });
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
 
     return (
         <>
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
-                        <Avatar />
+                        <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                            {/* <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link> */}
+                            <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
+                                <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-start align-items-center gap-2'> <i class="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
+                                <Link to='/dashboard' className=' textGray homeBox'> <i class="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
+                                <Avatar />
+                            </div>
+                        </div>
                         <div className='main_content'>
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
                             <div className='innerBox'>
@@ -202,7 +185,7 @@ const Dashboard = ({ name, ...props }) => {
                                     </div>
                                 </div>
 
-                                <button onClick={handleShowFirst} className=" primaryBtn ">
+                                <button className=" primaryBtn ">
                                     Set 12 Week Goals & Targets
                                 </button>
                             </div>
@@ -214,186 +197,45 @@ const Dashboard = ({ name, ...props }) => {
 
 
 
-            {/* First Offcanvas */}
-            <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
-                <Offcanvas.Header closeButton className='px-0'></Offcanvas.Header>
-                <Offcanvas.Body className='p-0'>
-                    <form>
-                        <div className='row'>
-                            <div className='col-lg-12 col-sm-12 mb-2'>
-                                <div className='form_group'>
-                                    <label className='para3 textPrimary mb-1'>Set Start Date</label>
-                                    <input
-                                        type="date"
-                                        id="date"
-                                        name="date"
-                                        className="form-control"
-                                        value={date}
-                                        onChange={(e) => setDate(e.target.value)}
-                                    />
-                                    {errors.date && <p className="text-danger">{errors.date}</p>}
-                                </div>
-                            </div>
 
-                            <div className='col-lg-12 col-sm-12 mb-2 mt-2'>
-                                <p className='para3 textPrimary mb-1'>Set 12 Week Goals</p>
-                            </div>
-                            <div className='col-lg-12 col-sm-12 mb-2'>
-                                <textarea
-                                    className="form-control form_control"
-                                    id="exampleFormControlTextarea1"
-                                    placeholder='Get 3 crore revenue every week...'
-                                    rows="4"
-                                    value={goal}
-                                    onChange={(e) => setGoal(e.target.value)}
-                                />
-                                {errors.goal && <p className="text-danger">{errors.goal}</p>}
-                            </div>
-                            <div className='col-lg-12'>
-                                <button type="button" onClick={handleShowSecond} className="primaryBtn">Next</button>
+            <Modal
+            show={modalShow}
+            onHide={closeModalShow}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Body className='p-0'>
+                <div className="welcome_container">
+                    <button className='closeButton' onClick={closeModalShow}>
+                        <i className="fi fi-rr-circle-xmark"></i>
+                    </button>
+                    <div className="row align-items-center">
+                        <div className='col-lg-12'>
+                            <h1 className='w_heading1 text-center mb-5'>Welcome</h1>
+                            <div className="profile_img">
+                                <img src='assets/image/welcome.png' alt="Welcome" />
                             </div>
                         </div>
-                    </form>
-                </Offcanvas.Body>
-            </Offcanvas>
-
-            {/* Second Offcanvas */}
-            <Offcanvas show={showSecond} onHide={handleCloseSecond} placement="bottom" {...props} className='bottom_offcanves'>
-                <Offcanvas.Header closeButton className='px-0'>
-                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
-                        <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
-                        <p className='heading3 textGreen mb-2'>Goals #1</p>
-                    </Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body className='p-0'>
-                    <form>
-                        <div className='row'>
-                            {actions.map((action, index) => (
-                                <Fragment key={index}>
-                                    <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                        <input
-                                            className="form-control form_controlStyle2"
-                                            type="text"
-                                            placeholder="Key actions / Tactics"
-                                            value={action}
-                                            onChange={(e) => {
-                                                const newActions = [...actions];
-                                                newActions[index] = e.target.value;
-                                                setActions(newActions);
-                                            }}
-                                        />
-                                        {errors[`action${index}`] && <p className="text-danger">{errors[`action${index}`]}</p>}
-                                    </div>
-                                    <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                        <Select
-                                            options={stageOptions}
-                                            value={weeks[index]}
-                                            onChange={(selectedOption) => {
-                                                const newWeeks = [...weeks];
-                                                newWeeks[index] = selectedOption;
-                                                setWeeks(newWeeks);
-                                            }}
-                                            className='input_control form_controlStyle2'
-                                            theme={(theme) => ({
-                                                ...theme,
-                                                colors: {
-                                                    ...theme.colors,
-                                                    primary25: '#ddddff',
-                                                    primary: '#018B72',
-                                                },
-                                            })}
-                                        />
-                                        {errors[`week${index}`] && <p className="text-danger">{errors[`week${index}`]}</p>}
-                                    </div>
-
-                                </Fragment>
-                            ))}
-                            <div className='col-lg-12'>
-                                <button onClick={handleShowThree} className=" primaryBtn2 mt-0 mb-3 mt-4">
-                                    Set another goal
-                                </button>
-                            </div>
-                            <div className='col-lg-12'>
-                                <button type="button" onClick={handleShowThree} className="primaryBtn mt-0">Next</button>
-                            </div>
-                            <div className='col-lg-12'>
-                                <button type="button" onClick={handleShowFirst} className="primaryBtn">Back</button>
+                        <div className='col-lg-12'>
+                            <div className="text-content">
+                                <h2 className='heading2 textPrimary fw-semibold'>Ashish Show</h2>
+                                <p className='para2 mb-2 fw-semibold'>ashish@gmail.com</p>
+                                <p className='para2 textGray300'>
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                                <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center mt-4'> <i class="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
                             </div>
                         </div>
-                    </form>
-                </Offcanvas.Body>
-            </Offcanvas>
+                    </div>
+                </div>
+            </Modal.Body>
+        </Modal>
+           
 
-            {/* Third Offcanvas */}
-            <Offcanvas show={showThree} onHide={handleCloseThree} placement="bottom" {...props} className='bottom_offcanves'>
-                <Offcanvas.Header closeButton className='px-0'>
-                    <Offcanvas.Title className='pt-3 d-flex justify-content-between align-items-center w-100'>
-                        <p className='heading3 textGreen mb-2'>Set 12 Week Plans</p>
-                        <p className='heading3 textGreen mb-2'>Goals #2</p>
-                    </Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body className='p-0'>
-                    <form>
-                        <div className='row'>
-                            {actions.map((action, index) => (
-                                <Fragment key={index}>
-                                    <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                        <input
-                                            className="form-control form_controlStyle2"
-                                            type="text"
-                                            placeholder="Key actions / Tactics"
-                                            value={action}
-                                            onChange={(e) => {
-                                                const newActions = [...actions];
-                                                newActions[index] = e.target.value;
-                                                setActions(newActions);
-                                            }}
-                                        />
-                                        {errors[`action${index}`] && <p className="text-danger">{errors[`action${index}`]}</p>}
-                                    </div>
-                                    <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                        <Select
-                                            options={stageOptions}
-                                            value={weeks[index]}
-                                            onChange={(selectedOption) => {
-                                                const newWeeks = [...weeks];
-                                                newWeeks[index] = selectedOption;
-                                                setWeeks(newWeeks);
-                                            }}
-                                            className='input_control form_controlStyle2'
-                                            theme={(theme) => ({
-                                                ...theme,
-                                                colors: {
-                                                    ...theme.colors,
-                                                    primary25: '#ddddff',
-                                                    primary: '#018B72',
-                                                },
-                                            })}
-                                        />
-                                        {errors[`week${index}`] && <p className="text-danger">{errors[`week${index}`]}</p>}
-                                    </div>
-
-                                </Fragment>
-                            ))}
-                            <div className='col-lg-12'>
-                                <button onClick={handleShowThree} className=" primaryBtn2 mt-0 mb-3 mt-4">
-                                    Set another goal
-                                </button>
-                            </div>
-                            <div className='col-lg-12'>
-                                <button type="button" onClick={handleShowThree} className="primaryBtn mt-0">Next</button>
-                            </div>
-                            <div className='col-lg-12'>
-                                <button type="button" onClick={handleShowSecond} className="primaryBtn">Back</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </Offcanvas.Body>
-            </Offcanvas>
-
-        </>
-    )
+            </>
+            )
 }
 
-export default Dashboard
+            export default Dashboard
