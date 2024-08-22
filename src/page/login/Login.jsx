@@ -67,7 +67,7 @@ const Login = () => {
                 });
 
                 localStorage.setItem("token", res.data.token);
-                navigate("/dashboard");
+                navigate("/welcome");
             } catch (error) {
                 console.log("Login error : ", error);
                 toast.error(error.response.data.message);
@@ -78,7 +78,7 @@ const Login = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            navigate("/dashboard");
+            navigate("/welcome");
         }
     }, [navigate]);
 

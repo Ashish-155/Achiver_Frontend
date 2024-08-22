@@ -72,26 +72,36 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
                         <div className='top_header'>
-                         
-                            <DropdownButton
-                            className='profile'
+                            {/* <DropdownButton
                                 align="end"
+                                className='profile'
                                 title={
-                                    <div className="profile-wrap">
-                                        <i className="fi fi-sr-circle-user"></i>
+                                    <div className="profile-wrap ">
+                                        {logindata.profile_image ? (
+                                            <img
+                                                className="rounded-circle avatar-xl img-thumbnail"
+                                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
+                                                alt={`${logindata.name}'s Profile`}
+                                            />
+                                        ) : (
+                                            <i class="fi fi-sr-circle-user"></i>
+                                        )}
+
                                     </div>
                                 }
                                 id="dropdown-menu-align-end"
                             >
-                            
                                 <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
-                                <Dropdown.Item eventKey="2">Logout</Dropdown.Item>
-                               
-                            </DropdownButton>
+                                <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
+
+                            </DropdownButton> */}
 
                         </div>
                         <div className='main_content'>
-                            <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+
+                            </div>
                             <div className='innerBox'>
                                 <div className='weekGoal details'>
                                     <div className='details_box'>

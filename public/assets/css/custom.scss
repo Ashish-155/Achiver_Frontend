@@ -94,6 +94,9 @@ $gradient_set5_2: rgba(215, 235, 224, 1);
 .textMarker {
     color: $text_marker;
 }
+.red{
+    color: $red;
+}
 
 @mixin heading1 ($size, $weight) {
     font-size: $size;
@@ -284,7 +287,11 @@ select {
 }
 
 
-
+@media (max-width: 991px) {
+    .container, .container-sm {
+        max-width: 991px !important;
+    }
+}
 
 
 
@@ -369,7 +376,7 @@ select {
 .dashboard {
     background: linear-gradient(-25deg, $gradient_set2_1 0%, $gradient_set1_2 100%);
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     padding-block: 0px 30px;
     overflow: hidden;
@@ -549,7 +556,7 @@ select {
 .innerBox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 140px);
     padding-inline: 5px;
 }
 
@@ -563,7 +570,7 @@ select {
     border-radius: 14px;
     padding: 20px;
     overflow: auto;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 140px);
 
     .week_card {
         background: $white;
@@ -659,6 +666,7 @@ select {
         margin-bottom: 15px;
         display: block;
         transition: all 0.4s ease-in-out;
+        overflow: hidden;
 
         &:hover {
             transform: translatey(-5px);
@@ -944,6 +952,93 @@ select {
 
 //   ===================== profile
 
+.profile {
+    .dropdown-toggle {
+        &.btn {
+            &.btn-primary {
+                border-radius: 50% !important;
+                width: 40px !important;
+                height: 40px !important;
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                padding: 0 !important;
+                background: $bg_rgba5 !important;
+
+                &::after {
+                    content: none !important;
+                }
+            }
+        }
+    }
+
+
+    .profile-wrap {
+
+        // display: flex;
+        // align-items: center;
+        i {
+            font-size: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $text_gray200;
+        }
+
+        .exp-avtar {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex: 0 0 auto;
+            justify-content: center;
+            align-items: center;
+            font-size: 11px;
+            letter-spacing: 0px;
+            font-weight: 600;
+            border-radius: 50%;
+            // border: 2px solid #c6c6c6;
+            overflow: hidden;
+
+            .prof-img {
+                width: 100%;
+                height: 100%;
+                flex: 0 0 auto;
+            }
+
+            .user-icon {
+                font-size: 14px;
+                line-height: 1;
+            }
+        }
+
+        .profile-name-wrap {
+            flex: 1;
+            text-align: left;
+            max-width: 210px;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0;
+            width: 100%;
+            //   color: $exp-primary-grey-3;
+        }
+
+        &.small-profile-wrap {
+            .exp-avtar {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .profile-name-desc {
+            flex: 1;
+        }
+
+    }
+
+}
 
 .top_header {
     display: flex;
@@ -952,9 +1047,9 @@ select {
     padding-block: 15px;
     padding-inline: 20px;
     width: 100%;
-    border-radius: 14px;
-    background: #fff;
-    margin-bottom: 40px;
+    // border-radius: 14px;
+    // background: #fff;
+    // margin-bottom: 40px;
 
     .dropdown {
         margin-inline-start: auto;
@@ -1271,3 +1366,109 @@ select {
 //         width: 0;
 //     }
 // }
+
+
+.profile_bg{
+    // background: linear-gradient(-25deg, $gradient_set2_1 0%, $gradient_set1_2 100%);
+    background: linear-gradient(-25deg, $gradient_set2_1 0%, $gradient_set1_2 100%);
+    width: 100%;
+    height: 250px;
+    padding: 40px;
+    border-radius: 14px;
+}
+
+
+
+// ============================= profile
+
+.welcome{
+    padding-block-end: 40px;
+   .inner_content{
+    height: calc(100vh - 90px);
+    overflow: auto;
+   }
+    .welcome_container {
+        background: url('../image/g-bg.jpg') no-repeat center center;
+        background-size: cover;
+        position: relative;
+        width: 100%;
+        padding: 30px;
+        margin-top: 125px ;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        .profile_row{
+            @media (max-width: 575px){
+                flex-direction: column-reverse;
+            }
+        }
+    }
+    
+    .text-content {
+        flex: 1;
+        @media (max-width: 575px) {
+            padding-top: 24px;
+            text-align: center;
+        }
+        .w_heading1 {
+            @include heading1(35px, 600);
+            color: $text_primary;
+        }
+        .heading2 {
+            @include heading2(22px, 500);
+            color: $text_gray400;
+            text-transform: capitalize;
+        }
+       
+    }
+    
+    .profile_img {
+        position: absolute;
+        right: 50px;
+        bottom: 0;
+        @media (max-width: 575px){
+            position: static;
+            margin-top: -125px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+}
+.goals_box{
+    border: 1px solid #ddd;
+    background: $white;
+    border-radius: 14px;
+    margin-top: 20px;
+    padding: 20px;
+    .heading3{
+        @include heading2(22px, 500);
+    }
+    .box{
+        background: $white;
+        border-radius: 14px;
+        padding-inline: 20px;
+        padding-block: 10px;
+        position: relative;
+        border: 1px solid #D8D8D8;
+        display: block;
+        transition: all 0.4s ease-in-out;
+        &:hover{
+            background: $gradient_set2_2;
+        }
+    }
+}
+.accordion_item{
+    .accordion-button{
+        @include heading1(16px, 600);
+        color: $text_primary;
+    }
+    .accordion-button:not(.collapsed){
+        background-color: $gradient_set2_2;
+        color: $text_primary;
+    }
+}
+.img_circle{
+    width: 40px;
+    height: 40px !important;
+}
