@@ -6,6 +6,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Avatar from '../../component/avatar/Avatar';
 import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
+// import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
+// import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
 
 const WeekGoals = () => {
 

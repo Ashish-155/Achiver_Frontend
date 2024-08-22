@@ -21,55 +21,55 @@ const Avatar = () => {
         navigate("/", { replace: true });
     };
 
-    useEffect(() => {
-        const profile = async () => {
-            try {
-                const res = await axios.get(
-                    `${BASE_URL}/api/user/my-profile`,
-                    {
-                        headers: {
-                            Authorization: `${localStorage.getItem("token")}`,
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-                setLoginData(res.data.data);
-                // console.log(res);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        profile();
-    }, []);
+    // useEffect(() => {
+    //     const profile = async () => {
+    //         try {
+    //             const res = await axios.get(
+    //                 `${BASE_URL}/api/user/my-profile`,
+    //                 {
+    //                     headers: {
+    //                         Authorization: `${localStorage.getItem("token")}`,
+    //                         "Content-Type": "application/json",
+    //                     },
+    //                 }
+    //             );
+    //             setLoginData(res.data.data);
+    //             // console.log(res);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+    //     profile();
+    // }, []);
 
     return (
         <>
             {/* <div className='top_header'> */}
-                <DropdownButton
-                    align="end"
-                    className='profile'
-                    title={
-                        <div className="profile-wrap ">
+            <DropdownButton
+                align="end"
+                className='profile'
+                title={
+                    <div className="profile-wrap ">
 
 
-                            {logindata.profile_image ? (
-                                <img
-                                    className="rounded-circle avatar-xl img-thumbnail img_circle"
-                                    src={`${BASE_URL}/uploads/${logindata.profile_image}`}
-                                    alt={`${logindata.name}'s Profile`}
-                                />
-                            ) : (
-                                <i class="fi fi-sr-circle-user"></i>
-                            )}
+                        {logindata.profile_image ? (
+                            <img
+                                className="rounded-circle avatar-xl img-thumbnail img_circle"
+                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
+                                alt={`${logindata.name}'s Profile`}
+                            />
+                        ) : (
+                            <i class="fi fi-sr-circle-user"></i>
+                        )}
 
-                        </div>
-                    }
-                    id="dropdown-menu-align-end"
-                >
-                    <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
-                    <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
+                    </div>
+                }
+                id="dropdown-menu-align-end"
+            >
+                <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
 
-                </DropdownButton>
+            </DropdownButton>
             {/* </div> */}
         </>
     )
