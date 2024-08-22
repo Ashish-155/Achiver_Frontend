@@ -90,6 +90,9 @@ $gradient_set5_2: rgba(215, 235, 224, 1);
 .textGray {
     color: $text_gray500;
 }
+.textGray300 {
+    color: $text_gray300;
+}
 
 .textMarker {
     color: $text_marker;
@@ -570,15 +573,15 @@ select {
     border-radius: 14px;
     padding: 20px;
     overflow: auto;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 160px);
 
     .week_card {
         background: $white;
         border-radius: 14px;
         padding-inline: 20px;
-        padding-block: 60px 20px;
+        padding-block:  20px;
         position: relative;
-        margin-block-start: 20px;
+        // margin-block-start: 20px;
         border: 1px solid #D8D8D8;
 
         .chip {
@@ -619,6 +622,9 @@ select {
 
         .form_group {
             margin-bottom: 20px;
+            &:last-child{
+                margin-bottom: 0;
+            }
 
             .label {
                 color: $text_gray600;
@@ -626,6 +632,21 @@ select {
                 font-weight: 500;
                 margin-bottom: 10px;
             }
+        }
+    }
+    .accordion-item{
+        margin-bottom:10px;
+        border-radius: 10px !important;
+        &:not(:first-of-type){
+            border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+        }
+        .accordion-button{
+           background: transparent;
+           &:not(.collapsed){
+                background-color: $gradient_set2_2;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+           }
         }
     }
 }
@@ -1381,69 +1402,21 @@ select {
 
 // ============================= profile
 
-.welcome{
-    padding-block-end: 40px;
-   .inner_content{
-    height: calc(100vh - 90px);
-    overflow: auto;
-   }
-    .welcome_container {
-        background: url('../image/g-bg.jpg') no-repeat center center;
-        background-size: cover;
-        position: relative;
-        width: 100%;
-        padding: 30px;
-        margin-top: 125px ;
-        border-radius: 15px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        .profile_row{
-            @media (max-width: 575px){
-                flex-direction: column-reverse;
-            }
-        }
-    }
-    
-    .text-content {
-        flex: 1;
-        @media (max-width: 575px) {
-            padding-top: 24px;
-            text-align: center;
-        }
-        .w_heading1 {
-            @include heading1(35px, 600);
-            color: $text_primary;
-        }
-        .heading2 {
-            @include heading2(22px, 500);
-            color: $text_gray400;
-            text-transform: capitalize;
-        }
-       
-    }
-    
-    .profile_img {
-        position: absolute;
-        right: 50px;
-        bottom: 0;
-        @media (max-width: 575px){
-            position: static;
-            margin-top: -125px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-}
+// .welcome{
+//     padding-block-end: 40px;
+//    .inner_content{
+//     height: calc(100vh - 90px);
+//     overflow: auto;
+//    }
+ 
+// }
 .goals_box{
     border: 1px solid #ddd;
     background: $white;
     border-radius: 14px;
     margin-top: 20px;
     padding: 20px;
-    .heading3{
-        @include heading2(22px, 500);
-    }
+    
     .box{
         background: $white;
         border-radius: 14px;
@@ -1483,7 +1456,45 @@ select {
     padding: 10px;
     color: $white;
     transition: all 0.4s ease-in-out;
-    // &:hover{
-    //     transform: ;
-    // }
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+.welcome_container {
+    background: url('../image/g-bg.jpg') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    
+}
+
+.text-content {
+    flex: 1;
+    padding-top: 24px;
+    text-align: center;
+    .w_heading1 {
+        @include heading1(35px, 600);
+        color: $text_primary;
+    }
+    .heading2 {
+        @include heading2(22px, 500);
+        color: $text_primary;
+        text-transform: capitalize;
+    }
+   
+}
+
+.profile_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.closeButton{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 25px;
 }

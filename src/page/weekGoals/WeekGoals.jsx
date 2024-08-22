@@ -21,7 +21,7 @@ const WeekGoals = () => {
                         <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
                             <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link>
                             <div className='d-flex justify-content-end align-items-center gap-2'>
-                                <Link to='/dashboard' className=' textPrimary '> <i class="fi fi-br-house-chimney fs-4 d-flex"></i></Link>
+                            <Link to='/dashboard' className=' textGray homeBox'> <i class="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
                         </div>
