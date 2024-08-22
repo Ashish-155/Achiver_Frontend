@@ -33,9 +33,7 @@ const Profile = () => {
                 <div className='container'>
                     <div className='main_content'>
                         <div className="card-box">
-                        {/* <div className=' '>
-
-                        </div> */}
+                            <button className='logout'><i class="fi fi-br-power"></i></button>
                             <form>
                                 <label for="fileToUpload" className='upload'>
                                     <div className="exp-avtar gth-bg-danger text-white profile-pic">
@@ -59,6 +57,7 @@ const Profile = () => {
                                 <input type="File" name="fileToUpload" id="fileToUpload" />
                             </form>
 
+
                             <div className="text-left mt-4">
 
                                 <p className="text-muted mb-2 font-13"><strong>Full Name :</strong> <span className="ml-2">{logindata.name}</span></p>
@@ -72,6 +71,8 @@ const Profile = () => {
                                 <p className="text-muted mb-1 font-13"><strong>Location :</strong> <span className="ml-2">{logindata.location}</span></p>
                                 <p className="text-muted mb-1 font-13"><strong>Date Of Birth :</strong> <span className="ml-2">{logindata.date_of_birth}</span></p>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

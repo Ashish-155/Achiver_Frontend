@@ -132,14 +132,6 @@ const Dashboard = ({ name, ...props }) => {
         return Object.keys(newErrors).length === 0;
     };
 
-
-
-
-
-
-
-
-
     return (
         <>
             <div className='dashboard'>

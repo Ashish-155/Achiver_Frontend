@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Avatar from '../../component/avatar/Avatar';
-import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
+// import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
+import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
 
 const WeekGoals = () => {
 
@@ -15,11 +16,11 @@ const WeekGoals = () => {
             <div className='dashboard'>
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
-                    <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                        <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
                             <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link>
                             <div className='d-flex justify-content-end align-items-center gap-2'>
-                            <Link to='/dashboard' className=' textPrimary '> <i class="fi fi-br-house-chimney fs-4 d-flex"></i></Link>
-                            <Avatar />
+                                <Link to='/dashboard' className=' textPrimary '> <i class="fi fi-br-house-chimney fs-4 d-flex"></i></Link>
+                                <Avatar />
                             </div>
                         </div>
                         <div className='main_content'>
@@ -104,7 +105,7 @@ const WeekGoals = () => {
                                         </ul>
                                     </div>
                                 </div>
-                               <AllGoalsBox />
+                                <AllGoalsBox />
                             </div>
 
                         </div>

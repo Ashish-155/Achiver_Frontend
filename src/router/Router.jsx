@@ -8,7 +8,6 @@ import WeekGoalsDetails from '../page/weekGoalsDetails/WeekGoalsDetails';
 import Profile from '../page/profile/Profile';
 import Welcome from '../page/welcome/Welcome';
 import AllGoals from '../page/allGoals/AllGoals';
-import AllGoalsBox from '../page/allGoalsBox/AllGoalsBox';
 
 const Router = () => {
   return (
