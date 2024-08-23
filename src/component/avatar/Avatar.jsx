@@ -59,7 +59,7 @@ const Avatar = () => {
                                 alt={`${logindata.name}'s Profile`}
                             />
                         ) : (
-                            <i class="fi fi-sr-circle-user"></i>
+                            <i className="fi fi-sr-circle-user"></i>
                         )}
 
                     </div>

@@ -114,10 +114,10 @@ const Dashboard = ({ name, ...props }) => {
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
-                            {/* <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link> */}
+                            {/* <Link to='/welcome' className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link> */}
                             <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
-                                <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-start align-items-center gap-2'> <i class="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
-                                <Link to='/dashboard' className=' textGray homeBox'> <i class="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
+                                <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-start align-items-center gap-2'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
+                                <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
                         </div>
@@ -185,9 +185,32 @@ const Dashboard = ({ name, ...props }) => {
                                     </div>
                                 </div>
 
-                                <button className=" primaryBtn ">
+                                {/* <button className=" primaryBtn ">
                                     Set 12 Week Goals & Targets
-                                </button>
+                                </button> */}
+                                <div className='addedGoals'>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #1</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #2</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #3</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #4</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #5</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #6</p>
+                                    </Link>
+                                    <Link to='/week-goals/:id' className='goalBox'>
+                                        <p className='heading2 textPrimary fw-semibold'>Goals #7</p>
+                                    </Link>
+                                </div>
                             </div>
 
                         </div>
@@ -225,7 +248,7 @@ const Dashboard = ({ name, ...props }) => {
                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                         when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                                     </p>
-                                    <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center mt-4'> <i class="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
+                                    <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center mt-4'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
                                 </div>
                             </div>
                         </div>

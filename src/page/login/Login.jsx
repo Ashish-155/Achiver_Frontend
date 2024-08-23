@@ -95,12 +95,12 @@ const Login = () => {
 
                         <div className="input_box mt-5">
                             <form novalidate>
-                                <div class="row mb-3">
-                                    <div class="col-md-12">
-                                        <div class="form-group form_group">
+                                <div className="row mb-3">
+                                    <div className="col-md-12">
+                                        <div className="form-group form_group">
                                             <input
                                                 // type="text"
-                                                class="form-control form_control"
+                                                className="form-control form_control"
                                                 id="validationCustom01"
                                                 placeholder="Email"
                                                 type="email"
@@ -110,17 +110,17 @@ const Login = () => {
                                                 required
                                             />
 
-                                            <i class="fi fi-rr-user first_icon"></i>
-                                            <div class="valid-feedback">
+                                            <i className="fi fi-rr-user first_icon"></i>
+                                            <div className="valid-feedback">
                                                 Please enter your email.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group form_group">
+                                    <div className="col-md-12">
+                                        <div className="form-group form_group">
                                             <input
                                                 type={showPassword ? "text" : "password"}
-                                                class="form-control form_control"
+                                                className="form-control form_control"
                                                 id="validationCustom02"
                                                 placeholder="Password"
                                                 onChange={setVal}
@@ -128,7 +128,7 @@ const Login = () => {
                                                 name="password"
                                                 required
                                             />
-                                            <i class="fi fi-rr-shield-keyhole first_icon"></i>
+                                            <i className="fi fi-rr-shield-keyhole first_icon"></i>
 
                                             <button
                                                 type="button"
@@ -146,16 +146,16 @@ const Login = () => {
                                                 {/* Change icon based on showPassword state */}
                                             </button>
 
-                                            <div class="valid-feedback">Password is not valid.</div>
+                                            <div className="valid-feedback">Password is not valid.</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div className="col-md-12">
                                         <Link to="" className="para2">
                                             Forgot password?
                                         </Link>
                                     </div>
                                 </div>
-                                <button type="submit" class="primaryBtn mt-5" onClick={loginuser}>
+                                <button type="submit" className="primaryBtn mt-5" onClick={loginuser}>
                                     Login
                                 </button>
                             </form>

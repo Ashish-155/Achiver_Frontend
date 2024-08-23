@@ -5,10 +5,10 @@ const WelcomeBox = () => {
     return (
         <>
             <div>
-                <div class="welcome_container">
-                    <div class="row profile_row">
+                <div className="welcome_container">
+                    <div className="row profile_row">
                         <div className=' col-lg-5 col-md-6 col-sm-12'>
-                            <div class="text-content">
+                            <div className="text-content">
                                 <h1 className='w_heading1'>Welcome </h1>
                                 <h2 className='heading2'>ashish Show</h2>
                                 <p className='para2'>ashish@gmail.com</p>
@@ -16,7 +16,7 @@ const WelcomeBox = () => {
                             </div>
                         </div>
                         <div className=' col-lg-7 col-md-6 col-sm-12'>
-                            <div class="profile_img">
+                            <div className="profile_img">
                                 <img src='assets/image/welcome.png' />
                             </div>
                         </div>

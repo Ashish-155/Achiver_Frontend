@@ -84,7 +84,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 alt={`${logindata.name}'s Profile`}
                                             />
                                         ) : (
-                                            <i class="fi fi-sr-circle-user"></i>
+                                            <i className="fi fi-sr-circle-user"></i>
                                         )}
 
                                     </div>
@@ -108,8 +108,8 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                         <h3 className='heading3 mb-3'>Notifies to enter actual data every week</h3>
                                         <h3 className='heading3 textGray'>Goals for this week</h3>
                                         <h2 className='heading2'>Week 6</h2>
-                                        <i class="fi fi-rr-angle-small-right arrow right"></i>
-                                        <i class="fi fi-rr-angle-small-left arrow left"></i>
+                                        <i className="fi fi-rr-angle-small-right arrow right"></i>
+                                        <i className="fi fi-rr-angle-small-left arrow left"></i>
                                         <div className='sliderBox'>
                                             <p className='para2 text-black'> Contact management team and form a mid week meeting</p>
                                         </div>
@@ -123,7 +123,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 </button>
                                             </div>
                                             <div className='card_body'>
-                                                <div className='delete'><i class="fi fi-br-trash"></i></div>
+                                                <div className='delete'><i className="fi fi-br-trash"></i></div>
                                                 <p className="text-muted mb-2 font-13">
                                                     <strong> Key Action / Tactics :</strong>
                                                     <span className="ml-2"> Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to </span>

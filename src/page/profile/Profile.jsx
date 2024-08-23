@@ -113,7 +113,7 @@ const Profile = () => {
                             <label for="file" className="upload-area">
                                 <span className="upload-area-icon">
 
-                                    <i class="fi fi-rr-file-export fs-2 textGreen"></i>
+                                    <i className="fi fi-rr-file-export fs-2 textGreen"></i>
                                 </span>
                                 <span className="upload-area-title"> file(s) here to upload.</span>
                                 <span className="upload-area-description">
