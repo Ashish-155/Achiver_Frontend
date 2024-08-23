@@ -18,7 +18,7 @@ const Router = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/week-target" element={<WeekTarget />} />
-        <Route path="/week-goals" element={<WeekGoals />} />
+        <Route path="/week-goals/:id" element={<WeekGoals />} />
         <Route path="/week-goals-details" element={<WeekGoalsDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/all-goals" element={<AllGoals />} />

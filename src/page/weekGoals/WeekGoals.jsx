@@ -1,16 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Avatar from '../../component/avatar/Avatar';
 import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox';
+import axios from 'axios';
+import { BASE_URL } from '../../services/api';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
 
 const WeekGoals = () => {
+    const { id } = useParams();
+    // console.log(id)
+    const [goal, setGoal] = useState({});
+    console.log("Goal_data:", goal)
 
+    useEffect(() => {
+
+        const fetchGoal = async () => {
+            try {
+                const res = await axios.get(`${BASE_URL}/api/goal/${id}`, {
+                    headers: {
+                        Authorization: `${localStorage.getItem("token")}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+                console.log(res)
+                setGoal(res.data.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchGoal();
+    }, [])
 
 
     return (
@@ -21,7 +45,7 @@ const WeekGoals = () => {
                         <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
                             <Link to='/welcome' className=' textPrimary '> <i class="fi fi-rr-angle-small-left fs-3"></i></Link>
                             <div className='d-flex justify-content-end align-items-center gap-2'>
-                            <Link to='/dashboard' className=' textGray homeBox'> <i class="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
+                                <Link to='/dashboard' className=' textGray homeBox'> <i class="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
                         </div>
@@ -107,7 +131,7 @@ const WeekGoals = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                <AllGoalsBox />
+                                <AllGoalsBox goal={goal} />
                             </div>
 
                         </div>
