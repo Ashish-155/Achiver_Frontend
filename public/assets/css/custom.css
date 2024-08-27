@@ -1508,3 +1508,25 @@ input[type="file"] {
   color: #ff9b05 !important;
   background: #ff99004d;
 }
+
+.para3 {
+  color: #535353;
+}
+
+.para3 strong {
+  color: #1EA38D;
+}
+
+.para3 .down {
+  color: #FF0000;
+  font-weight: 600;
+}
+
+.para3 .up {
+  color: #0EA55C;
+  font-weight: 600;
+}
+
+.f-s-12 {
+  font-size: 12px;
+}

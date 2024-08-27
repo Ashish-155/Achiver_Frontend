@@ -147,6 +147,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                     <i className="fi fi-rr-add textMarker fs-5"></i>
                                                 </button>
                                             </div>
+                                            {/* Loop start */}
                                             <div className='card_body'>
                                                 <div className='delete'><i className="fi fi-br-trash"></i></div>
                                                 <p className="text-muted mb-2 font-13">
@@ -162,9 +163,10 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                     <span className="ml-2">Wednesday </span>
                                                 </p>
                                             </div>
+                                            {/* Loop end */}
 
                                         </div>
-                                        <div className='execution'>
+                                        {/* <div className='execution'>
                                             <h2 className='heading2 textGray'>Weekly Execution Score</h2>
                                             <div className='mb-5'>
                                                 <div className='progress_label mb-2'>
@@ -200,6 +202,67 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 <span className="para4">Cumulative Actual:</span>
                                                 <span className="value">2368</span>
                                             </div>
+                                        </div> */}
+                                        <div className="lead-measures pb-1">
+                                            <div className='row'>
+                                                <div className='col-md-6'>
+                                                    <div className='card border mb-3'>
+                                                        <div className='card-body'>
+                                                            <div className="measure">
+                                                                <span className="para4">Lead Target</span>
+                                                                <span className="value">500</span>
+                                                            </div>
+                                                            <div className="measure">
+                                                                <span className="para4">Lead Actual</span>
+                                                                <span className="value">500</span>
+                                                            </div>
+                                                            <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                <span className="down up">
+                                                                    10
+                                                                </span> Lead score
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='col-md-6 mb-3'>
+                                                    <div className='card border'>
+                                                        <div className='card-body'>
+                                                            <div className="measure">
+                                                                <span className="para4">Lag Target</span>
+                                                                <span className="value">3000</span>
+                                                            </div>
+                                                            <div className="measure">
+                                                                <span className="para4">Lag Actual</span>
+                                                                <span className="value">2368</span>
+                                                            </div>
+                                                            <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                <span className="down up">
+                                                                    10%
+                                                                </span> Lag score
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='col-md-6'>
+                                                    <div className='d-flex mb-3 f-s-12 fw-bold'>
+                                                        <span className='text-muted me-2'>Week Start Date :</span>
+                                                        <span>27/08/2024</span>
+                                                    </div>
+                                                </div>
+                                                <div className='col-md-6'>
+                                                    <div className='d-flex  mb-3 f-s-12 fw-bold'>
+                                                        <span className='text-muted me-2'>Week End Date :</span>
+                                                        <span>03/09/2024</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>

@@ -1824,3 +1824,23 @@ input[type="file"] {
         background: #ff99004d
     }
 }
+.para3 {
+    color: $text_black200;
+
+    strong {
+        color: $bg_marker;
+    }
+
+    .down {
+        color: $red;
+        font-weight: 600;
+    }
+
+    .up {
+        color: $green;
+        font-weight: 600;
+    }
+}
+.f-s-12 {
+    font-size: 12px;
+}
