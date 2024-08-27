@@ -137,8 +137,14 @@ const WeekGoals = () => {
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                                     <div className='chart_postion'>
                                                         {/* <img src={'assets/image/chart2.png'} alt='' /> */}
-                                                        <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" />
-                                                        <p className='para4 center_text'><strong>80%</strong></p>
+                                                        {/* <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" /> */}
+                                                        {/* <i className="fi fi-rr-arrow-trend-down down"></i> */}
+                                                        {parseFloat(goal.lead_execution_score) > 0 ? (
+                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                        ) : (
+                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                        )}
+                                                        <p className='para4 center_text'><strong>{goal.lead_execution_score}</strong></p>
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
@@ -166,9 +172,14 @@ const WeekGoals = () => {
                                             </div> */}
                                             <div className='row align-items-center'>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='chart_postion'>
+                                                    <div className='chart_postion para3'>
                                                         <img src={'assets/image/chart2.png'} alt='' />
-                                                        <p className='para4 center_text'><strong>80%</strong></p>
+                                                        {parseFloat(goal.lag_execution_score) > 0 ? (
+                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                        ) : (
+                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                        )}
+                                                        <p className='para4 center_text'><strong>{goal.lag_execution_score}</strong></p>
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
