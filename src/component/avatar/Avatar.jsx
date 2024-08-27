@@ -21,26 +21,26 @@ const Avatar = () => {
         navigate("/", { replace: true });
     };
 
-    // useEffect(() => {
-    //     const profile = async () => {
-    //         try {
-    //             const res = await axios.get(
-    //                 `${BASE_URL}/api/user/my-profile`,
-    //                 {
-    //                     headers: {
-    //                         Authorization: `${localStorage.getItem("token")}`,
-    //                         "Content-Type": "application/json",
-    //                     },
-    //                 }
-    //             );
-    //             setLoginData(res.data.data);
-    //             // console.log(res);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    //     profile();
-    // }, []);
+    useEffect(() => {
+        const profile = async () => {
+            try {
+                const res = await axios.get(
+                    `${BASE_URL}/api/user/my-profile`,
+                    {
+                        headers: {
+                            Authorization: `${localStorage.getItem("token")}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setLoginData(res.data.data);
+                // console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        profile();
+    }, []);
 
     return (
         <>

@@ -1763,17 +1763,21 @@ input[type="file"] {
 
 
 .addedGoals {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-
-    .goalBox {
-        border: 1px solid #e5e5e5;
-        background: $white;
-        border-radius: 10px;
-        padding: 10px 30px;
+    background: $white;
+    padding: 20px;
+    border-radius: 14px;
+    .wrap{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        .goalBox {
+            border: 1px solid #e5e5e5;
+            background: $white;
+            border-radius: 10px;
+            padding: 10px 30px;
+        }
     }
 }
 

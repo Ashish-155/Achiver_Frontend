@@ -1,41 +1,62 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import { Modal } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../services/api';
 
-const AllGoalsBox = ({ goal }) => {
-
-    console.log("cdc : ", goal)
-    console.log("week_goal : ", goal.Week_Goal);
-
-
-
+const AllGoalsBox = ({ goal, refreshGoals }) => {
     const [modalShow, setModalShow] = useState(false);
 
-    const openModalShow = () => setModalShow(true);
-    const closeModalShow = () => setModalShow(false);
+    console.log("object : ", goal.Week_Goal)
 
-
-    const [actions, setActions] = useState({
-        goal: '',
-        date: '',
-        description: ''
+    // Initial state for form data
+    const [actualData, setActualData] = useState({
+        week_goal_id: "",
+        lead_actual: "",
+        lag_actual: "",
+        description: "",
     });
 
     // State for form errors
     const [errors, setErrors] = useState({
-        goal: '',
-        date: ''
+        lead_actual: '',
+        lag_actual: ''
     });
 
-    // Handle form field changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setActions(prevActions => ({
-            ...prevActions,
-            [name]: value
+    // Update form data when goal prop or modalShow state changes
+    useEffect(() => {
+        if (modalShow && actualData.week_goal_id) {
+            const weekGoal = goal.Week_Goal.find(wg => wg.id === actualData.week_goal_id);
+            if (weekGoal) {
+                setActualData({
+                    week_goal_id: weekGoal.id,
+                    lead_actual: weekGoal.lead_actual || "",
+                    lag_actual: weekGoal.lag_actual || "",
+                    description: weekGoal.description || "",
+                });
+            }
+        }
+    }, [goal, modalShow, actualData.week_goal_id]);
+
+    const openModalShow = (id) => {
+        setActualData(prevData => ({
+            ...prevData,
+            week_goal_id: id,
         }));
+        setModalShow(true);
+    };
+
+    const closeModalShow = () => {
+        setModalShow(false);
+        // Clear the form when closing the modal
+        setActualData({
+            week_goal_id: "",
+            lead_actual: "",
+            lag_actual: "",
+            description: "",
+        });
     };
 
     // Handle form submission
@@ -46,13 +67,13 @@ const AllGoalsBox = ({ goal }) => {
         let hasErrors = false;
         const newErrors = {};
 
-        if (!actions.goal) {
-            newErrors.goal = 'Goal name is required';
+        if (!actualData.lead_actual) {
+            newErrors.lead_actual = 'Actual Lead is required';
             hasErrors = true;
         }
 
-        if (!actions.date) {
-            newErrors.date = 'Start date is required';
+        if (!actualData.lag_actual) {
+            newErrors.lag_actual = 'Actual Lag is required';
             hasErrors = true;
         }
 
@@ -63,52 +84,63 @@ const AllGoalsBox = ({ goal }) => {
         }
 
         // Submit the form data
-        console.log('Form submitted:', actions);
+        handleActualWeekGoalDataSubmit();
 
-        // Clear the form (optional)
-        setActions({
-            goal: '',
-            date: '',
-            description: ''
+        // Clear the form after submission
+        setActualData({
+            week_goal_id: "",
+            lead_actual: "",
+            lag_actual: "",
+            description: "",
         });
+
+        // Close the modal
+        closeModalShow();
     };
 
-
-
+    // API call to submit actual week goal data
+    const handleActualWeekGoalDataSubmit = async () => {
+        try {
+            await axios.put(`${BASE_URL}/api/goal/post-actual-week-goal-data`, actualData, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            refreshGoals();
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
-
             <div className='weekGoal'>
-                <div className='row '>
-
+                <div className='row'>
                     {
                         goal.Week_Goal && Array.isArray(goal.Week_Goal) && goal.Week_Goal.length > 0 ? (
                             goal.Week_Goal.map((value, index) => {
                                 return (
-                                    <div className='col-lg-4 col-md-4 col-sm-6 mb-3 position-relative'>
+                                    <div className='col-lg-4 col-md-4 col-sm-6 mb-3 position-relative' key={index}>
                                         <div className='work_drop'>
                                             <DropdownButton
                                                 align="end"
-                                                title={<i class="fi fi-rr-menu-dots-vertical"></i>}
+                                                title={<i className="fi fi-rr-menu-dots-vertical"></i>}
                                                 id="dropdown-menu-align-end"
                                                 className=''
                                             >
                                                 <Link eventKey="1" to='/week-goals-details' className='dropdown-item'>View</Link>
-                                                <Dropdown.Item eventKey="2" onClick={openModalShow}>Set Goal</Dropdown.Item>
-
+                                                <Dropdown.Item eventKey="2" onClick={() => openModalShow(value.id)}>Actual Achivement</Dropdown.Item>
                                             </DropdownButton>
                                         </div>
-                                        <Link to='/week-goals-details' className='goalCard active' key={index}>
+                                        <Link to={`/week-goals-details/${value.id}`} className='goalCard active'>
                                             <div>
                                                 <div className='chip'>
-                                                    <i className="fi fi-rr-calendar"></i> Week {index + 1}
+                                                    <i className="fi fi-rr-calendar"></i> Week
+                                                    {/* {index + 1} */}
+                                                    {value.week_for}
                                                 </div>
-                                                {/* status */}
-                                                {/* <p className='para2 status active'>Active</p> */}
                                                 <p className='para2 status incoming'>Incoming</p>
-
-
                                             </div>
                                             <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
                                                 <p className='para2'>Target Leads</p>
@@ -120,8 +152,25 @@ const AllGoalsBox = ({ goal }) => {
                                             </div>
                                             <div className='mt-4'>
                                                 <p className='para2 d-flex justify-content-start align-items-center gap-2'>
-                                                    <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                    <span className='down'>20.5%</span> Low from Last Week
+                                                    {parseFloat(value.lead_execution_score) > 0 ? (
+                                                        <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                    ) : (
+                                                        <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                    )}
+                                                    <span className={parseFloat(value.lead_execution_score) >= 0 ? 'up' : 'down'}>
+                                                        {value.lead_execution_score}
+                                                    </span> Lead score
+                                                </p>
+
+                                                <p className='para2 d-flex justify-content-start align-items-center gap-2'>
+                                                    {parseFloat(value.lag_execution_score) >= 0 ? (
+                                                        <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                    ) : (
+                                                        <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                    )}
+                                                    <span className={parseFloat(value.lag_execution_score) >= 0 ? 'up' : 'down'}>
+                                                        {value.lag_execution_score}
+                                                    </span> Lag score
                                                 </p>
                                             </div>
                                         </Link>
@@ -132,18 +181,8 @@ const AllGoalsBox = ({ goal }) => {
                             <p>No week goals available</p>
                         )
                     }
-
-
                 </div>
-
             </div>
-
-
-
-
-
-
-
 
             <Modal
                 show={modalShow}
@@ -152,58 +191,59 @@ const AllGoalsBox = ({ goal }) => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Body className='p-4' >
+                <Modal.Body className='p-4'>
                     <button className='closeButton' onClick={closeModalShow}>
                         <i className="fi fi-rr-circle-xmark"></i>
                     </button>
                     <form onSubmit={handleSubmit}>
                         <div className=' mt-4'>
-                            <h3 className="heading3 mb-4">Set Your Goal</h3>
+                            <h3 className="heading3 mb-4">Set Your Actual Data</h3>
                             <div className='row'>
                                 <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                    <label className='para3 textGray mb-1'>Your Goal Name<span className='red'>*</span></label>
+                                    <label className='para3 textGray mb-1'>
+                                        Actual Lead<span className='red'>*</span>
+                                    </label>
                                     <input
-                                        className="form-control form_controlStyle2"
-                                        type="text"
-                                        name="goal"
-                                        placeholder="Your Goal Name"
-                                        value={actions.goal}
-                                        onChange={handleChange}
+                                        type="number"
+                                        className="form-control  form_controlStyle2"
+                                        placeholder="Enter Actual Lead"
+                                        value={actualData.lead_actual}
+                                        onChange={(e) => setActualData({ ...actualData, lead_actual: e.target.value })}
                                     />
-                                    {errors.goal && <p className="text-danger">{errors.goal}</p>}
+                                    {errors.lead_actual && <span className="text-danger para2">{errors.lead_actual}</span>}
                                 </div>
                                 <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                    <label className='para3 textGray mb-1'>Set Start Date<span className='red'>*</span></label>
+                                    <label className='para3 textGray mb-1'>
+                                        Actual Lag<span className='text-danger'>*</span>
+                                    </label>
                                     <input
-                                        type="date"
-                                        id="date"
-                                        name="date"
-                                        className="form-control form_controlStyle2"
-                                        value={actions.date}
-                                        onChange={handleChange}
+                                        type="number"
+                                        className="form-control  form_controlStyle2"
+                                        placeholder="Enter Actual Lag"
+                                        value={actualData.lag_actual}
+                                        onChange={(e) => setActualData({ ...actualData, lag_actual: e.target.value })}
                                     />
-                                    {errors.date && <p className="text-danger">{errors.date}</p>}
+                                    {errors.lag_actual && <span className="text-danger para2">{errors.lag_actual}</span>}
                                 </div>
                                 <div className='col-lg-12 mb-2'>
                                     <label className='para3 textGray mb-1'>Description</label>
                                     <textarea
-                                        className="form-control form_controlStyle2"
-                                        name='description'
-                                        value={actions.description}
-                                        onChange={handleChange}
-                                        rows={2}
+                                        className="form-control  form_controlStyle2"
+                                        placeholder="Enter description"
+                                        value={actualData.description}
+                                        onChange={(e) => setActualData({ ...actualData, description: e.target.value })}
                                     />
                                 </div>
-                                <div className='col-lg-12'>
-                                    <button type='submit' className='primaryBtn' onClick={handleSubmit}>Submit</button>
-                                </div>
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                <button type="submit" className="primaryBtn">Submit</button>
                             </div>
                         </div>
                     </form>
                 </Modal.Body>
             </Modal>
         </>
-    )
+    );
 }
 
-export default AllGoalsBox
+export default AllGoalsBox;

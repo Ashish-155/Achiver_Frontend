@@ -8,6 +8,7 @@ import WeekGoalsDetails from '../page/weekGoalsDetails/WeekGoalsDetails';
 import Profile from '../page/profile/Profile';
 import Welcome from '../page/welcome/Welcome';
 import AllGoals from '../page/allGoals/AllGoals';
+import ProtectedRoute from '../ProtectedRoute';
 // import AllGoalsBox from '../page/allGoalsBox/AllGoalsBox';
 
 const Router = () => {
@@ -15,13 +16,57 @@ const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/week-target" element={<WeekTarget />} />
-        <Route path="/week-goals/:id" element={<WeekGoals />} />
-        <Route path="/week-goals-details" element={<WeekGoalsDetails />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/all-goals" element={<AllGoals />} />
+
+        <Route path="/welcome" element={
+
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
+        } />
+
+
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/week-target" element={
+          // <WeekTarget />
+          <ProtectedRoute>
+            <WeekTarget />
+          </ProtectedRoute>
+        } />
+        <Route path="/week-goals/:id" element={
+          // <WeekGoals />
+          <ProtectedRoute>
+            <WeekGoals />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/week-goals-details/:id" element={
+          // <WeekGoalsDetails />
+          <ProtectedRoute>
+            <WeekGoalsDetails />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/profile" element={
+          // <Profile />
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/all-goals" element={
+          // <AllGoals />
+          <ProtectedRoute>
+            <AllGoals />
+          </ProtectedRoute>
+
+        } />
+
+
         {/* <Route path="/all-goals-box" element={<AllGoalsBox />} /> */}
 
       </Routes>

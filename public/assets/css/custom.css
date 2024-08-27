@@ -1447,6 +1447,12 @@ input[type="file"] {
 }
 
 .addedGoals {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.addedGoals .wrap {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1454,7 +1460,7 @@ input[type="file"] {
   flex-wrap: wrap;
 }
 
-.addedGoals .goalBox {
+.addedGoals .wrap .goalBox {
   border: 1px solid #e5e5e5;
   background: #ffffff;
   border-radius: 10px;

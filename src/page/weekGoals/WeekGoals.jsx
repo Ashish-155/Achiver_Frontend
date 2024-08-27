@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link, useParams } from 'react-router-dom';
 import Select from 'react-select';
@@ -8,36 +8,39 @@ import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox';
 import axios from 'axios';
 import { BASE_URL } from '../../services/api';
 import { Modal } from 'react-bootstrap';
+import { LoginContext } from '../../ContextProvider/Context';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
+
 
 const WeekGoals = () => {
     const { id } = useParams();
     // console.log(id)
     const [goal, setGoal] = useState({});
-    console.log("Goal_data:", goal)
+    // console.log("Goal_data:", goal)
+
+    const fetchGoal = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/api/goal/${id}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            // console.log(res)
+            setGoal(res.data.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-
-        const fetchGoal = async () => {
-            try {
-                const res = await axios.get(`${BASE_URL}/api/goal/${id}`, {
-                    headers: {
-                        Authorization: `${localStorage.getItem("token")}`,
-                        "Content-Type": "application/json",
-                    },
-                });
-                console.log(res)
-                setGoal(res.data.data)
-            } catch (error) {
-                console.log(error);
-            }
-        }
         fetchGoal();
     }, []);
 
-
+    const { logindata, setLoginData } = useContext(LoginContext);
+    // console.log("Context : ", logindata)
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -69,7 +72,7 @@ const WeekGoals = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // Validation logic
         let hasErrors = false;
         const newErrors = {};
@@ -78,7 +81,7 @@ const WeekGoals = () => {
             newErrors.goal = 'Goal name is required';
             hasErrors = true;
         }
-        
+
         if (!actions.date) {
             newErrors.date = 'Start date is required';
             hasErrors = true;
@@ -102,7 +105,6 @@ const WeekGoals = () => {
     };
 
 
-
     return (
         <>
             <div className='dashboard'>
@@ -122,36 +124,36 @@ const WeekGoals = () => {
                                     <div className='col-lg-12'>
                                         <div className='chart_box'>
                                             <h3 className='heading3 mb-3'>Leads & Lags Graph</h3>
-                                            <img src={'assets/image/chart1.png'} alt='' />
+                                            <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" />
                                         </div>
                                     </div>
                                     <div className='col-lg-6 col-md-12'>
                                         <div className='chart_box mb-0'>
                                             <h3 className='heading3 mb-3'>Leads Measure</h3>
-                                            <div className='add_box'>
+                                            {/* <div className='add_box'>
                                                 <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
-                                            </div>
+                                            </div> */}
                                             <div className='row align-items-center'>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                                     <div className='chart_postion'>
-                                                        <img src={'assets/image/chart2.png'} alt='' />
+                                                        {/* <img src={'assets/image/chart2.png'} alt='' /> */}
+                                                        <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" />
                                                         <p className='para4 center_text'><strong>80%</strong></p>
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                                     <div className='info '>
+                                                        <div className='box'>
+                                                            <p className='para3'>Target</p>
+                                                            <p className='para3'><strong>{goal.lead_target}</strong></p>
+                                                        </div>
                                                         <div className='box '>
                                                             {/* <div className='circle'></div> */}
                                                             <p className='para3'>Actual</p>
-                                                            <p className='para3'><strong>5558</strong></p>
+                                                            <p className='para3'><strong>{goal.lead_actual}</strong></p>
                                                         </div>
-                                                        <div className='box'>
-                                                            {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Target</p>
-                                                            <p className='para3'><strong>5558</strong></p>
-                                                        </div>
+
                                                     </div>
-                                                    {/* <p className='para4'>Cumu. target 2023 <strong>5558</strong></p> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -159,9 +161,9 @@ const WeekGoals = () => {
                                     <div className='col-lg-6 col-md-12'>
                                         <div className='chart_box mb-0'>
                                             <h3 className='heading3 mb-3'>Lags Measure</h3>
-                                            <div className='add_box'>
+                                            {/* <div className='add_box'>
                                                 <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
-                                            </div>
+                                            </div> */}
                                             <div className='row align-items-center'>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                                     <div className='chart_postion'>
@@ -173,14 +175,15 @@ const WeekGoals = () => {
                                                     <div className='info'>
                                                         <div className='box'>
                                                             {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Actual</p>
-                                                            <p className='para3'><strong>5558</strong></p>
+                                                            <p className='para3'>Target</p>
+                                                            <p className='para3'><strong>{goal.lag_target}</strong></p>
                                                         </div>
                                                         <div className='box'>
                                                             {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Target</p>
-                                                            <p className='para3'><strong>5558</strong></p>
+                                                            <p className='para3'>Actual</p>
+                                                            <p className='para3'><strong>{goal.lag_actual}</strong></p>
                                                         </div>
+
                                                     </div>
                                                     {/* <p className='para4'>Cumu. target 2023 <strong>46.72%</strong></p> */}
                                                 </div>
@@ -195,23 +198,18 @@ const WeekGoals = () => {
                                 <div className='weekGoal'>
                                     <h3 className='heading3 mb-3 fw-semibold'>12 Week Goals</h3>
                                     <div className='goal_List'>
-                                        <p className='para3'>This results in shorter and simpler expressions when accessing chained properties when the possibility exists that a reference may be missing. It can also be helpful while exploring the content of an object when there's no known guarantee as to which properties are required.</p>
+                                        {/* <p className='para3'>This results in shorter and simpler expressions when accessing chained properties when the possibility exists that a reference may be missing. It can also be helpful while exploring the content of an object when there's no known guarantee as to which properties are required.</p> */}
+                                        <p className='para3'>{goal.description}</p>
+
                                     </div>
                                 </div>
-                                <AllGoalsBox goal={goal} />
+                                <AllGoalsBox goal={goal} refreshGoals={fetchGoal} />
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
 
 
             <Modal
@@ -222,9 +220,9 @@ const WeekGoals = () => {
                 centered
             >
                 <Modal.Body className='p-4' >
-                <button className='closeButton' onClick={closeModalShow}>
-                            <i className="fi fi-rr-circle-xmark"></i>
-                        </button>
+                    <button className='closeButton' onClick={closeModalShow}>
+                        <i className="fi fi-rr-circle-xmark"></i>
+                    </button>
                     <form onSubmit={handleSubmit}>
                         <div className=' mt-4'>
                             <h3 className="heading3 mb-4">Set Your Goal</h3>
@@ -264,7 +262,7 @@ const WeekGoals = () => {
                                     />
                                 </div>
                                 <div className='col-lg-12'>
-                                <button type='submit' className='primaryBtn' onClick={handleSubmit}>Submit</button>
+                                    <button type='submit' className='primaryBtn' onClick={handleSubmit}>Submit</button>
                                 </div>
                             </div>
                         </div>

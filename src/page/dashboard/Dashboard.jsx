@@ -23,31 +23,6 @@ const Dashboard = ({ name, ...props }) => {
         setShowThree(false);
     };
 
-    // const handleCloseSecond = () => setShowSecond(false);
-    // const handleShowSecond = (e) => {
-    //     e.preventDefault();
-
-    //     if (validateFirstStep()) {
-    //         setShowFirst(true);
-    //         setShowSecond(true);
-    //         setShowThree(false);
-    //     }
-    // };
-
-
-
-    // const handleCloseThree = () => setShowThree(false);
-    // const handleShowThree = (e) => {
-    //     e.preventDefault();
-
-    //     if (validateSecondStep()) {
-    //         setShowFirst(false);
-    //         setShowSecond(false);
-    //         setShowThree(true);
-    //     }
-    // };
-
-
     const { logindata, setLoginData } = useContext(LoginContext);
 
 
@@ -69,6 +44,10 @@ const Dashboard = ({ name, ...props }) => {
         navigate("/", { replace: true });
     };
 
+    // goals 
+    const [goals, setGoals] = useState({});
+    console.log(goals)
+
     useEffect(() => {
         const profile = async () => {
             try {
@@ -87,7 +66,27 @@ const Dashboard = ({ name, ...props }) => {
                 console.log(error);
             }
         };
+
+        // my goals api
+        const goals = async () => {
+            try {
+                const res = await axios.get(
+                    `${BASE_URL}/api/goal/all-goal`,
+                    {
+                        headers: {
+                            Authorization: `${localStorage.getItem("token")}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                setGoals(res.data.data);
+                console.log("Goal_res : ", res);
+            } catch (error) {
+                console.log(error);
+            }
+        };
         profile();
+        goals();
     }, []);
 
 
@@ -189,34 +188,35 @@ const Dashboard = ({ name, ...props }) => {
                                     Set 12 Week Goals & Targets
                                 </button> */}
                                 <div className='addedGoals'>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #1</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #2</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #3</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #4</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #5</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #6</p>
-                                    </Link>
-                                    <Link to='/week-goals/:id' className='goalBox'>
-                                        <p className='heading2 textPrimary fw-semibold'>Goals #7</p>
-                                    </Link>
+                                    <h3 className='heading3 mb-3 fw-semibold'>Your Goals</h3>
+                                    <div className='wrap'>
+
+                                        {
+                                            goals && Array.isArray(goals) && goals.length > 0 ? (
+                                                goals.map((value, index) => {
+                                                    return (
+                                                        <Link to={`/week-goals/${value.id}`} className='goalBox'>
+                                                            <p className='heading2 textPrimary fw-semibold'>{value.name}</p>
+                                                        </Link>
+
+                                                    )
+                                                })
+                                            )
+                                                :
+                                                (
+                                                    <p>No week goals available</p>
+                                                )
+                                        }
+
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
+
 
 
 

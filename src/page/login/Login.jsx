@@ -67,6 +67,10 @@ const Login = () => {
                 });
 
                 localStorage.setItem("token", res.data.token);
+                const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours from now
+                localStorage.setItem("token_expiration", expirationTime);
+
+
                 navigate("/dashboard");
             } catch (error) {
                 console.log("Login error : ", error);

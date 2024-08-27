@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BASE_URL } from '../../services/api';
 
 const WeekGoalsDetails = ({ name, ...props }) => {
 
@@ -66,6 +69,28 @@ const WeekGoalsDetails = ({ name, ...props }) => {
     const now = 75;
     const now2 = 56;
 
+    // api implementation
+    const { id } = useParams();
+    const [goalData, setGoalData] = useState({});
+    const weekGoalDetails = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/api/goal/week-goal-for?id=${id}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            // console.log("Week_goal_details : ", res);
+            setGoalData(res.data.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        weekGoalDetails()
+    }, [])
+
     return (
         <>
             <div className='dashboard'>
@@ -107,7 +132,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                     <div className='details_box'>
                                         <h3 className='heading3 mb-3'>Notifies to enter actual data every week</h3>
                                         <h3 className='heading3 textGray'>Goals for this week</h3>
-                                        <h2 className='heading2'>Week 6</h2>
+                                        <h2 className='heading2'>Week {goalData.week_for}</h2>
                                         <i className="fi fi-rr-angle-small-right arrow right"></i>
                                         <i className="fi fi-rr-angle-small-left arrow left"></i>
                                         <div className='sliderBox'>
