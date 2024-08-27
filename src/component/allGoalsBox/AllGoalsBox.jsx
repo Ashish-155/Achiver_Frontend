@@ -129,7 +129,7 @@ const AllGoalsBox = ({ goal, refreshGoals }) => {
                                                 id="dropdown-menu-align-end"
                                                 className=''
                                             >
-                                                <Link eventKey="1" to='/week-goals-details' className='dropdown-item'>View</Link>
+                                                <Link eventKey="1" to={`/week-goals-details/${value.id}`} className='dropdown-item'>View</Link>
                                                 <Dropdown.Item eventKey="2" onClick={() => openModalShow(value.id)}>Actual Achivement</Dropdown.Item>
                                             </DropdownButton>
                                         </div>
