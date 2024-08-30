@@ -7,6 +7,8 @@ import { Modal } from 'react-bootstrap';
 const Profile = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
 
+    const [fileName, setFileName] = useState('Attach the file below');
+
     // profile change logic 
 
     const [formData, setFormData] = useState({
@@ -26,13 +28,21 @@ const Profile = () => {
         });
     };
 
+    // const handleFileChange = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         profile_image: e.target.files[0],
+    //     });
+    // };
+
+
     const handleFileChange = (e) => {
         setFormData({
             ...formData,
             profile_image: e.target.files[0],
         });
+        setFileName(e.target.files[0].name); // Assuming `setFileName` is a state setter for `fileName`.
     };
-
 
 
     const handleProfileChangeProfile = async () => {
@@ -159,16 +169,21 @@ const Profile = () => {
                         </button>
                         <div className="modal-body">
                             <p className="modal-title">Upload a file</p>
-                            <p className="modal-description">Attach the file below</p>
+                            <p className="modal-description"> {fileName === '' ? 'Attach the file below' : fileName}</p>
+
+
                             <label for="file" className="upload-area">
                                 <span className="upload-area-icon">
 
                                     <i className="fi fi-rr-file-export fs-2 textGreen"></i>
                                 </span>
                                 <span className="upload-area-title"> file(s) here to upload.</span>
-                                <span className="upload-area-description">
-                                    Alternatively, you can select a file
-                                </span>
+                                <p className="upload-area-description">
+                                    {fileName === 'Amelia_Cooper_PEP25s_payslip_for_Apr_01_2024_-_Apr_24_2024.pdf'
+                                        ? "Alternatively, you can select a different file"
+                                        : fileName || "No file selected yet"}
+                                </p>
+
                             </label>
                             <input type='file' className='img_upload'
                                 id='file'

@@ -855,7 +855,7 @@ select {
                 background: $bg_rgba4;
                 border-radius: 14px;
                 padding: 20px;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
                 margin-inline: 20px;
                 border: 1px solid #ADADB1;
                 position: relative;
@@ -1520,9 +1520,14 @@ form input[type="file"] {
     right: 20px;
     top: 20px;
     font-size: 25px;
+    z-index: 5;
 }
 
-
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: $text_black !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
 
 
 

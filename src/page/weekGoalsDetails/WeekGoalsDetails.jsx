@@ -3,7 +3,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../services/api';
 import { toast, ToastContainer } from 'react-toastify';
@@ -161,6 +161,12 @@ const WeekGoalsDetails = ({ name, ...props }) => {
 
                         </div>
                         <div className='main_content'>
+                        <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                            <Link to={`/week-goals/${id}`} className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
+                            <div className='d-flex justify-content-end align-items-center gap-2'>
+                                <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
+                            </div>
+                        </div>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD </h1>
 
