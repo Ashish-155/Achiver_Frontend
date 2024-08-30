@@ -45,7 +45,6 @@ const Router = () => {
         } />
 
         <Route path="/week-goals-details/:id" element={
-          // <WeekGoalsDetails />
           <ProtectedRoute>
             <WeekGoalsDetails />
           </ProtectedRoute>
@@ -58,7 +57,6 @@ const Router = () => {
         } />
 
         <Route path="/all-goals" element={
-          // <AllGoals />
           <ProtectedRoute>
             <AllGoals />
           </ProtectedRoute>
