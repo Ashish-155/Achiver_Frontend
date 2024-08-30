@@ -67,7 +67,19 @@ const Login = () => {
                 });
 
                 localStorage.setItem("token", res.data.token);
+
                 const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours from now
+                localStorage.setItem("token_expiration", expirationTime);
+
+                // Set timeout to remove token after 24 hours
+                setTimeout(() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("token_expiration");
+                    toast.info("Session expired. Please log in again.", {
+                        position: "top-center"
+                    });
+                    navigate("/login");
+                }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds 24 hours from now
                 localStorage.setItem("token_expiration", expirationTime);
 
 

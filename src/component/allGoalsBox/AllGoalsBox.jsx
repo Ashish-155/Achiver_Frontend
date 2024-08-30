@@ -9,7 +9,7 @@ import { BASE_URL } from '../../services/api';
 const AllGoalsBox = ({ goal, refreshGoals }) => {
     const [modalShow, setModalShow] = useState(false);
 
-    console.log("object : ", goal.Week_Goal)
+    // console.log("object : ", goal.Week_Goal)
 
     // Initial state for form data
     const [actualData, setActualData] = useState({
@@ -140,7 +140,22 @@ const AllGoalsBox = ({ goal, refreshGoals }) => {
                                                     {/* {index + 1} */}
                                                     {value.week_for}
                                                 </div>
-                                                <p className='para2 status incoming'>Incoming</p>
+                                                {
+                                                    value.running === true ? (
+                                                        <p className='para2 status active'>
+                                                            Running
+                                                        </p>
+                                                    ) :
+                                                        (
+                                                            value.upcoming === true ? (
+                                                                <p className='para2 status incoming'>
+                                                                    Upcoming
+                                                                </p>
+                                                            ) : (
+                                                                ""
+                                                            )
+                                                        )
+                                                }
                                             </div>
                                             <div className='d-flex justify-content-between align-items-center gap-2 mb-2'>
                                                 <p className='para2'>Target Leads</p>
@@ -152,7 +167,7 @@ const AllGoalsBox = ({ goal, refreshGoals }) => {
                                             </div>
                                             <div className='mt-4'>
                                                 <p className='para2 d-flex justify-content-start align-items-center gap-2'>
-                                                    {parseFloat(value.lead_execution_score) > 0 ? (
+                                                    {parseFloat(value.lead_execution_score) >= 0 ? (
                                                         <i className="fi fi-rr-arrow-trend-up up"></i>
                                                     ) : (
                                                         <i className="fi fi-rr-arrow-trend-down down"></i>

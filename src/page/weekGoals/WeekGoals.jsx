@@ -9,6 +9,8 @@ import axios from 'axios';
 import { BASE_URL } from '../../services/api';
 import { Modal } from 'react-bootstrap';
 import { LoginContext } from '../../ContextProvider/Context';
+import LeadChart from '../charts/LeadChart';
+import LagChart from '../charts/LagChart';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
 // import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
@@ -20,6 +22,17 @@ const WeekGoals = () => {
     const [goal, setGoal] = useState({});
     // console.log("Goal_data:", goal)
 
+    // lead_taerget graph state
+    const [leadExecutionScores, setLeadExecutionScores] = useState([]);
+    const [leadExecutionScoresRaw, setLeadExecutionScoresRaw] = useState([]);
+    // console.log("leadExecutionScoresRaw : ", leadExecutionScoresRaw)
+    // console.log("leadExecutionScores : ", leadExecutionScores)
+
+    // lag_target graph state
+    const [lagExecutionScores, setLagExecutionScores] = useState([]);
+    const [lagExecutionScoresRaw, setLagExecutionScoresRaw] = useState([]);
+
+
     const fetchGoal = async () => {
         try {
             const res = await axios.get(`${BASE_URL}/api/goal/${id}`, {
@@ -30,6 +43,20 @@ const WeekGoals = () => {
             });
             // console.log(res)
             setGoal(res.data.data)
+
+            // taerget graph
+            const weekGoals = res.data.data.Week_Goal;
+
+            const leadRawScores = weekGoals.map(week => week.lead_execution_score);
+            const lagRawScores = weekGoals.map(week => week.lag_execution_score);
+
+            const leadScores = weekGoals.map(week => parseFloat(week.lead_execution_score.replace('%', '')));
+            const lagScores = weekGoals.map(week => parseFloat(week.lag_execution_score.replace('%', '')));
+
+            setLeadExecutionScores(leadScores);
+            setLagExecutionScores(lagScores);
+            setLeadExecutionScoresRaw(leadRawScores); // Store the raw lead scores for tooltip
+            setLagExecutionScoresRaw(lagRawScores);
         } catch (error) {
             console.log(error);
         }
@@ -118,13 +145,25 @@ const WeekGoals = () => {
                             </div>
                         </div>
                         <div className='main_content'>
-                            <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+                            <h1 className='heading1 mb-3'>
+                                ACHIEVE  DASHBOARD ({goal.name})
+                            </h1>
                             <div className='innerBox'>
                                 <div className='row align-items-center'>
-                                    <div className='col-lg-12'>
+                                    <div className='col-lg-6 col-md-12 col-sm-12'>
                                         <div className='chart_box'>
-                                            <h3 className='heading3 mb-3'>Leads & Lags Graph</h3>
-                                            <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" />
+                                            <h3 className='heading3 mb-3'>Leads Graph</h3>
+                                            {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
+
+                                            <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} />
+
+                                        </div>
+                                    </div>
+                                    <div className='col-lg-6 col-md-12 col-sm-12'>
+                                        <div className='chart_box'>
+                                            <h3 className='heading3 mb-3'>Lags Graph</h3>
+                                            {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
+                                            <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} />
                                         </div>
                                     </div>
                                     <div className='col-lg-6 col-md-12'>
@@ -135,16 +174,22 @@ const WeekGoals = () => {
                                             </div> */}
                                             <div className='row align-items-center'>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='chart_postion'>
+                                                    <div className='chart_postion para3'>
                                                         {/* <img src={'assets/image/chart2.png'} alt='' /> */}
                                                         {/* <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" /> */}
-                                                        {/* <i className="fi fi-rr-arrow-trend-down down"></i> */}
-                                                        {parseFloat(goal.lead_execution_score) > 0 ? (
-                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                        {parseFloat(goal.lead_execution_score) >= 0 ? (
+                                                            <>
+                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                <p className='up center_text'>{goal.lead_execution_score}</p>
+
+                                                            </>
                                                         ) : (
-                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                            <>
+                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                <p className='down center_text'>{goal.lead_execution_score}</p>
+
+                                                            </>
                                                         )}
-                                                        <p className='para4 center_text'><strong>{goal.lead_execution_score}</strong></p>
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
@@ -174,12 +219,19 @@ const WeekGoals = () => {
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                                     <div className='chart_postion para3'>
                                                         <img src={'assets/image/chart2.png'} alt='' />
-                                                        {parseFloat(goal.lag_execution_score) > 0 ? (
-                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                        {parseFloat(goal.lag_execution_score) >= 0 ? (
+                                                            <>
+                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                <p className='up center_text'>{goal.lag_execution_score}</p>
+                                                            </>
+
                                                         ) : (
-                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                            <>
+                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                <p className='down center_text'>{goal.lag_execution_score}</p>
+                                                            </>
+
                                                         )}
-                                                        <p className='para4 center_text'><strong>{goal.lag_execution_score}</strong></p>
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6 col-md-6 col-sm-12'>
@@ -196,7 +248,6 @@ const WeekGoals = () => {
                                                         </div>
 
                                                     </div>
-                                                    {/* <p className='para4'>Cumu. target 2023 <strong>46.72%</strong></p> */}
                                                 </div>
                                             </div>
                                         </div>

@@ -52,7 +52,6 @@ const Router = () => {
         } />
 
         <Route path="/profile" element={
-          // <Profile />
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>

@@ -124,9 +124,15 @@ const Dashboard = ({ name, ...props }) => {
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
                             <div className='innerBox'>
                                 <div className='row align-items-center'>
-                                    <div className='col-lg-12'>
+                                    <div className='col-lg-6 col-md-12 col-sm-12'>
                                         <div className='chart_box'>
-                                            <h3 className='heading3 mb-3'>Leads & Lags Graph</h3>
+                                            <h3 className='heading3 mb-3'>Leads Graph</h3>
+                                            <img src={'assets/image/chart1.png'} alt='' />
+                                        </div>
+                                    </div>
+                                    <div className='col-lg-6 col-md-12 col-sm-12'>
+                                        <div className='chart_box'>
+                                            <h3 className='heading3 mb-3'>Lags Graph</h3>
                                             <img src={'assets/image/chart1.png'} alt='' />
                                         </div>
                                     </div>

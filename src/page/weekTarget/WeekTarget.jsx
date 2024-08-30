@@ -7,6 +7,7 @@ import Avatar from '../../component/avatar/Avatar';
 import Accordion from 'react-bootstrap/Accordion';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
+import { BASE_URL } from '../../services/api';
 
 const WeekTarget = ({ name, ...props }) => {
 
@@ -118,7 +119,7 @@ const WeekTarget = ({ name, ...props }) => {
         const newWeeks = [...weeks];
         newWeeks[index] = { ...newWeeks[index], [name]: value };
         setWeeks(newWeeks);
-        
+
         if (value.trim()) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -185,7 +186,8 @@ const WeekTarget = ({ name, ...props }) => {
 
             // Send the POST request
             const res = await axios.post(
-                "http://localhost:5000/api/goal/create-seperate-goal",
+                // "http://localhost:5000/api/goal/create-seperate-goal",
+                `${BASE_URL}/api/goal/create-seperate-goal`,
                 payload,
                 {
                     headers: {
@@ -206,7 +208,7 @@ const WeekTarget = ({ name, ...props }) => {
             console.error('Error creating goal:', error.response ? error.response.data : error.message);
         }
     };
-    
+
 
     return (
         <>

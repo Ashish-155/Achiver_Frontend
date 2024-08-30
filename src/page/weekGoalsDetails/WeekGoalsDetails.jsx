@@ -6,26 +6,37 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../services/api';
+import { toast, ToastContainer } from 'react-toastify';
 
 const WeekGoalsDetails = ({ name, ...props }) => {
-
+    const { id } = useParams();
     const [showFirst, setShowFirst] = useState(false);
     const handleCloseFirst = () => setShowFirst(false);
     const handleShowFirst = () => setShowFirst(true);
 
-    // form validation
-
     const [formData, setFormData] = useState({
-        keyAction: '',
+        week_goal_id: '',
+        key_action: '',
         who: '',
         day: '',
     });
-
     const [errors, setErrors] = useState({
-        keyAction: '',
+        key_action: '',
         who: '',
         day: '',
     });
+    const [goalData, setGoalData] = useState({});
+
+    // Update formData when id changes
+    useEffect(() => {
+        if (id) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                week_goal_id: id,
+            }));
+            weekGoalDetails(); // Fetch goal details when id is available
+        }
+    }, [id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -36,9 +47,9 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         let valid = true;
         const newErrors = {};
 
-        if (!formData.keyAction) {
+        if (!formData.key_action) {
             valid = false;
-            newErrors.keyAction = 'Key Action is required';
+            newErrors.key_action = 'Key Action is required';
         }
 
         if (!formData.who) {
@@ -55,24 +66,34 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         return valid;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (validate()) {
-            // Form is valid, submit the data
-            console.log('Form submitted:', formData);
+            try {
+                const res = await axios.post(`${BASE_URL}/api/goal/create-week_goal-action`, formData, {
+                    headers: {
+                        Authorization: `${localStorage.getItem("token")}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+                toast.success(res.data.message, { position: "top-center" });
+                handleCloseFirst();
+                weekGoalDetails();
+                setFormData({
+                    week_goal_id: id,
+                    key_action: '',
+                    who: '',
+                    day: '',
+                });
+            } catch (error) {
+                console.log("Error creating action:", error);
+            }
         }
     };
 
-    // progress
-
-    const now = 75;
-    const now2 = 56;
-
-    // api implementation
-    const { id } = useParams();
-    const [goalData, setGoalData] = useState({});
     const weekGoalDetails = async () => {
+        if (!id) return; // Ensure id is available before making the API call
         try {
             const res = await axios.get(`${BASE_URL}/api/goal/week-goal-for?id=${id}`, {
                 headers: {
@@ -80,16 +101,33 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                     "Content-Type": "application/json",
                 },
             });
-            // console.log("Week_goal_details : ", res);
-            setGoalData(res.data.data)
+            setGoalData(res.data.data);
         } catch (error) {
-            console.log(error);
+            console.log("Error fetching goal details:", error);
         }
-    }
+    };
+
+    const handleActionDelete = async (week_goal_action_id) => {
+        try {
+            const res = await axios.delete(`${BASE_URL}/api/goal/delete-week_goal-action`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+                data: { week_goal_action_id },
+            });
+            toast.success(res.data.message, { position: "top-center" });
+            weekGoalDetails();
+        } catch (error) {
+            console.log("Error deleting action:", error);
+        }
+    };
 
     useEffect(() => {
-        weekGoalDetails()
-    }, [])
+        if (id) {
+            weekGoalDetails();
+        }
+    }, [id]);
 
     return (
         <>
@@ -124,7 +162,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                         </div>
                         <div className='main_content'>
                             <div className='d-flex justify-content-between align-items-center'>
-                                <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+                                <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD </h1>
 
                             </div>
                             <div className='innerBox'>
@@ -148,21 +186,35 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 </button>
                                             </div>
                                             {/* Loop start */}
-                                            <div className='card_body'>
-                                                <div className='delete'><i className="fi fi-br-trash"></i></div>
-                                                <p className="text-muted mb-2 font-13">
-                                                    <strong> Key Action / Tactics :</strong>
-                                                    <span className="ml-2"> Conta Contact Deepak and Ask him to start setupct Deepak and Ask him to </span>
-                                                </p>
-                                                <p className="text-muted mb-2 font-13">
-                                                    <strong> Who :</strong>
-                                                    <span className="ml-2">Veenet </span>
-                                                </p>
-                                                <p className="text-muted font-13">
-                                                    <strong> Day :</strong>
-                                                    <span className="ml-2">Wednesday </span>
-                                                </p>
-                                            </div>
+                                            {
+                                                goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
+                                                    goalData.Week_Goal_Actions.map((value, index) => {
+                                                        return (
+                                                            <>
+                                                                <div className='card_body'>
+                                                                    <div className='delete'>
+                                                                        <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
+                                                                    </div>
+                                                                    <p className="text-muted mb-2 font-13">
+                                                                        <strong> Key Action / Tactics :</strong>
+                                                                        <span className="ml-2"> {value.key_action} </span>
+                                                                    </p>
+                                                                    <p className="text-muted mb-2 font-13">
+                                                                        <strong> Who :</strong>
+                                                                        <span className="ml-2">{value.who} </span>
+                                                                    </p>
+                                                                    <p className="text-muted font-13">
+                                                                        <strong> Day :</strong>
+                                                                        <span className="ml-2">{value.day} </span>
+                                                                    </p>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    })
+                                                )
+                                                    : (null)
+                                            }
+
                                             {/* Loop end */}
 
                                         </div>
@@ -210,18 +262,30 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                         <div className='card-body'>
                                                             <div className="measure">
                                                                 <span className="para4">Lead Target</span>
-                                                                <span className="value">500</span>
+                                                                <span className="value">{goalData.lead_target}</span>
                                                             </div>
                                                             <div className="measure">
                                                                 <span className="para4">Lead Actual</span>
-                                                                <span className="value">500</span>
+                                                                <span className="value">{goalData.lead_actual}</span>
                                                             </div>
                                                             <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                <span className="down up">
-                                                                    10
-                                                                </span> Lead score
+                                                                {
+                                                                    parseFloat(goalData.lead_execution_score) >= 0 ? (
+                                                                        <>
+                                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                            <span className="up">
+                                                                                {goalData.lead_execution_score}
+                                                                            </span> Lag score
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                            <span className="down">
+                                                                                {goalData.lead_execution_score}
+                                                                            </span> Lag score
+                                                                        </>
+                                                                    )
+                                                                }
                                                             </p>
                                                         </div>
                                                     </div>
@@ -231,37 +295,54 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                         <div className='card-body'>
                                                             <div className="measure">
                                                                 <span className="para4">Lag Target</span>
-                                                                <span className="value">3000</span>
+                                                                <span className="value">{goalData.lag_target}</span>
                                                             </div>
                                                             <div className="measure">
                                                                 <span className="para4">Lag Actual</span>
-                                                                <span className="value">2368</span>
+                                                                <span className="value">{goalData.lag_actual}</span>
                                                             </div>
                                                             <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                <span className="down up">
-                                                                    10%
-                                                                </span> Lag score
+                                                                {
+                                                                    parseFloat(goalData.lag_execution_score) >= 0 ? (
+                                                                        <>
+                                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                            <span className="up">
+                                                                                {goalData.lag_execution_score}
+                                                                            </span> Lag score
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                            <span className="down">
+                                                                                {goalData.lag_execution_score}
+                                                                            </span> Lag score
+                                                                        </>
+                                                                    )
+                                                                }
+
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
+
+
                                                 <div className='col-md-6'>
                                                     <div className='d-flex mb-3 f-s-12 fw-bold'>
                                                         <span className='text-muted me-2'>Week Start Date :</span>
-                                                        <span>27/08/2024</span>
+                                                        {/* <span>{goalData.start_date}</span> */}
+                                                        <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
                                                     </div>
                                                 </div>
                                                 <div className='col-md-6'>
                                                     <div className='d-flex  mb-3 f-s-12 fw-bold'>
                                                         <span className='text-muted me-2'>Week End Date :</span>
-                                                        <span>03/09/2024</span>
+                                                        {/* <span>{goalData.end_date}</span> */}
+                                                        <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
-
+                                            <ToastContainer />
 
                                         </div>
                                     </div>
@@ -272,11 +353,6 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                 </div>
             </div>
 
-
-
-
-
-
             <Offcanvas show={showFirst} onHide={handleCloseFirst} placement="bottom" {...props} className='bottom_offcanves'>
                 <Offcanvas.Header closeButton className='px-0'>
 
@@ -286,14 +362,14 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                         <div className='form_group'>
                             <label className='label'>Key Action / Tactics</label>
                             <textarea
-                                className={`form-control form_control ${errors.keyAction && 'is-invalid'}`}
+                                className={`form-control form_control ${errors.key_action && 'is-invalid'}`}
                                 placeholder='Enter key action'
                                 rows='2'
-                                name='keyAction'
-                                value={formData.keyAction}
+                                name='key_action'
+                                value={formData.key_action}
                                 onChange={handleChange}
                             />
-                            {errors.keyAction && <div className="invalid-feedback">{errors.keyAction}</div>}
+                            {errors.key_action && <div className="invalid-feedback">{errors.key_action}</div>}
                         </div>
 
                         <div className='form_group'>
