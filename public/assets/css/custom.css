@@ -469,7 +469,7 @@ select {
 .innerBox {
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 185px);
   padding-inline: 5px;
 }
 
@@ -699,7 +699,7 @@ select {
   background: #ffffff;
   border-radius: 14px;
   text-align: left;
-  max-height: 880px;
+  max-height: 250px;
   overflow: auto;
   position: relative;
   padding-bottom: 20px;
@@ -714,16 +714,18 @@ select {
   position: sticky;
   top: 0;
   background: #ffffff;
-  padding: 20px;
+  padding-inline: 20px;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
+  z-index: 5;
+  padding-block-start: 20px;
 }
 
 .weekGoal.details .task_card .card_body {
   background: rgba(225, 255, 246, 0.19);
   border-radius: 14px;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-top: 30px;
   margin-inline: 20px;
   border: 1px solid #ADADB1;
   position: relative;

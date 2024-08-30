@@ -113,7 +113,6 @@ const Dashboard = ({ name, ...props }) => {
                 <div className=' overflow-x-hidden overflow-y-hidden'>
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
-                            {/* <Link to='/welcome' className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link> */}
                             <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
                                 <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-start align-items-center gap-2'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>

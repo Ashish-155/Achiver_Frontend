@@ -6,8 +6,7 @@ import WeekTarget from '../page/weekTarget/WeekTarget';
 import WeekGoals from '../page/weekGoals/WeekGoals';
 import WeekGoalsDetails from '../page/weekGoalsDetails/WeekGoalsDetails';
 import Profile from '../page/profile/Profile';
-import Welcome from '../page/welcome/Welcome';
-import AllGoals from '../page/allGoals/AllGoals';
+// import Welcome from '../page/welcome/Welcome';
 import ProtectedRoute from '../ProtectedRoute';
 // import AllGoalsBox from '../page/allGoalsBox/AllGoalsBox';
 
@@ -16,14 +15,6 @@ const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-
-        <Route path="/welcome" element={
-
-          <ProtectedRoute>
-            <Welcome />
-          </ProtectedRoute>
-        } />
-
 
         <Route path="/dashboard" element={
           <ProtectedRoute>
@@ -54,13 +45,6 @@ const Router = () => {
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
-        } />
-
-        <Route path="/all-goals" element={
-          <ProtectedRoute>
-            <AllGoals />
-          </ProtectedRoute>
-
         } />
 
 
