@@ -9,7 +9,7 @@ import { BASE_URL } from '../../services/api';
 const AllGoalsBox = ({ goal, refreshGoals }) => {
     const [modalShow, setModalShow] = useState(false);
 
-    // console.log("object : ", goal.Week_Goal)
+    // console.log("object : ", goal.id)
 
     // Initial state for form data
     const [actualData, setActualData] = useState({
@@ -129,11 +129,11 @@ const AllGoalsBox = ({ goal, refreshGoals }) => {
                                                 id="dropdown-menu-align-end"
                                                 className=''
                                             >
-                                                <Link eventKey="1" to={`/week-goals-details/${value.id}`} className='dropdown-item'>View</Link>
+                                                <Link eventKey="1" to={`/week-goals-details/${value.id}`} state={{ goalId: goal.id }} className='dropdown-item'>View</Link>
                                                 <Dropdown.Item eventKey="2" onClick={() => openModalShow(value.id)}>Actual Achivement</Dropdown.Item>
                                             </DropdownButton>
                                         </div>
-                                        <Link to={`/week-goals-details/${value.id}`} className='goalCard active'>
+                                        <Link to={`/week-goals-details/${value.id}`} state={{ goalId: goal.id }} className='goalCard active'>
                                             <div>
                                                 <div className='chip'>
                                                     <i className="fi fi-rr-calendar"></i> Week

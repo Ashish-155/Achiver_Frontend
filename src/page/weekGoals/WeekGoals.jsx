@@ -42,7 +42,9 @@ const WeekGoals = () => {
                 },
             });
             // console.log(res)
-            setGoal(res.data.data)
+            setGoal(res.data.data);
+
+            console.log("fetch_Goal : ", res)
 
             // taerget graph
             const weekGoals = res.data.data.Week_Goal;
