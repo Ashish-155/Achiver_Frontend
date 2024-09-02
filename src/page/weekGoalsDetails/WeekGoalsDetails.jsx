@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -8,13 +8,16 @@ import axios from 'axios';
 import { BASE_URL } from '../../services/api';
 import { toast, ToastContainer } from 'react-toastify';
 import Avatar from '../../component/avatar/Avatar';
+import { GoalDataContext } from '../../ContextProvider/Context';
 
 const WeekGoalsDetails = ({ name, ...props }) => {
     const location = useLocation();
     const { state } = location;
-    console.log("State : ", state)
     const { goalId } = state;
-    console.log("GoalId : ", goalId)
+    // console.log("GoalId : ", goalId)
+
+    const { goalDataContext, setGoalDataContext } = useContext(GoalDataContext);
+    console.log("goalDataContext : ", goalDataContext)
 
 
     const { id } = useParams();
@@ -190,7 +193,9 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                         <i className="fi fi-rr-angle-small-right arrow right"></i>
                                         <i className="fi fi-rr-angle-small-left arrow left"></i>
                                         <div className='sliderBox'>
-                                            <p className='para2 text-black'> Contact management team and form a mid week meeting</p>
+                                            <p className='para2 text-black'> Lead accumulate : {goalDataContext.lead_actual}</p>
+                                            <p className='para2 text-black'> Lag accumulate : {goalDataContext.lag_actual}</p>
+
                                         </div>
                                     </div>
                                     <div className='mt-3 item_box'>

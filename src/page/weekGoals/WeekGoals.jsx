@@ -8,7 +8,7 @@ import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox';
 import axios from 'axios';
 import { BASE_URL } from '../../services/api';
 import { Modal } from 'react-bootstrap';
-import { LoginContext } from '../../ContextProvider/Context';
+import { GoalDataContext, LoginContext } from '../../ContextProvider/Context';
 import LeadChart from '../charts/LeadChart';
 import LagChart from '../charts/LagChart';
 // import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
@@ -21,6 +21,9 @@ const WeekGoals = () => {
     // console.log(id)
     const [goal, setGoal] = useState({});
     // console.log("Goal_data:", goal)
+
+    const { goalDataContext, setGoalDataContext } = useContext(GoalDataContext);
+    // console.log("goalDataContext : ", goalDataContext)
 
     // lead_taerget graph state
     const [leadExecutionScores, setLeadExecutionScores] = useState([]);
@@ -43,6 +46,7 @@ const WeekGoals = () => {
             });
             // console.log(res)
             setGoal(res.data.data);
+            setGoalDataContext(res.data.data)
 
             console.log("fetch_Goal : ", res)
 
