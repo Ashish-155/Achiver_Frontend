@@ -155,7 +155,7 @@ const WeekGoals = () => {
                                             <h3 className='heading3 mb-3'>Leads Graph</h3>
                                             {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
 
-                                            <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} />
+                                            <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} goalData={goal} />
 
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@ const WeekGoals = () => {
                                         <div className='chart_box'>
                                             <h3 className='heading3 mb-3'>Lags Graph</h3>
                                             {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
-                                            <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} />
+                                            <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} goalData={goal} />
                                         </div>
                                     </div>
                                     <div className='col-lg-6 col-md-12'>

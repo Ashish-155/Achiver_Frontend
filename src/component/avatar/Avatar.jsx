@@ -66,8 +66,8 @@ const Avatar = () => {
                 }
                 id="dropdown-menu-align-end"
             >
-                <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
-                <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
+                <Link eventKey="1" to="/profile" className="dropdown-item">Profile</Link>
+                <button eventKey="2" className="dropdown-item" onClick={() => removeToken()}>Logout</button>
 
             </DropdownButton>
             {/* </div> */}
