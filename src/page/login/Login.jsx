@@ -78,7 +78,7 @@ const Login = () => {
                     toast.info("Session expired. Please log in again.", {
                         position: "top-center"
                     });
-                    navigate("/login");
+                    navigate("/");
                 }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds 24 hours from now
                 localStorage.setItem("token_expiration", expirationTime);
 
