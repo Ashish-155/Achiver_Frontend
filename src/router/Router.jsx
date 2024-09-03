@@ -8,6 +8,7 @@ import WeekGoalsDetails from '../page/weekGoalsDetails/WeekGoalsDetails';
 import Profile from '../page/profile/Profile';
 // import Welcome from '../page/welcome/Welcome';
 import ProtectedRoute from '../ProtectedRoute';
+import Welcome from '../page/welcome/Welcome';
 // import AllGoalsBox from '../page/allGoalsBox/AllGoalsBox';
 
 const Router = () => {
@@ -19,6 +20,13 @@ const Router = () => {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/" element={<Login />} />
+
+        <Route path="/welcome" element={
+          <ProtectedRoute>
+            <Welcome />
           </ProtectedRoute>
         } />
 

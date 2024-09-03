@@ -121,7 +121,7 @@ const AllGoalsBox = ({ goal, refreshGoals }) => {
                         goal.Week_Goal && Array.isArray(goal.Week_Goal) && goal.Week_Goal.length > 0 ? (
                             goal.Week_Goal.map((value, index) => {
                                 return (
-                                    <div className='col-lg-4 col-md-4 col-sm-6 mb-3 position-relative' key={index}>
+                                    <div className='col-lg-4 col-md-6 col-sm-6 mb-3 position-relative' key={index}>
                                         <div className='work_drop'>
                                             <DropdownButton
                                                 align="end"

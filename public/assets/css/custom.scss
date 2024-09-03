@@ -51,6 +51,14 @@ $text_gray500: #727677;
 $text_black200: #535353;
 $text_marker: #1EA38D;
 
+$upcoming_color: #0084ff;
+$upcoming_color_light: #e6f3ff;
+$inprogress_color: #ff9900;
+$inprogress_color_light: #fff4e5;
+$completed_color: #00cc44;
+$completed_color_light: #e6ffe6;
+
+
 //  border-color
 
 $border_light_gray: #DFF8EA;
@@ -108,8 +116,8 @@ $gradient_set5_2: rgba(215, 235, 224, 1);
     font-weight: $weight;
 }
 
-@mixin heading2 ($size, $weight) {
-    font-size: $size;
+@mixin heading2 ($min-size, $preferred-size, $max-size, $weight) {
+    font-size: clamp($min-size, $preferred-size, $max-size);
     font-weight: $weight;
 }
 
@@ -327,7 +335,7 @@ select {
         flex-direction: column;
 
         .heading2 {
-            @include heading2(25px, 500);
+            @include heading2(18px, 2vw, 25px, 500);
             color: $text_black;
             margin-block: 30px;
         }
@@ -379,15 +387,30 @@ select {
 
 //  =========================================== login end
 //  =========================================== dashboard start
+.top_header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(-25deg, rgba(178, 224, 188, 0) 0%, rgba(255, 255, 255, 0.4) 100%);
+    backdrop-filter: blur(100px);
 
+
+}
+// .chart-container{
+//     svg{
+//         width: 100% !important;
+//         height: 100% !important;
+//     }
+// }
 .dashboard {
     background: linear-gradient(-25deg, $gradient_set2_1 0%, $gradient_set1_2 100%);
     width: 100%;
     height: 100vh;
     position: relative;
-    padding-block: 0px 30px;
-    overflow: hidden;
+    padding-block-end: 20px;
+    // overflow: hidden;
     isolation: isolate;
+    overflow: auto;
 
     &::before {
         content: '';
@@ -421,6 +444,11 @@ select {
         .heading1 {
             @include heading1(20px, 2vw, 28px, 600);
             color: $text_primary;
+        }
+
+        .main_content {
+            position: sticky;
+            top: 0;
         }
 
         .chart_box {
@@ -465,6 +493,9 @@ select {
                     align-items: center;
                     gap: 15px;
                     width: 100%;
+                    @media (max-width: 767px){
+                        justify-content: space-between;
+                    }
 
                     .circle {
                         width: 16px;
@@ -493,6 +524,9 @@ select {
                 position: relative;
                 max-width: 178px;
                 width: 100%;
+                @media (max-width: 767px) {
+                    margin-bottom: 15px;
+                }
             }
 
             .center_text {
@@ -515,10 +549,7 @@ select {
         }
     }
 
-    &.dsh_target {
-        // padding-block: 40px;
-        height: 100vh;
-    }
+  
 }
 
 .bottom_offcanves {
@@ -576,8 +607,8 @@ select {
 .innerBox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: calc(100vh - 185px);
     padding-inline: 5px;
+    
 }
 
 //  =========================================== dashboard end
@@ -590,7 +621,7 @@ select {
     border-radius: 14px;
     padding: 20px;
     overflow: auto;
-    height: calc(100vh - 160px);
+    // height: calc(100vh - 160px);
 
     .week_card {
         background: $white;
@@ -679,7 +710,7 @@ select {
     background-color: $white;
     border-radius: 14px;
     padding: 20px;
-    margin-block-start: 20px;
+    // margin-block-start: 20px;
 
     .goal_List {
         // overflow: auto;
@@ -802,8 +833,7 @@ select {
 
         .heading2 {
             color: $text_marker;
-            font-weight: 600;
-            font-size: 20px;
+            @include heading2(18px, 2vw, 22px, 600);
         }
 
         .sliderBox {
@@ -832,25 +862,25 @@ select {
             background: $white;
             border-radius: 14px;
             text-align: left;
-            max-height: 250px;
+            max-height: 415px;
             overflow: auto;
             position: relative;
-            padding-bottom: 20px;
 
-            .card_header {
+            .card_footer {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 align-items: center;
+                gap: 20px;
                 margin-bottom: 0;
                 cursor: pointer;
                 position: sticky;
-                top: 0;
+                bottom: 0;
                 background: $white;
                 padding-inline: 20px;
                 border-top-left-radius: 14px;
                 border-top-right-radius: 14px;
                 z-index: 5;
-                padding-block-start: 20px;
+                padding-block: 20px;
             }
 
             .card_body {
@@ -929,13 +959,9 @@ select {
         }
 
         .details_box {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: $white;
-            box-shadow: rgba(110, 110, 110, 0.05) 0 0 10px;
-            padding: 20px;
-            border-radius: 14px;
+           
+            padding-block-start: 20px;
+            padding-inline: 20px;
         }
 
         .item_box {
@@ -947,7 +973,8 @@ select {
 
 .lead-measures {
     background-color: $bg_rgba5;
-    padding: 20px;
+    padding-block: 20px;
+    padding-inline: clamp(10px, 2vw, 20px);
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     color: $text_primary;
@@ -1488,9 +1515,18 @@ form input[type="file"] {
     background: url('../image/g-bg.jpg') no-repeat center center;
     background-size: cover;
     width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+
+    .w_content {
+        max-width: 580px;
+        width: 100%;
+    }
 
 }
 
@@ -1505,7 +1541,7 @@ form input[type="file"] {
     }
 
     .heading2 {
-        @include heading2(22px, 500);
+        @include heading2(18px, 2vw, 22px, 500);
         color: $text_primary;
         text-transform: capitalize;
     }
@@ -1526,26 +1562,15 @@ form input[type="file"] {
     z-index: 5;
 }
 
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
     color: $text_black !important;
     background-color: transparent !important;
     border-color: transparent !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // profile
@@ -1774,12 +1799,14 @@ input[type="file"] {
     background: $white;
     padding: 20px;
     border-radius: 14px;
-    .wrap{
+
+    .wrap {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         gap: 20px;
         flex-wrap: wrap;
+
         .goalBox {
             border: 1px solid #e5e5e5;
             background: $white;
@@ -1832,6 +1859,7 @@ input[type="file"] {
         background: #ff99004d
     }
 }
+
 .para3 {
     color: $text_black200;
 
@@ -1849,6 +1877,97 @@ input[type="file"] {
         font-weight: 600;
     }
 }
+
 .f-s-12 {
     font-size: 12px;
+}
+
+
+
+
+
+// /////////////////// new dashboard design
+
+
+.goals-container {
+    padding: 20px;
+    background: $white;
+    border-radius: 14px;
+    padding: 20px;
+
+    .heading2 {
+        @include heading2(18px, 2vw, 22px, 500);
+        color: $text_black;
+        margin-block-end: 20px;
+    }
+
+    .goal-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: $white;
+        border: 1px solid $border_light_gray2;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+
+        .goal-title {
+            @include heading2(16px, 2vw, 16px, 500);
+            color: $text_black;
+        }
+
+        .goal-status {
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 2px 10px;
+            flex-shrink: 0;
+
+            &.upcoming {
+                color: $upcoming_color;
+                background-color: $upcoming_color_light;
+            }
+
+            &.inprogress {
+                color: $inprogress_color;
+                background-color: $inprogress_color_light;
+            }
+
+            &.completed {
+                color: $completed_color;
+                background-color: $completed_color_light;
+            }
+        }
+    }
+}
+
+
+
+
+element.style {
+}
+.carousel-control-prev {
+    left: 0;
+}
+.carousel-control-next, .carousel-control-prev {
+    top: 2% !important;
+    bottom: unset !important;
+    z-index: 5 !important;
+    color: $text_black !important;
+    // cursor: pointer !important;
+  
+}
+.carousel-control-prev-icon {
+    background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3e%3cpath d=%27M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z%27/%3e%3c/svg%3e') !important;
+    // cursor: pointer !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3e%3cpath d=%27M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e') !important;
+    // cursor: pointer !important;
 }

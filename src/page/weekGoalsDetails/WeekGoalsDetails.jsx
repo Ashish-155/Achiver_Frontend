@@ -9,6 +9,7 @@ import { BASE_URL } from '../../services/api';
 import { toast, ToastContainer } from 'react-toastify';
 import Avatar from '../../component/avatar/Avatar';
 import { GoalDataContext } from '../../ContextProvider/Context';
+import Carousel from 'react-bootstrap/Carousel';
 
 const WeekGoalsDetails = ({ name, ...props }) => {
     const location = useLocation();
@@ -144,97 +145,73 @@ const WeekGoalsDetails = ({ name, ...props }) => {
     return (
         <>
             <div className='dashboard'>
-                <div className=' overflow-x-hidden overflow-y-hidden'>
+                {/* <div className=' overflow-x-hidden overflow-y-hidden'> */}
+                <div className='top_header'>
                     <div className='container'>
-                        <div className='top_header'>
-                            {/* <DropdownButton
-                                align="end"
-                                className='profile'
-                                title={
-                                    <div className="profile-wrap ">
-                                        {logindata.profile_image ? (
-                                            <img
-                                                className="rounded-circle avatar-xl img-thumbnail"
-                                                src={`${BASE_URL}/uploads/${logindata.profile_image}`}
-                                                alt={`${logindata.name}'s Profile`}
-                                            />
-                                        ) : (
-                                            <i className="fi fi-sr-circle-user"></i>
-                                        )}
-
-                                    </div>
-                                }
-                                id="dropdown-menu-align-end"
-                            >
-                                <Dropdown.Item eventKey="1" href="/profile">Profile</Dropdown.Item>
-                                <Dropdown.Item eventKey="2" href="" onClick={() => removeToken()}>Logout</Dropdown.Item>
-
-                            </DropdownButton> */}
-
+                        <div className='d-flex justify-content-between align-items-center gap-1'>
+                            <Link to={`/week-goals/${goalId}`} className=' textPrimary'> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
+                            <div className='d-flex justify-content-end align-items-center gap-2'>
+                                <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
+                                <Avatar />
+                            </div>
                         </div>
-                        <div className='main_content'>
-                            <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
-                                <Link to={`/week-goals/${goalId}`} className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
-                                <div className='d-flex justify-content-end align-items-center gap-2'>
-                                    <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
-                                    <Avatar />
-                                </div>
-                            </div>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD </h1>
+                    </div>
+                </div>
 
-                            </div>
-                            <div className='innerBox'>
-                                <div className='weekGoal details'>
-                                    <div className='details_box'>
-                                        <h3 className='heading3 mb-3'>Notifies to enter actual data every week</h3>
-                                        <h3 className='heading3 textGray'>Goals for this week</h3>
-                                        <h2 className='heading2'>Week {goalData.week_for}</h2>
-                                       
-                                       
-                                    </div>
-                                    <div className='mt-3 item_box'>
-                                        <div className='task_card'>
-                                            <div className='card_header'>
-                                                <h3 className='heading3 textGray'>Add a Task</h3>
-                                                <button onClick={handleShowFirst}>
-                                                    <i className="fi fi-rr-add textMarker fs-5"></i>
-                                                </button>
-                                            </div>
-                                            {/* Loop start */}
-                                            {
-                                                goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
-                                                    goalData.Week_Goal_Actions.map((value, index) => {
-                                                        return (
-                                                            <>
-                                                                <div className='card_body'>
-                                                                    <div className='delete'>
-                                                                        <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
-                                                                    </div>
-                                                                    <p className="text-muted mb-2 font-13">
-                                                                        <strong> Key Action / Tactics :</strong>
-                                                                        <span className="ml-2"> {value.key_action} </span>
-                                                                    </p>
-                                                                    <p className="text-muted mb-2 font-13">
-                                                                        <strong> Who :</strong>
-                                                                        <span className="ml-2">{value.who} </span>
-                                                                    </p>
-                                                                    <p className="text-muted font-13">
-                                                                        <strong> Day :</strong>
-                                                                        <span className="ml-2">{value.day} </span>
-                                                                    </p>
-                                                                </div>
-                                                            </>
-                                                        )
-                                                    })
-                                                )
-                                                    : (null)
-                                            }
+                <div className='main_content pt-4'>
 
-                                            {/* Loop end */}
-
+                    <div className='container'>
+                        <Carousel>
+                            <Carousel.Item interval={3000}>
+                                <div className='innerBox'>
+                                    <div className='weekGoal details'>
+                                        <div className='details_box'>
+                                            <h2 className='heading2 mb-0'>Week {goalData.week_for}</h2>
                                         </div>
-                                        {/* <div className='execution'>
+                                        <div className=' item_box'>
+                                            <div className='task_card'>
+
+                                                {/* Loop start */}
+                                                {
+                                                    goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
+                                                        goalData.Week_Goal_Actions.map((value, index) => {
+                                                            return (
+                                                                <>
+                                                                    <div className='card_body'>
+                                                                        <div className='delete'>
+                                                                            <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
+                                                                        </div>
+                                                                        <p className="text-muted mb-2 font-13">
+                                                                            <strong> Key Action / Tactics :</strong>
+                                                                            <span className="ml-2"> {value.key_action} </span>
+                                                                        </p>
+                                                                        <p className="text-muted mb-2 font-13">
+                                                                            <strong> Who :</strong>
+                                                                            <span className="ml-2">{value.who} </span>
+                                                                        </p>
+                                                                        <p className="text-muted font-13">
+                                                                            <strong> Day :</strong>
+                                                                            <span className="ml-2">{value.day} </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        })
+                                                    )
+                                                        : (null)
+                                                }
+
+                                                {/* Loop end */}
+                                                <div className='card_footer'>
+                                                    <h3 className='heading3 textGray mb-0'>Add a Task</h3>
+                                                    <button onClick={handleShowFirst}>
+                                                        <i className="fi fi-rr-add textMarker fs-5"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {/* <div className='execution'>
                                             <h2 className='heading2 textGray'>Weekly Execution Score</h2>
                                             <div className='mb-5'>
                                                 <div className='progress_label mb-2'>
@@ -271,116 +248,468 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 <span className="value">2368</span>
                                             </div>
                                         </div> */}
-                                        <div className="lead-measures pb-1">
-                                            <div className='row'>
-                                                <div className='col-md-6'>
-                                                    <div className='card border mb-3'>
-                                                        <div className='card-body'>
-                                                            <div className="measure">
-                                                                <span className="para4">Lead Target</span>
-                                                                <span className="value">{goalData.lead_target}</span>
+                                            <div className="lead-measures pb-1">
+                                                <div className='row'>
+                                                    <div className='col-md-6'>
+                                                        <div className='card border mb-3'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead Target</span>
+                                                                    <span className="value">{goalData.lead_target}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead Actual</span>
+                                                                    <span className="value">{goalData.lead_actual}</span>
+                                                                </div>
+                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                    {
+                                                                        parseFloat(goalData.lead_execution_score) >= 0 ? (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                                <span className="up">
+                                                                                    {goalData.lead_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                                <span className="down">
+                                                                                    {goalData.lead_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </p>
                                                             </div>
-                                                            <div className="measure">
-                                                                <span className="para4">Lead Actual</span>
-                                                                <span className="value">{goalData.lead_actual}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-md-6 mb-3'>
+                                                        <div className='card border'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lag Target</span>
+                                                                    <span className="value">{goalData.lag_target}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lag Actual</span>
+                                                                    <span className="value">{goalData.lag_actual}</span>
+                                                                </div>
+                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                    {
+                                                                        parseFloat(goalData.lag_execution_score) >= 0 ? (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                                <span className="up">
+                                                                                    {goalData.lag_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                                <span className="down">
+                                                                                    {goalData.lag_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        )
+                                                                    }
+
+                                                                </p>
                                                             </div>
-                                                            <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                {
-                                                                    parseFloat(goalData.lead_execution_score) >= 0 ? (
-                                                                        <>
-                                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                            <span className="up">
-                                                                                {goalData.lead_execution_score}
-                                                                            </span> Lag score
-                                                                        </>
-                                                                    ) : (
-                                                                        <>
-                                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                            <span className="down">
-                                                                                {goalData.lead_execution_score}
-                                                                            </span> Lag score
-                                                                        </>
-                                                                    )
-                                                                }
-                                                            </p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className='col-md-6'>
+                                                        <div className='d-flex mb-3 f-s-12 fw-bold'>
+                                                            <span className='text-muted me-2'>Week Start Date :</span>
+                                                            {/* <span>{goalData.start_date}</span> */}
+                                                            <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-md-6'>
+                                                        <div className='d-flex  mb-3 f-s-12 fw-bold'>
+                                                            <span className='text-muted me-2'>Week End Date :</span>
+                                                            {/* <span>{goalData.end_date}</span> */}
+                                                            <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className='col-md-12 mt-2'>
+                                                        <div className='card border mb-3'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead accumulate :</span>
+                                                                    <span className="value">{goalDataContext.lead_actual}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4"> Lag accumulate : </span>
+                                                                    <span className="value">{goalDataContext.lag_actual}</span>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-md-6 mb-3'>
-                                                    <div className='card border'>
-                                                        <div className='card-body'>
-                                                            <div className="measure">
-                                                                <span className="para4">Lag Target</span>
-                                                                <span className="value">{goalData.lag_target}</span>
-                                                            </div>
-                                                            <div className="measure">
-                                                                <span className="para4">Lag Actual</span>
-                                                                <span className="value">{goalData.lag_actual}</span>
-                                                            </div>
-                                                            <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                {
-                                                                    parseFloat(goalData.lag_execution_score) >= 0 ? (
-                                                                        <>
-                                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                            <span className="up">
-                                                                                {goalData.lag_execution_score}
-                                                                            </span> Lag score
-                                                                        </>
-                                                                    ) : (
-                                                                        <>
-                                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                            <span className="down">
-                                                                                {goalData.lag_execution_score}
-                                                                            </span> Lag score
-                                                                        </>
-                                                                    )
-                                                                }
 
-                                                            </p>
+                                                <ToastContainer />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Carousel.Item>
+                            <Carousel.Item interval={5000}>
+                                <div className='innerBox'>
+                                    <div className='weekGoal details'>
+                                        <div className='details_box'>
+                                            <h2 className='heading2'>Week {goalData.week_for}</h2>
+                                        </div>
+                                        <div className=' item_box'>
+                                            <div className='task_card'>
+
+                                                {/* Loop start */}
+                                                {
+                                                    goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
+                                                        goalData.Week_Goal_Actions.map((value, index) => {
+                                                            return (
+                                                                <>
+                                                                    <div className='card_body'>
+                                                                        <div className='delete'>
+                                                                            <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
+                                                                        </div>
+                                                                        <p className="text-muted mb-2 font-13">
+                                                                            <strong> Key Action / Tactics :</strong>
+                                                                            <span className="ml-2"> {value.key_action} </span>
+                                                                        </p>
+                                                                        <p className="text-muted mb-2 font-13">
+                                                                            <strong> Who :</strong>
+                                                                            <span className="ml-2">{value.who} </span>
+                                                                        </p>
+                                                                        <p className="text-muted font-13">
+                                                                            <strong> Day :</strong>
+                                                                            <span className="ml-2">{value.day} </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        })
+                                                    )
+                                                        : (null)
+                                                }
+
+                                                {/* Loop end */}
+                                                <div className='card_footer'>
+                                                    <h3 className='heading3 textGray mb-0'>Add a Task</h3>
+                                                    <button onClick={handleShowFirst}>
+                                                        <i className="fi fi-rr-add textMarker fs-5"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            {/* <div className='execution'>
+                                            <h2 className='heading2 textGray'>Weekly Execution Score</h2>
+                                            <div className='mb-5'>
+                                                <div className='progress_label mb-2'>
+                                                    <p className='para4 d-flex justify-content-between align-items-center'>Last week’s Execution Score <strong>{now}%</strong></p>
+                                                </div>
+                                                <ProgressBar now={now} variant="bg_marker" />
+                                            </div>
+                                            <div>
+                                                <div className='progress_label mb-2'>
+                                                    <p className='para4 d-flex justify-content-between align-items-center'>Average Execution Score to Date <strong>{now2}%</strong></p>
+                                                </div>
+                                                <ProgressBar now={now2} variant='bg_secondary' />
+                                            </div>
+                                        </div>
+
+                                        <div className="lead-measures">
+                                            <h3 className='heading3'>Lead Measures</h3>
+                                            <div className="measure">
+                                                <span className="para4">Target</span>
+                                                <span className="value">500</span>
+                                            </div>
+                                            <div className="measure">
+                                                <span className="para4">Actual</span>
+                                                <span className="value actual-input">
+                                                    <input type="number" placeholder="Enter value" className='form_controlStyle3' />
+                                                </span>
+                                            </div>
+                                            <div className="measure">
+                                                <span className="para4">Cumulative Target:</span>
+                                                <span className="value">3000</span>
+                                            </div>
+                                            <div className="measure">
+                                                <span className="para4">Cumulative Actual:</span>
+                                                <span className="value">2368</span>
+                                            </div>
+                                        </div> */}
+                                            <div className="lead-measures pb-1">
+                                                <div className='row'>
+                                                    <div className='col-md-6'>
+                                                        <div className='card border mb-3'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead Target</span>
+                                                                    <span className="value">{goalData.lead_target}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead Actual</span>
+                                                                    <span className="value">{goalData.lead_actual}</span>
+                                                                </div>
+                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                    {
+                                                                        parseFloat(goalData.lead_execution_score) >= 0 ? (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                                <span className="up">
+                                                                                    {goalData.lead_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                                <span className="down">
+                                                                                    {goalData.lead_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-md-6 mb-3'>
+                                                        <div className='card border'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lag Target</span>
+                                                                    <span className="value">{goalData.lag_target}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lag Actual</span>
+                                                                    <span className="value">{goalData.lag_actual}</span>
+                                                                </div>
+                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                                    {
+                                                                        parseFloat(goalData.lag_execution_score) >= 0 ? (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                                <span className="up">
+                                                                                    {goalData.lag_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        ) : (
+                                                                            <>
+                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                                <span className="down">
+                                                                                    {goalData.lag_execution_score}
+                                                                                </span> Lag score
+                                                                            </>
+                                                                        )
+                                                                    }
+
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className='col-md-6'>
+                                                        <div className='d-flex mb-3 f-s-12 fw-bold'>
+                                                            <span className='text-muted me-2'>Week Start Date :</span>
+                                                            {/* <span>{goalData.start_date}</span> */}
+                                                            <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-md-6'>
+                                                        <div className='d-flex  mb-3 f-s-12 fw-bold'>
+                                                            <span className='text-muted me-2'>Week End Date :</span>
+                                                            {/* <span>{goalData.end_date}</span> */}
+                                                            <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className='col-md-12 mt-2'>
+                                                        <div className='card border mb-3'>
+                                                            <div className='card-body'>
+                                                                <div className="measure">
+                                                                    <span className="para4">Lead accumulate :</span>
+                                                                    <span className="value">{goalDataContext.lead_actual}</span>
+                                                                </div>
+                                                                <div className="measure">
+                                                                    <span className="para4"> Lag accumulate : </span>
+                                                                    <span className="value">{goalDataContext.lag_actual}</span>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
+                                                <ToastContainer />
 
-                                                <div className='col-md-6'>
-                                                    <div className='d-flex mb-3 f-s-12 fw-bold'>
-                                                        <span className='text-muted me-2'>Week Start Date :</span>
-                                                        {/* <span>{goalData.start_date}</span> */}
-                                                        <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
-                                                    </div>
-                                                </div>
-                                                <div className='col-md-6'>
-                                                    <div className='d-flex  mb-3 f-s-12 fw-bold'>
-                                                        <span className='text-muted me-2'>Week End Date :</span>
-                                                        {/* <span>{goalData.end_date}</span> */}
-                                                        <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
-                                                    </div>
-                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Carousel.Item>
+                        </Carousel>
 
-                                                <div className='col-md-12 mt-2'>
-                                                    <div className='card border mb-3'>
-                                                        <div className='card-body'>
-                                                            <div className="measure">
-                                                                <span className="para4">Lead accumulate :</span>
-                                                                <span className="value">{goalDataContext.lead_actual}</span>
+                        {/* <div className='innerBox '>
+                            <div className='weekGoal details'>
+                                <div className='details_box'>
+                                    <h2 className='heading2'>Week {goalData.week_for}</h2>
+                                </div>
+                                <div className=' item_box'>
+                                    <div className='task_card'>
+
+                                        {
+                                            goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
+                                                goalData.Week_Goal_Actions.map((value, index) => {
+                                                    return (
+                                                        <>
+                                                            <div className='card_body'>
+                                                                <div className='delete'>
+                                                                    <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
+                                                                </div>
+                                                                <p className="text-muted mb-2 font-13">
+                                                                    <strong> Key Action / Tactics :</strong>
+                                                                    <span className="ml-2"> {value.key_action} </span>
+                                                                </p>
+                                                                <p className="text-muted mb-2 font-13">
+                                                                    <strong> Who :</strong>
+                                                                    <span className="ml-2">{value.who} </span>
+                                                                </p>
+                                                                <p className="text-muted font-13">
+                                                                    <strong> Day :</strong>
+                                                                    <span className="ml-2">{value.day} </span>
+                                                                </p>
                                                             </div>
-                                                            <div className="measure">
-                                                                <span className="para4"> Lag accumulate : </span>
-                                                                <span className="value">{goalDataContext.lag_actual}</span>
-                                                            </div>
-                                                            
+                                                        </>
+                                                    )
+                                                })
+                                            )
+                                                : (null)
+                                        }
+
+                                        <div className='card_footer'>
+                                            <h3 className='heading3 textGray mb-0'>Add a Task</h3>
+                                            <button onClick={handleShowFirst}>
+                                                <i className="fi fi-rr-add textMarker fs-5"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                 
+                                    <div className="lead-measures pb-1">
+                                        <div className='row'>
+                                            <div className='col-md-6'>
+                                                <div className='card border mb-3'>
+                                                    <div className='card-body'>
+                                                        <div className="measure">
+                                                            <span className="para4">Lead Target</span>
+                                                            <span className="value">{goalData.lead_target}</span>
                                                         </div>
+                                                        <div className="measure">
+                                                            <span className="para4">Lead Actual</span>
+                                                            <span className="value">{goalData.lead_actual}</span>
+                                                        </div>
+                                                        <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                            {
+                                                                parseFloat(goalData.lead_execution_score) >= 0 ? (
+                                                                    <>
+                                                                        <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                        <span className="up">
+                                                                            {goalData.lead_execution_score}
+                                                                        </span> Lag score
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                        <span className="down">
+                                                                            {goalData.lead_execution_score}
+                                                                        </span> Lag score
+                                                                    </>
+                                                                )
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='col-md-6 mb-3'>
+                                                <div className='card border'>
+                                                    <div className='card-body'>
+                                                        <div className="measure">
+                                                            <span className="para4">Lag Target</span>
+                                                            <span className="value">{goalData.lag_target}</span>
+                                                        </div>
+                                                        <div className="measure">
+                                                            <span className="para4">Lag Actual</span>
+                                                            <span className="value">{goalData.lag_actual}</span>
+                                                        </div>
+                                                        <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
+                                                            {
+                                                                parseFloat(goalData.lag_execution_score) >= 0 ? (
+                                                                    <>
+                                                                        <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                                        <span className="up">
+                                                                            {goalData.lag_execution_score}
+                                                                        </span> Lag score
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                                        <span className="down">
+                                                                            {goalData.lag_execution_score}
+                                                                        </span> Lag score
+                                                                    </>
+                                                                )
+                                                            }
+
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <ToastContainer />
 
+                                            <div className='col-md-6'>
+                                                <div className='d-flex mb-3 f-s-12 fw-bold'>
+                                                    <span className='text-muted me-2'>Week Start Date :</span>
+                                                    <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
+                                                </div>
+                                            </div>
+                                            <div className='col-md-6'>
+                                                <div className='d-flex  mb-3 f-s-12 fw-bold'>
+                                                    <span className='text-muted me-2'>Week End Date :</span>
+                                                    <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className='col-md-12 mt-2'>
+                                                <div className='card border mb-3'>
+                                                    <div className='card-body'>
+                                                        <div className="measure">
+                                                            <span className="para4">Lead accumulate :</span>
+                                                            <span className="value">{goalDataContext.lead_actual}</span>
+                                                        </div>
+                                                        <div className="measure">
+                                                            <span className="para4"> Lag accumulate : </span>
+                                                            <span className="value">{goalDataContext.lag_actual}</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <ToastContainer />
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

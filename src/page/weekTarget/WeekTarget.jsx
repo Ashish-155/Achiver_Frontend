@@ -216,108 +216,110 @@ const WeekTarget = ({ name, ...props }) => {
 
     return (
         <>
-            <div className='dashboard dsh_target'>
-                <div className=' overflow-x-hidden overflow-y-hidden'>
+            <div className='dashboard'>
+                <div className='top_header'>
                     <div className='container'>
-                        <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                        <div className='d-flex justify-content-between align-items-center gap-1'>
                             <Link to='/dashboard' className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
-                            <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
+                            <div className='d-flex justify-content-end align-items-center gap-2'>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
                         </div>
-                        <div className='main_content'>
-                            <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
-                            <form onSubmit={handleSubmit}>
-                                <div className='target'>
-                                    <div className='goals_box mb-4'>
-                                        <h3 className="heading3 mb-4">Set Your Goal</h3>
-                                        <div className='row'>
-                                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                                <label className='para3 textGray mb-1'>Your Goal Name<span className='red'>*</span></label>
-                                                <input
-                                                    className="form-control form_controlStyle2"
-                                                    type="text"
-                                                    name="goal"
-                                                    placeholder="Your Goal Name"
-                                                    value={actions.goal}
-                                                    onChange={handleChange}
-                                                />
-                                                {errors.goal && <p className="text-danger">{errors.goal}</p>}
-                                            </div>
-                                            <div className='col-lg-6 col-sm-6 col-6 mb-2'>
-                                                <label className='para3 textGray mb-1'>Set Start Date<span className='red'>*</span></label>
-                                                <input
-                                                    type="date"
-                                                    id="date"
-                                                    name="date"
-                                                    className="form-control form_controlStyle2"
-                                                    value={actions.date}
-                                                    onChange={handleChange}
-                                                />
-                                                {errors.date && <p className="text-danger">{errors.date}</p>}
-                                            </div>
-                                            <div className='col-lg-12 mb-2'>
-                                                <label className='para3 textGray mb-1'>Description<span className='red'>*</span></label>
-                                                <textarea
-                                                    className="form-control form_controlStyle2"
-                                                    name='description'
-                                                    value={actions.description}
-                                                    onChange={handleChange}
-                                                    rows={2}
-                                                />
-                                                {errors.date && <p className="text-danger">{errors.date}</p>}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h3 className='heading3 mb-3'>Set 12 Week Target Separately</h3>
-                                    <Accordion defaultActiveKey="0">
-                                        {weeks.map((week, index) => (
-                                            <Accordion.Item eventKey={index.toString()} key={index}>
-                                                <Accordion.Header>
-                                                    <div className='chip'><i className="fi fi-rr-calendar"></i> Week {index + 1}</div>
-                                                </Accordion.Header>
-                                                <Accordion.Body>
-                                                    <div className='week_card'>
-                                                        <div className='form_group'>
-                                                            <label className='label'>Set Lead Target<span className='red'>*</span></label>
-                                                            <input
-                                                                className="form-control form_controlStyle3"
-                                                                type="text"
-                                                                name="lead_target"
-                                                                placeholder="Lead Target"
-                                                                value={week.lead_target}
-                                                                onChange={(e) => handleWeekChange(index, e)}
-                                                            />
-                                                            {errors[`lead_target_${index}`] && <p className="text-danger">{errors[`lead_target_${index}`]}</p>}
-                                                        </div>
-                                                        <div className='form_group'>
-                                                            <label className='label'>Set Lag Target<span className='red'>*</span></label>
-                                                            <input
-                                                                className="form-control form_controlStyle3"
-                                                                type="text"
-                                                                name="lag_target"
-                                                                placeholder="Lag Target"
-                                                                value={week.lag_target}
-                                                                onChange={(e) => handleWeekChange(index, e)}
-                                                            />
-                                                            {errors[`lag_target_${index}`] && <p className="text-danger">{errors[`lag_target_${index}`]}</p>}
-                                                        </div>
-                                                    </div>
-                                                </Accordion.Body>
-                                            </Accordion.Item>
-                                        ))}
-                                    </Accordion>
-                                    <button type='submit' className='primaryBtn' onClick={handleSubmit}>Submit</button>
-                                </div>
-                            </form>
-
-                        </div>
                     </div>
                 </div>
-                <ToastContainer />
-            </div >
+                <div className='main_content pt-3'>
+                    <div className='container'>
+                        <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className='target'>
+                                <div className='goals_box mb-4'>
+                                    <h3 className="heading3 mb-4">Set Your Goal</h3>
+                                    <div className='row'>
+                                        <div className='col-lg-6 col-sm-6 col-6 mb-2'>
+                                            <label className='para3 textGray mb-1'>Your Goal Name<span className='red'>*</span></label>
+                                            <input
+                                                className="form-control form_controlStyle2"
+                                                type="text"
+                                                name="goal"
+                                                placeholder="Your Goal Name"
+                                                value={actions.goal}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.goal && <p className="text-danger">{errors.goal}</p>}
+                                        </div>
+                                        <div className='col-lg-6 col-sm-6 col-6 mb-2'>
+                                            <label className='para3 textGray mb-1'>Set Start Date<span className='red'>*</span></label>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                name="date"
+                                                className="form-control form_controlStyle2"
+                                                value={actions.date}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.date && <p className="text-danger">{errors.date}</p>}
+                                        </div>
+                                        <div className='col-lg-12 mb-2'>
+                                            <label className='para3 textGray mb-1'>Description<span className='red'>*</span></label>
+                                            <textarea
+                                                className="form-control form_controlStyle2"
+                                                name='description'
+                                                value={actions.description}
+                                                onChange={handleChange}
+                                                rows={2}
+                                            />
+                                            {errors.date && <p className="text-danger">{errors.date}</p>}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className='heading3 mb-3'>Set 12 Week Target Separately</h3>
+                                <Accordion defaultActiveKey="0">
+                                    {weeks.map((week, index) => (
+                                        <Accordion.Item eventKey={index.toString()} key={index}>
+                                            <Accordion.Header>
+                                                <div className='chip'><i className="fi fi-rr-calendar"></i> Week {index + 1}</div>
+                                            </Accordion.Header>
+                                            <Accordion.Body>
+                                                <div className='week_card'>
+                                                    <div className='form_group'>
+                                                        <label className='label'>Set Lead Target<span className='red'>*</span></label>
+                                                        <input
+                                                            className="form-control form_controlStyle3"
+                                                            type="text"
+                                                            name="lead_target"
+                                                            placeholder="Lead Target"
+                                                            value={week.lead_target}
+                                                            onChange={(e) => handleWeekChange(index, e)}
+                                                        />
+                                                        {errors[`lead_target_${index}`] && <p className="text-danger">{errors[`lead_target_${index}`]}</p>}
+                                                    </div>
+                                                    <div className='form_group'>
+                                                        <label className='label'>Set Lag Target<span className='red'>*</span></label>
+                                                        <input
+                                                            className="form-control form_controlStyle3"
+                                                            type="text"
+                                                            name="lag_target"
+                                                            placeholder="Lag Target"
+                                                            value={week.lag_target}
+                                                            onChange={(e) => handleWeekChange(index, e)}
+                                                        />
+                                                        {errors[`lag_target_${index}`] && <p className="text-danger">{errors[`lag_target_${index}`]}</p>}
+                                                    </div>
+                                                </div>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    ))}
+                                </Accordion>
+                                <button type='submit' className='primaryBtn' onClick={handleSubmit}>Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <ToastContainer />
 
 
 

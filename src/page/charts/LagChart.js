@@ -139,7 +139,7 @@ const LagChart = ({ goalData }) => {
 
     return (
         <div className="chart-container">
-            <Chart options={options} series={series} type="area" height={300} width={600} />
+            <Chart options={options} series={series} type="area"  />
         </div>
     );
 };

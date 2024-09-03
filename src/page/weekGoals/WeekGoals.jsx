@@ -141,142 +141,150 @@ const WeekGoals = () => {
     return (
         <>
             <div className='dashboard'>
-                <div className=' overflow-x-hidden overflow-y-hidden'>
+                {/* <div className=' overflow-x-hidden overflow-y-hidden'> */}
+                <div className='top_header'>
                     <div className='container'>
-                        <div className='d-flex justify-content-between align-items-center gap-1 py-4'>
+                        <div className='d-flex justify-content-between align-items-center gap-1'>
                             <Link to='/dashboard' className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
                             <div className='d-flex justify-content-end align-items-center gap-2'>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
                         </div>
-                        <div className='main_content'>
+                    </div>
+                </div>
+                <div className='main_content'>
+                    <div className='container'>
+                        <div className='top_container pt-4'>
                             <h1 className='heading1 mb-3'>
-                                ACHIEVE  DASHBOARD ({goal.name})
+                                GOAL DASHBOARD ({goal.name})
                             </h1>
-                            <div className='innerBox'>
-                                <div className='row align-items-center'>
-                                    <div className='col-lg-6 col-md-12 col-sm-12'>
-                                        <div className='chart_box'>
-                                            <h3 className='heading3 mb-3'>Leads Graph</h3>
-                                            {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
+                            <div className='weekGoal mb-3'>
+                                <h3 className='heading3 mb-3 fw-semibold'>12 Week Goals</h3>
+                                <div className='goal_List'>
+                                    {/* <p className='para3'>This results in shorter and simpler expressions when accessing chained properties when the possibility exists that a reference may be missing. It can also be helpful while exploring the content of an object when there's no known guarantee as to which properties are required.</p> */}
+                                    <p className='para3'>{goal.description}</p>
 
-                                            <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} goalData={goal} />
-
-                                        </div>
-                                    </div>
-                                    <div className='col-lg-6 col-md-12 col-sm-12'>
-                                        <div className='chart_box'>
-                                            <h3 className='heading3 mb-3'>Lags Graph</h3>
-                                            {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
-                                            <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} goalData={goal} />
-                                        </div>
-                                    </div>
-                                    <div className='col-lg-6 col-md-12'>
-                                        <div className='chart_box mb-0'>
-                                            <h3 className='heading3 mb-3'>Leads Measure</h3>
-                                            {/* <div className='add_box'>
-                                                <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
-                                            </div> */}
-                                            <div className='row align-items-center'>
-                                                <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='chart_postion para3'>
-                                                        {/* <img src={'assets/image/chart2.png'} alt='' /> */}
-                                                        {/* <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" /> */}
-                                                        {parseFloat(goal.lead_execution_score) >= 0 ? (
-                                                            <>
-                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                <p className='up center_text'>{goal.lead_execution_score}</p>
-
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                <p className='down center_text'>{goal.lead_execution_score}</p>
-
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='info '>
-                                                        <div className='box'>
-                                                            <p className='para3'>Target</p>
-                                                            <p className='para3'><strong>{goal.lead_target}</strong></p>
-                                                        </div>
-                                                        <div className='box '>
-                                                            {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Actual</p>
-                                                            <p className='para3'><strong>{goal.lead_actual}</strong></p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='col-lg-6 col-md-12'>
-                                        <div className='chart_box mb-0'>
-                                            <h3 className='heading3 mb-3'>Lags Measure</h3>
-                                            {/* <div className='add_box'>
-                                                <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
-                                            </div> */}
-                                            <div className='row align-items-center'>
-                                                <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='chart_postion para3'>
-                                                        <img src={'assets/image/chart2.png'} alt='' />
-                                                        {parseFloat(goal.lag_execution_score) >= 0 ? (
-                                                            <>
-                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                <p className='up center_text'>{goal.lag_execution_score}</p>
-                                                            </>
-
-                                                        ) : (
-                                                            <>
-                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                <p className='down center_text'>{goal.lag_execution_score}</p>
-                                                            </>
-
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <div className='info'>
-                                                        <div className='box'>
-                                                            {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Target</p>
-                                                            <p className='para3'><strong>{goal.lag_target}</strong></p>
-                                                        </div>
-                                                        <div className='box'>
-                                                            {/* <div className='circle'></div> */}
-                                                            <p className='para3'>Actual</p>
-                                                            <p className='para3'><strong>{goal.lag_actual}</strong></p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                {/* <button className=" primaryBtn mt-0">
-                                    Set 12 Week Goals & Targets
-                                </button> */}
-
-                                <div className='weekGoal'>
-                                    <h3 className='heading3 mb-3 fw-semibold'>12 Week Goals</h3>
-                                    <div className='goal_List'>
-                                        {/* <p className='para3'>This results in shorter and simpler expressions when accessing chained properties when the possibility exists that a reference may be missing. It can also be helpful while exploring the content of an object when there's no known guarantee as to which properties are required.</p> */}
-                                        <p className='para3'>{goal.description}</p>
-
-                                    </div>
-                                </div>
-                                <AllGoalsBox goal={goal} refreshGoals={fetchGoal} />
                             </div>
 
                         </div>
+                        <div className='innerBox '>
+                            <div className='row align-items-center'>
+                                <div className='col-lg-6 col-md-12 col-sm-12'>
+                                    <div className='chart_box'>
+                                        <h3 className='heading3 mb-3'>Leads Graph</h3>
+                                        {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
+
+                                        <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} goalData={goal} />
+
+                                    </div>
+                                </div>
+                                <div className='col-lg-6 col-md-12 col-sm-12'>
+                                    <div className='chart_box'>
+                                        <h3 className='heading3 mb-3'>Lags Graph</h3>
+                                        {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
+                                        <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} goalData={goal} />
+                                    </div>
+                                </div>
+                                <div className='col-lg-6 col-md-12 mb-4'>
+                                    <div className='chart_box mb-0'>
+                                        <h3 className='heading3 mb-3'>Leads Measure</h3>
+                                        {/* <div className='add_box'>
+                                                <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
+                                            </div> */}
+                                        <div className='row align-items-center'>
+                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                                <div className='chart_postion para3'>
+                                                    {/* <img src={'assets/image/chart2.png'} alt='' /> */}
+                                                    {/* <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" /> */}
+                                                    {parseFloat(goal.lead_execution_score) >= 0 ? (
+                                                        <>
+                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                            <p className='up center_text'>{goal.lead_execution_score}</p>
+
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                            <p className='down center_text'>{goal.lead_execution_score}</p>
+
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                                <div className='info '>
+                                                    <div className='box'>
+                                                        <p className='para3'>Target</p>
+                                                        <p className='para3'><strong>{goal.lead_target}</strong></p>
+                                                    </div>
+                                                    <div className='box '>
+                                                        {/* <div className='circle'></div> */}
+                                                        <p className='para3'>Actual</p>
+                                                        <p className='para3'><strong>{goal.lead_actual}</strong></p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-lg-6 col-md-12 mb-4'>
+                                    <div className='chart_box mb-0'>
+                                        <h3 className='heading3 mb-3'>Lags Measure</h3>
+                                        {/* <div className='add_box'>
+                                                <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
+                                            </div> */}
+                                        <div className='row align-items-center'>
+                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                                <div className='chart_postion para3'>
+                                                    <img src={'assets/image/chart2.png'} alt='' />
+                                                    {parseFloat(goal.lag_execution_score) >= 0 ? (
+                                                        <>
+                                                            <i className="fi fi-rr-arrow-trend-up up"></i>
+                                                            <p className='up center_text'>{goal.lag_execution_score}</p>
+                                                        </>
+
+                                                    ) : (
+                                                        <>
+                                                            <i className="fi fi-rr-arrow-trend-down down"></i>
+                                                            <p className='down center_text'>{goal.lag_execution_score}</p>
+                                                        </>
+
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                                <div className='info'>
+                                                    <div className='box'>
+                                                        {/* <div className='circle'></div> */}
+                                                        <p className='para3'>Target</p>
+                                                        <p className='para3'><strong>{goal.lag_target}</strong></p>
+                                                    </div>
+                                                    <div className='box'>
+                                                        {/* <div className='circle'></div> */}
+                                                        <p className='para3'>Actual</p>
+                                                        <p className='para3'><strong>{goal.lag_actual}</strong></p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <button className=" primaryBtn mt-0">
+                                    Set 12 Week Goals & Targets
+                                </button> */}
+
+
+                            <AllGoalsBox goal={goal} refreshGoals={fetchGoal} />
+                        </div>
+
                     </div>
                 </div>
+                {/* </div> */}
             </div>
 
 
