@@ -191,7 +191,7 @@ const LeadChart = ({ goalData }) => {
         tooltip: {
             enabled: true,
             x: {
-                formatter: (value) => `Week ${value + 1}`,
+                formatter: (value) => `Week ${value}`,
             },
             y: {
                 formatter: (value, { dataPointIndex }) =>
