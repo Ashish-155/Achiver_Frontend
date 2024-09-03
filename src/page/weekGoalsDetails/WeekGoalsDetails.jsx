@@ -190,13 +190,8 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                         <h3 className='heading3 mb-3'>Notifies to enter actual data every week</h3>
                                         <h3 className='heading3 textGray'>Goals for this week</h3>
                                         <h2 className='heading2'>Week {goalData.week_for}</h2>
-                                        <i className="fi fi-rr-angle-small-right arrow right"></i>
-                                        <i className="fi fi-rr-angle-small-left arrow left"></i>
-                                        <div className='sliderBox'>
-                                            <p className='para2 text-black'> Lead accumulate : {goalDataContext.lead_actual}</p>
-                                            <p className='para2 text-black'> Lag accumulate : {goalDataContext.lag_actual}</p>
-
-                                        </div>
+                                       
+                                       
                                     </div>
                                     <div className='mt-3 item_box'>
                                         <div className='task_card'>
@@ -359,6 +354,22 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                         <span className='text-muted me-2'>Week End Date :</span>
                                                         {/* <span>{goalData.end_date}</span> */}
                                                         <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className='col-md-12 mt-2'>
+                                                    <div className='card border mb-3'>
+                                                        <div className='card-body'>
+                                                            <div className="measure">
+                                                                <span className="para4">Lead accumulate :</span>
+                                                                <span className="value">{goalDataContext.lead_actual}</span>
+                                                            </div>
+                                                            <div className="measure">
+                                                                <span className="para4"> Lag accumulate : </span>
+                                                                <span className="value">{goalDataContext.lag_actual}</span>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
