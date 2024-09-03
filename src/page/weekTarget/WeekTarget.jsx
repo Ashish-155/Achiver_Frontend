@@ -141,6 +141,10 @@ const WeekTarget = ({ name, ...props }) => {
             newErrors.date = "Date is required.";
             isValid = false;
         }
+        if (!actions.date?.trim()) {
+            newErrors.date = "Please enter a message.";
+            isValid = false;
+        }
 
         weeks.forEach((week, index) => {
             if (!week.lead_target?.trim()) {
@@ -254,7 +258,7 @@ const WeekTarget = ({ name, ...props }) => {
                                                 {errors.date && <p className="text-danger">{errors.date}</p>}
                                             </div>
                                             <div className='col-lg-12 mb-2'>
-                                                <label className='para3 textGray mb-1'>Description</label>
+                                                <label className='para3 textGray mb-1'>Description<span className='red'>*</span></label>
                                                 <textarea
                                                     className="form-control form_controlStyle2"
                                                     name='description'
@@ -262,6 +266,7 @@ const WeekTarget = ({ name, ...props }) => {
                                                     onChange={handleChange}
                                                     rows={2}
                                                 />
+                                                {errors.date && <p className="text-danger">{errors.date}</p>}
                                             </div>
                                         </div>
                                     </div>
