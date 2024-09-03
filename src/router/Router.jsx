@@ -23,13 +23,11 @@ const Router = () => {
         } />
 
         <Route path="/week-target" element={
-          // <WeekTarget />
           <ProtectedRoute>
             <WeekTarget />
           </ProtectedRoute>
         } />
         <Route path="/week-goals/:id" element={
-          // <WeekGoals />
           <ProtectedRoute>
             <WeekGoals />
           </ProtectedRoute>
