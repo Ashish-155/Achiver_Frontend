@@ -60,7 +60,7 @@ const Login = () => {
                     `${BASE_URL}/api/user/login`,
                     inpval
                 );
-                // console.log(res);    
+                console.log(res);
                 setLoginData(res.data.data);
                 toast.success("Login successful!", {
                     position: "top-center"
@@ -82,8 +82,13 @@ const Login = () => {
                 }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds 24 hours from now
                 localStorage.setItem("token_expiration", expirationTime);
 
+                // navigation logic
+                if (res.data.hasGoals === true) {
+                    navigate("/dashboard");
+                } else {
+                    navigate("/welcome");
+                }
 
-                navigate("/welcome");
             } catch (error) {
                 console.log("Login error : ", error);
                 toast.error(error.response.data.message);

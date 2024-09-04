@@ -106,14 +106,14 @@ const Dashboard = ({ name, ...props }) => {
                         </div>
                     </div>
                 </div>
-              
+
                 <div className='main_content'>
                     <div className='container'>
-                    <div className='top_container pt-4'>
-                        <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
-                    </div>
+                        <div className='top_container pt-4'>
+                            <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
+                        </div>
                         <div className='innerBox'>
-                            <div className='addedGoals'>
+                            {/* <div className='addedGoals'>
                                 <h3 className='heading3 mb-3 fw-semibold'>Your Goals</h3>
                                 <div className='wrap'>
 
@@ -135,21 +135,44 @@ const Dashboard = ({ name, ...props }) => {
                                     }
 
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="goals-container mb-3">
                                 <h2 className='heading2'>All Goals</h2>
                                 <div className="row goals-grid">
 
-                                    {goal.map((goal, index) => (
+                                    {/* {goal.map((goal, index) => (
                                         <div className='col-lg-6 col-sm-6 col-12 mb-3' key={index}>
                                             <Link to={`/week-goals/${goal.id}`} className={`goal-card ${goal.goalStatus.toLowerCase()}`}>
-                                                <span className="goal-title">{goal.title}</span>
+                                                <span className="goal-title">Goal_Title</span>
                                                 <span className={`goal-status ${goal.goalStatus.toLowerCase()}`}>
-                                                    {goal.status}
+                                               
+                                                    Status
                                                 </span>
                                             </Link>
                                         </div>
-                                    ))}
+                                    ))} */}
+
+                                    {
+                                        goals && Array.isArray(goals) && goals.length > 0 ? (
+                                            goals.map((value, index) => {
+                                                return (
+                                                    <div className='col-lg-6 col-sm-6 col-12 mb-3' key={index}>
+                                                        <Link to={`/week-goals/${value.id}`} className='goal-card'>
+                                                            {/* <p className='heading2 textPrimary fw-semibold'>{value.name}</p> */}
+                                                            <span className="goal-title">{value.name}</span>
+                                                            <span className={`goal-status`}>
+                                                                {value.goal_status}
+                                                            </span>
+                                                        </Link>
+                                                    </div>
+                                                )
+                                            })
+                                        )
+                                            :
+                                            (
+                                                <p>No week goals available</p>
+                                            )
+                                    }
                                 </div>
                             </div>
                             <div className='innerBox'>
