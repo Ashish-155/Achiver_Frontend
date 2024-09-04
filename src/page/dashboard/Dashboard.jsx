@@ -98,8 +98,7 @@ const Dashboard = ({ name, ...props }) => {
                 <div className='top_header'>
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1'>
-                            <Link to='/dashboard' className=' textPrimary '> <i className="fi fi-rr-angle-small-left fs-3"></i></Link>
-                            <div className='d-flex justify-content-end align-items-center gap-2'>
+                            <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
@@ -160,7 +159,7 @@ const Dashboard = ({ name, ...props }) => {
                                                         <Link to={`/week-goals/${value.id}`} className='goal-card'>
                                                             {/* <p className='heading2 textPrimary fw-semibold'>{value.name}</p> */}
                                                             <span className="goal-title">{value.name}</span>
-                                                            <span className={`goal-status`}>
+                                                            <span className={`goal-status completed`}>
                                                                 {value.goal_status}
                                                             </span>
                                                         </Link>
@@ -175,20 +174,7 @@ const Dashboard = ({ name, ...props }) => {
                                     }
                                 </div>
                             </div>
-                            <div className='innerBox'>
-                                <div className='row align-items-center'>
-                                    <div className='col-lg-12 col-md-12 col-sm-12'>
-                                        <div className='chart_box'>
-                                            <h3 className='heading3 mb-3'>Leads Graph</h3>
-                                            {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
-
-                                            <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} goalData={goal} />
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
