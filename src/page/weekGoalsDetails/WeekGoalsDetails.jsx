@@ -17,6 +17,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
     const { goalId } = state;
     // console.log("GoalId : ", goalId)
 
+
     const { goalDataContext, setGoalDataContext } = useContext(GoalDataContext);
     console.log("goalDataContext : ", goalDataContext)
 
@@ -148,7 +149,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
     if (!goals || goals.length === 0) {
         return <div>No goals available</div>;
     }
-    
+
     // const currentIndex = goals.findIndex(goal => goal.id === parseInt(id));
     // const previousId = currentIndex > 0 ? goals[currentIndex - 1].id : null;
     // const nextId = currentIndex < goals.length - 1 ? goals[currentIndex + 1].id : null;
@@ -178,20 +179,24 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                             <div className='weekGoal details'>
                                 <div className='details_box'>
                                     <h2 className='heading2 mb-0'>Week {goalData.week_for}</h2>
-                                   
 
-                                        {
-                                          <>
-                                          <Link to={`/week-goals-details/${goalData.week_for - 1}`} className='actionArrow left'>
+
+                                    {/* {
+                                        <>
+                                            <Link
+                                                to={`/week-goals-details/${goalData.week_for - 1}`}
+                                                className='actionArrow left'>
                                                 <i className="fi fi-rr-angle-small-left"></i>
                                             </Link>
 
-                                            <Link to={`/week-goals-details/${goalData.week_for + 1}`} className='actionArrow right'>
+                                            <Link
+                                                to={`/week-goals-details/${goalData.week_for + 1}`}
+                                                className='actionArrow right'>
                                                 <i className="fi fi-rr-angle-small-right"></i>
                                             </Link>
-                                          </>
-                                        }
-                                   
+                                        </>
+                                    } */}
+
                                 </div>
                                 <div className=' item_box'>
                                     <div className='task_card'>
@@ -337,162 +342,6 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* <Carousel>
-                            <Carousel.Item interval={3000}>
-                                <div className='innerBox'>
-                                    <div className='weekGoal details'>
-                                        <div className='details_box'>
-                                            <h2 className='heading2 mb-0'>Week {goalData.week_for}</h2>
-                                        </div>
-                                        <div className=' item_box'>
-                                            <div className='task_card'>
-
-                                                {
-                                                    goalData.Week_Goal_Actions && Array.isArray(goalData.Week_Goal_Actions) && goalData.Week_Goal_Actions.length > 0 ? (
-                                                        goalData.Week_Goal_Actions.map((value, index) => {
-                                                            return (
-                                                                <>
-                                                                    <div className='card_body'>
-                                                                        <div className='delete'>
-                                                                            <i className="fi fi-br-trash" onClick={() => handleActionDelete(value.id)}></i>
-                                                                        </div>
-                                                                        <p className="text-muted mb-2 font-13">
-                                                                            <strong> Key Action / Tactics :</strong>
-                                                                            <span className="ml-2"> {value.key_action} </span>
-                                                                        </p>
-                                                                        <p className="text-muted mb-2 font-13">
-                                                                            <strong> Who :</strong>
-                                                                            <span className="ml-2">{value.who} </span>
-                                                                        </p>
-                                                                        <p className="text-muted font-13">
-                                                                            <strong> Day :</strong>
-                                                                            <span className="ml-2">{value.day} </span>
-                                                                        </p>
-                                                                    </div>
-                                                                </>
-                                                            )
-                                                        })
-                                                    )
-                                                        : (null)
-                                                }
-
-                                                <div className='card_footer'>
-                                                    <h3 className='heading3 textGray mb-0'>Add a Task</h3>
-                                                    <button onClick={handleShowFirst}>
-                                                        <i className="fi fi-rr-add textMarker fs-5"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-
-                                            
-                                            <div className="lead-measures pb-1">
-                                                <div className='row'>
-                                                    <div className='col-md-6'>
-                                                        <div className='card border mb-3'>
-                                                            <div className='card-body'>
-                                                                <div className="measure">
-                                                                    <span className="para4">Lead Target</span>
-                                                                    <span className="value">{goalData.lead_target}</span>
-                                                                </div>
-                                                                <div className="measure">
-                                                                    <span className="para4">Lead Actual</span>
-                                                                    <span className="value">{goalData.lead_actual}</span>
-                                                                </div>
-                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                    {
-                                                                        parseFloat(goalData.lead_execution_score) >= 0 ? (
-                                                                            <>
-                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                                <span className="up">
-                                                                                    {goalData.lead_execution_score}
-                                                                                </span> Lag score
-                                                                            </>
-                                                                        ) : (
-                                                                            <>
-                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                                <span className="down">
-                                                                                    {goalData.lead_execution_score}
-                                                                                </span> Lag score
-                                                                            </>
-                                                                        )
-                                                                    }
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-6 mb-3'>
-                                                        <div className='card border'>
-                                                            <div className='card-body'>
-                                                                <div className="measure">
-                                                                    <span className="para4">Lag Target</span>
-                                                                    <span className="value">{goalData.lag_target}</span>
-                                                                </div>
-                                                                <div className="measure">
-                                                                    <span className="para4">Lag Actual</span>
-                                                                    <span className="value">{goalData.lag_actual}</span>
-                                                                </div>
-                                                                <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
-                                                                    {
-                                                                        parseFloat(goalData.lag_execution_score) >= 0 ? (
-                                                                            <>
-                                                                                <i className="fi fi-rr-arrow-trend-up up"></i>
-                                                                                <span className="up">
-                                                                                    {goalData.lag_execution_score}
-                                                                                </span> Lag score
-                                                                            </>
-                                                                        ) : (
-                                                                            <>
-                                                                                <i className="fi fi-rr-arrow-trend-down down"></i>
-                                                                                <span className="down">
-                                                                                    {goalData.lag_execution_score}
-                                                                                </span> Lag score
-                                                                            </>
-                                                                        )
-                                                                    }
-
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-6'>
-                                                        <div className='d-flex mb-3 f-s-12 fw-bold'>
-                                                            <span className='text-muted me-2'>Week Start Date :</span>
-                                                            <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-6'>
-                                                        <div className='d-flex  mb-3 f-s-12 fw-bold'>
-                                                            <span className='text-muted me-2'>Week End Date :</span>
-                                                            <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-12 mt-2'>
-                                                        <div className='card border mb-3'>
-                                                            <div className='card-body'>
-                                                                <div className="measure">
-                                                                    <span className="para4">Lead accumulate :</span>
-                                                                    <span className="value">{goalDataContext.lead_actual}</span>
-                                                                </div>
-                                                                <div className="measure">
-                                                                    <span className="para4"> Lag accumulate : </span>
-                                                                    <span className="value">{goalDataContext.lag_actual}</span>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <ToastContainer />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Carousel.Item>
-                            
-                        </Carousel> */}
-
 
                     </div>
                 </div>

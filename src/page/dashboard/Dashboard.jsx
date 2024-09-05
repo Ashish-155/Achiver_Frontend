@@ -10,13 +10,11 @@ import axios from 'axios';
 import { DropdownButton, Modal } from 'react-bootstrap';
 import Avatar from '../../component/avatar/Avatar';
 import LeadChart from '../charts/LeadChart';
+import ApexCharts from 'react-apexcharts';
 
 const Dashboard = ({ name, ...props }) => {
 
-
     const { logindata, setLoginData } = useContext(LoginContext);
-
-
 
     const navigate = useNavigate();
     const removeToken = () => {
@@ -27,7 +25,39 @@ const Dashboard = ({ name, ...props }) => {
 
     // goals 
     const [goals, setGoals] = useState({});
-    console.log(goals)
+    // console.log(goals)
+
+    // Chart 
+    const [chartData, setChartData] = useState({
+        series: [],
+        options: {
+            chart: {
+                type: 'pie',
+            },
+            labels: ['Completed', 'Upcoming', 'Running'],
+            colors: ['#FF4560', '#00E396', '#008FFB'],
+            // legend: {
+            //     position: 'bottom'
+            // },
+            legend: {
+                position: 'right', // Place legend on the right side
+                horizontalAlign: 'left', // Align legend to the left of the chart
+                offsetX: 0, // Adjust the horizontal offset
+                offsetY: 0, // Adjust the vertical offset
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
 
     useEffect(() => {
         const profile = async () => {
@@ -52,6 +82,7 @@ const Dashboard = ({ name, ...props }) => {
         const goals = async () => {
             try {
                 const res = await axios.get(
+
                     `${BASE_URL}/api/goal/all-goal`,
                     {
                         headers: {
@@ -61,36 +92,31 @@ const Dashboard = ({ name, ...props }) => {
                     }
                 );
                 setGoals(res.data.data);
-                console.log("Goal_res : ", res);
+                // console.log("Goal_res : ", res);
             } catch (error) {
                 console.log(error);
             }
         };
+
+        // pie chart
+        const pieChart = async () => {
+            const res = await axios.get(`${BASE_URL}/api/goal/count-goal-data`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log("PieChart_data : ", res)
+            const { completed_goals, upcoming_goals, running_goals } = res.data.meta;
+            setChartData(prevState => ({
+                ...prevState,
+                series: [completed_goals, upcoming_goals, running_goals]
+            }));
+        }
         profile();
         goals();
+        pieChart();
     }, []);
-
-
-    const goal = [
-        { title: 'Run 100 miles to reduce weight', status: 'Upcoming', goalStatus: 'Upcoming' },
-        { title: 'Produce $12,000 in revenue', status: 'In Progress', goalStatus: 'inProgress' },
-        { title: 'Setup a manufacturing unit in Punjab', status: 'Completed', goalStatus: 'Completed' },
-        { title: 'Get championship in swimming', status: 'Upcoming', goalStatus: 'Upcoming' },
-        { title: 'Open 2 stores in Mumbai', status: 'In Progress', goalStatus: 'inProgress' },
-        { title: 'Aquire Lands in Gujarat', status: 'Completed', goalStatus: 'Completed' },
-    ];
-
-
-    // lead_taerget graph state
-    const [leadExecutionScores, setLeadExecutionScores] = useState([]);
-    const [leadExecutionScoresRaw, setLeadExecutionScoresRaw] = useState([]);
-    // console.log("leadExecutionScoresRaw : ", leadExecutionScoresRaw)
-    // console.log("leadExecutionScores : ", leadExecutionScores)
-
-    // lag_target graph state
-    const [lagExecutionScores, setLagExecutionScores] = useState([]);
-    const [lagExecutionScoresRaw, setLagExecutionScoresRaw] = useState([]);
-
 
     return (
         <>
@@ -112,54 +138,19 @@ const Dashboard = ({ name, ...props }) => {
                             <h1 className='heading1 mb-3'>ACHIEVE DASHBOARD</h1>
                         </div>
                         <div className='innerBox'>
-                            {/* <div className='addedGoals'>
-                                <h3 className='heading3 mb-3 fw-semibold'>Your Goals</h3>
-                                <div className='wrap'>
 
-                                    {
-                                        goals && Array.isArray(goals) && goals.length > 0 ? (
-                                            goals.map((value, index) => {
-                                                return (
-                                                    <Link to={`/week-goals/${value.id}`} className='goalBox'>
-                                                        <p className='heading2 textPrimary fw-semibold'>{value.name}</p>
-                                                    </Link>
-
-                                                )
-                                            })
-                                        )
-                                            :
-                                            (
-                                                <p>No week goals available</p>
-                                            )
-                                    }
-
-                                </div>
-                            </div> */}
                             <div className="goals-container mb-3">
                                 <h2 className='heading2'>All Goals</h2>
                                 <div className="row goals-grid">
-
-                                    {/* {goal.map((goal, index) => (
-                                        <div className='col-lg-6 col-sm-6 col-12 mb-3' key={index}>
-                                            <Link to={`/week-goals/${goal.id}`} className={`goal-card ${goal.goalStatus.toLowerCase()}`}>
-                                                <span className="goal-title">Goal_Title</span>
-                                                <span className={`goal-status ${goal.goalStatus.toLowerCase()}`}>
-                                               
-                                                    Status
-                                                </span>
-                                            </Link>
-                                        </div>
-                                    ))} */}
-
                                     {
                                         goals && Array.isArray(goals) && goals.length > 0 ? (
                                             goals.map((value, index) => {
                                                 return (
                                                     <div className='col-lg-6 col-sm-6 col-12 mb-3' key={index}>
                                                         <Link to={`/week-goals/${value.id}`} className='goal-card'>
-                                                            {/* <p className='heading2 textPrimary fw-semibold'>{value.name}</p> */}
                                                             <span className="goal-title">{value.name}</span>
-                                                            <span className={`goal-status completed`}>
+                                                            <span className={value.goal_status === "Running" ? "goal-status inprogress" : value.goal_status === "Upcoming" ? "goal-status upcoming" : value.goal_status === "Completed" ? "goal-status completed" : "goal-status"}
+                                                            >
                                                                 {value.goal_status}
                                                             </span>
                                                         </Link>
@@ -174,19 +165,24 @@ const Dashboard = ({ name, ...props }) => {
                                     }
                                 </div>
                             </div>
-                           
+
+                            <div className="chart-container">
+                                <h2 className='heading2'>Goals Distribution</h2>
+                                <ApexCharts
+                                    options={chartData.options}
+                                    series={chartData.series}
+                                    type="pie"
+                                    height={350}
+                                />
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
             {/* </div> */}
-
-
-
-
-
-
-
         </>
     )
 }
