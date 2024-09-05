@@ -12,12 +12,7 @@ const Profile = () => {
     // profile change logic 
 
     const [formData, setFormData] = useState({
-        // name: logindata.name || '',
-        // contact_no: logindata.contact_no || '',
-        // isd_code: logindata.isd_code || '',
-        // whats_app_number: logindata.whats_app_number || '',
-        // location: logindata.location || '',
-        // date_of_birth: logindata.date_of_birth || '',
+       
         profile_image: null,
     });
 
@@ -27,13 +22,6 @@ const Profile = () => {
             [e.target.name]: e.target.value,
         });
     };
-
-    // const handleFileChange = (e) => {
-    //     setFormData({
-    //         ...formData,
-    //         profile_image: e.target.files[0],
-    //     });
-    // };
 
 
     const handleFileChange = (e) => {
@@ -48,12 +36,7 @@ const Profile = () => {
     const handleProfileChangeProfile = async () => {
         try {
             const profileData = new FormData();
-            // profileData.append('name', formData.name);
-            // profileData.append('contact_no', formData.contact_no);
-            // profileData.append('isd_code', formData.isd_code);
-            // profileData.append('whats_app_number', formData.whats_app_number);
-            // profileData.append('location', formData.location);
-            // profileData.append('date_of_birth', formData.date_of_birth);
+         
             if (formData.profile_image) {
                 profileData.append('profile_image', formData.profile_image);
             }
@@ -162,12 +145,12 @@ const Profile = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Body className='p-0'>
-                    <div className="welcome_container">
+                <Modal.Body className='p-0 w-100'>
+                    <div className="welcome_containerModal">
                         <button className='closeButton' onClick={closeModalShow}>
                             <i className="fi fi-rr-circle-xmark"></i>
                         </button>
-                        <div className="modal-body">
+                        <div className="modal_body">
                             <p className="modal-title">Upload a file</p>
                             <p className="modal-description"> {fileName === '' ? 'Attach the file below' : fileName}</p>
 
@@ -190,7 +173,7 @@ const Profile = () => {
                                 onChange={handleFileChange}
                             />
                         </div>
-                        <div className="modal-footer">
+                        <div className="modal-footer ms-auto">
                             <label type='button' className='primaryBtn' onClick={handleProfileChangeProfile}>Upload Image</label>
                             <input type="file" id="tb-file-upload" />
                         </div>
@@ -198,29 +181,7 @@ const Profile = () => {
                 </Modal.Body>
             </Modal>
 
-            {/* <Modal show={modalShow} onHide={closeModalShow} size="lg" centered>
-                <Modal.Body className='p-0'>
-                    <div className="welcome_container">
-                        <button className='closeButton' onClick={closeModalShow}>
-                            <i className="fi fi-rr-circle-xmark"></i>
-                        </button>
-                        <div className="modal-body">
-                            <p className="modal-title">Upload a file</p>
-                            <p className="modal-description">Attach the file below</p>
-                            <input
-                                type='file'
-                                className='img_upload'
-                                onChange={handleFileChange}
-                            />
-                        </div>
-                        <div className="modal-footer">
-                            <button className='primaryBtn' onClick={handleProfileChangeProfile}>
-                                Upload Image
-                            </button>
-                        </div>
-                    </div>
-                </Modal.Body>
-            </Modal> */}
+            
         </>
 
     )

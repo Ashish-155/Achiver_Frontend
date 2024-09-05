@@ -1,15 +1,10 @@
 import { useState, useContext, useEffect, Fragment } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link, useNavigate } from 'react-router-dom';
-import Select from 'react-select';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { toast } from 'react-toastify';
 import { LoginContext } from '../../ContextProvider/Context';
 import { BASE_URL } from '../../services/api';
 import axios from 'axios';
-import { DropdownButton, Modal } from 'react-bootstrap';
 import Avatar from '../../component/avatar/Avatar';
-import LeadChart from '../charts/LeadChart';
 import ApexCharts from 'react-apexcharts';
 
 const Dashboard = ({ name, ...props }) => {
@@ -166,14 +161,16 @@ const Dashboard = ({ name, ...props }) => {
                                 </div>
                             </div>
 
-                            <div className="chart-container">
+                            <div className="chart_container">
                                 <h2 className='heading2'>Goals Distribution</h2>
+                            <div className="chart_wrap">
                                 <ApexCharts
                                     options={chartData.options}
                                     series={chartData.series}
                                     type="pie"
                                     height={350}
                                 />
+                            </div>
                             </div>
 
 

@@ -1,8 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link, useParams } from 'react-router-dom';
-import Select from 'react-select';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Avatar from '../../component/avatar/Avatar';
 import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox';
 import axios from 'axios';
@@ -11,9 +8,7 @@ import { Modal } from 'react-bootstrap';
 import { GoalDataContext, LoginContext } from '../../ContextProvider/Context';
 import LeadChart from '../charts/LeadChart';
 import LagChart from '../charts/LagChart';
-// import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
-// import AllGoalsBox from '../allGoalsBox/AllGoalsBox';
-// import AllGoalsBox from '../../component/allGoalsBox/AllGoalsBox'
+
 
 
 const WeekGoals = () => {
@@ -28,8 +23,7 @@ const WeekGoals = () => {
     // lead_taerget graph state
     const [leadExecutionScores, setLeadExecutionScores] = useState([]);
     const [leadExecutionScoresRaw, setLeadExecutionScoresRaw] = useState([]);
-    // console.log("leadExecutionScoresRaw : ", leadExecutionScoresRaw)
-    // console.log("leadExecutionScores : ", leadExecutionScores)
+    
 
     // lag_target graph state
     const [lagExecutionScores, setLagExecutionScores] = useState([]);
@@ -141,7 +135,6 @@ const WeekGoals = () => {
     return (
         <>
             <div className='dashboard'>
-                {/* <div className=' overflow-x-hidden overflow-y-hidden'> */}
                 <div className='top_header'>
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1'>
@@ -174,8 +167,6 @@ const WeekGoals = () => {
                                 <div className='col-lg-6 col-md-12 col-sm-12'>
                                     <div className='chart_box'>
                                         <h3 className='heading3 mb-3'>Leads Graph</h3>
-                                        {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
-
                                         <LeadChart leadExecutionScores={leadExecutionScores} leadExecutionScoresRaw={leadExecutionScoresRaw} goalData={goal} />
 
                                     </div>
@@ -183,7 +174,6 @@ const WeekGoals = () => {
                                 <div className='col-lg-6 col-md-12 col-sm-12'>
                                     <div className='chart_box'>
                                         <h3 className='heading3 mb-3'>Lags Graph</h3>
-                                        {/* <img src={process.env.PUBLIC_URL + '../assets/image/chart1.png'} alt="chart" /> */}
                                         <LagChart lagExecutionScores={lagExecutionScores} lagExecutionScoresRaw={lagExecutionScoresRaw} goalData={goal} />
                                     </div>
                                 </div>
@@ -233,9 +223,7 @@ const WeekGoals = () => {
                                 <div className='col-lg-6 col-md-12 mb-4'>
                                     <div className='chart_box mb-0'>
                                         <h3 className='heading3 mb-3'>Lags Measure</h3>
-                                        {/* <div className='add_box'>
-                                                <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
-                                            </div> */}
+                                        
                                         <div className='row align-items-center'>
                                             <div className='col-lg-6 col-md-6 col-sm-12'>
                                                 <div className='chart_postion para3'>
@@ -258,12 +246,10 @@ const WeekGoals = () => {
                                             <div className='col-lg-6 col-md-6 col-sm-12'>
                                                 <div className='info'>
                                                     <div className='box'>
-                                                        {/* <div className='circle'></div> */}
                                                         <p className='para3'>Target</p>
                                                         <p className='para3'><strong>{goal.lag_target}</strong></p>
                                                     </div>
                                                     <div className='box'>
-                                                        {/* <div className='circle'></div> */}
                                                         <p className='para3'>Actual</p>
                                                         <p className='para3'><strong>{goal.lag_actual}</strong></p>
                                                     </div>
@@ -274,17 +260,13 @@ const WeekGoals = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <button className=" primaryBtn mt-0">
-                                    Set 12 Week Goals & Targets
-                                </button> */}
-
+                          
 
                             <AllGoalsBox goal={goal} refreshGoals={fetchGoal} />
                         </div>
 
                     </div>
                 </div>
-                {/* </div> */}
             </div>
 
 

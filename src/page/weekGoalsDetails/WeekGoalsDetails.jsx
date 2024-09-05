@@ -181,22 +181,6 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                     <h2 className='heading2 mb-0'>Week {goalData.week_for}</h2>
 
 
-                                    {/* {
-                                        <>
-                                            <Link
-                                                to={`/week-goals-details/${goalData.week_for - 1}`}
-                                                className='actionArrow left'>
-                                                <i className="fi fi-rr-angle-small-left"></i>
-                                            </Link>
-
-                                            <Link
-                                                to={`/week-goals-details/${goalData.week_for + 1}`}
-                                                className='actionArrow right'>
-                                                <i className="fi fi-rr-angle-small-right"></i>
-                                            </Link>
-                                        </>
-                                    } */}
-
                                 </div>
                                 <div className=' item_box'>
                                     <div className='task_card'>
@@ -309,14 +293,12 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                             <div className='col-md-6'>
                                                 <div className='d-flex mb-3 f-s-12 fw-bold'>
                                                     <span className='text-muted me-2'>Week Start Date :</span>
-                                                    {/* <span>{goalData.start_date}</span> */}
                                                     <span>{new Date(goalData.start_date).toLocaleDateString('en-GB')}</span>
                                                 </div>
                                             </div>
                                             <div className='col-md-6'>
                                                 <div className='d-flex  mb-3 f-s-12 fw-bold'>
                                                     <span className='text-muted me-2'>Week End Date :</span>
-                                                    {/* <span>{goalData.end_date}</span> */}
                                                     <span>{new Date(goalData.end_date).toLocaleDateString('en-GB')}</span>
                                                 </div>
                                             </div>
