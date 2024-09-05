@@ -206,7 +206,7 @@ const WeekTarget = ({ name, ...props }) => {
                 position: "top-center"
             });
             navigate(`/week-goals/${res.data.data.id}`)
-            console.log(res.data);
+            // console.log(res.data);
         } catch (error) {
             // Handle error response
             console.error('Error creating goal:', error.response ? error.response.data : error.message);

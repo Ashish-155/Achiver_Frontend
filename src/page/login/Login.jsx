@@ -60,7 +60,7 @@ const Login = () => {
                     `${BASE_URL}/api/user/login`,
                     inpval
                 );
-                console.log(res);
+                // console.log(res);
                 setLoginData(res.data.data);
                 toast.success("Login successful!", {
                     position: "top-center"

@@ -106,7 +106,7 @@ const Dashboard = ({ name, ...props }) => {
                     "Content-Type": "application/json",
                 },
             });
-            console.log("PieChart_data : ", res)
+            // console.log("PieChart_data : ", res)
             const { completed_goals, upcoming_goals, running_goals } = res.data.meta;
             setChartData(prevState => ({
                 ...prevState,

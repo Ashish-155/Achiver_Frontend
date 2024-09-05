@@ -48,7 +48,7 @@ const WeekGoals = () => {
             setGoal(res.data.data);
             setGoalDataContext(res.data.data)
 
-            console.log("fetch_Goal : ", res)
+            // console.log("fetch_Goal : ", res)
 
             // taerget graph
             const weekGoals = res.data.data.Week_Goal;
@@ -127,7 +127,7 @@ const WeekGoals = () => {
         }
 
         // Submit the form data
-        console.log('Form submitted:', actions);
+        // console.log('Form submitted:', actions);
 
         // Clear the form (optional)
         setActions({

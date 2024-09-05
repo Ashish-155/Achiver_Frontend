@@ -19,7 +19,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
 
 
     const { goalDataContext, setGoalDataContext } = useContext(GoalDataContext);
-    console.log("goalDataContext : ", goalDataContext)
+    // console.log("goalDataContext : ", goalDataContext)
 
 
     const { id } = useParams();
@@ -39,7 +39,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         day: '',
     });
     const [goalData, setGoalData] = useState({});
-    console.log("goalData : ", goalData)
+    // console.log("goalData : ", goalData)
 
     // Update formData when id changes
     useEffect(() => {
@@ -116,7 +116,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                 },
             });
             setGoalData(res.data.data);
-            console.log("WeekGoalDetails : ", res)
+            // console.log("WeekGoalDetails : ", res)
         } catch (error) {
             console.log("Error fetching goal details:", error);
         }
