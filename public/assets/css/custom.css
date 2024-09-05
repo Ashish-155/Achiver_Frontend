@@ -1571,7 +1571,6 @@ input[type="file"] {
   padding: 20px;
   background: #ffffff;
   border-radius: 14px;
-  padding: 20px;
 }
 
 .goals-container .heading2 {
@@ -1643,4 +1642,10 @@ input[type="file"] {
 
 .details_box .actionArrow.right {
   right: 20px;
+}
+
+.chart_container {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 14px;
 }

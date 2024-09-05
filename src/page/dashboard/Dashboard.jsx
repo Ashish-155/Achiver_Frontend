@@ -166,7 +166,7 @@ const Dashboard = ({ name, ...props }) => {
                                 </div>
                             </div>
 
-                            <div className="chart-container">
+                            <div className="chart_container">
                                 <h2 className='heading2'>Goals Distribution</h2>
                                 <ApexCharts
                                     options={chartData.options}
