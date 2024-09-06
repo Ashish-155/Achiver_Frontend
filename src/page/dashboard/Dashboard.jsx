@@ -124,6 +124,7 @@ const Dashboard = ({ name, ...props }) => {
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1'>
                             <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
+                            <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
