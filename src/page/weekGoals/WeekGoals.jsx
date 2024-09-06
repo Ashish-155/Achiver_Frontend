@@ -184,7 +184,7 @@ const WeekGoals = () => {
                                                 <button className=' textGray homeBox' onClick={openModalShow}><i class="fi fi-br-plus d-flex"></i></button>
                                             </div> */}
                                         <div className='row align-items-center'>
-                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                            <div className='col-lg-6 col-md-6 col-sm-6 col-6'>
                                                 <div className='chart_postion para3'>
                                                     {/* <img src={'assets/image/chart2.png'} alt='' /> */}
                                                     {/* <img src={process.env.PUBLIC_URL + 'assets/images/chart1.png'} alt="chart" /> */}
@@ -203,7 +203,7 @@ const WeekGoals = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                            <div className='col-lg-6 col-md-6 col-sm-6 col-6'>
                                                 <div className='info '>
                                                     <div className='box'>
                                                         <p className='para3'>Target</p>
@@ -225,7 +225,7 @@ const WeekGoals = () => {
                                         <h3 className='heading3 mb-3'>Lags Measure</h3>
                                         
                                         <div className='row align-items-center'>
-                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                            <div className='col-lg-6 col-md-6 col-sm-6 col-6'>
                                                 <div className='chart_postion para3'>
                                                     <img src={'assets/image/chart2.png'} alt='' />
                                                     {parseFloat(goal.lag_execution_score) >= 0 ? (
@@ -243,7 +243,7 @@ const WeekGoals = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className='col-lg-6 col-md-6 col-sm-12'>
+                                            <div className='col-lg-6 col-md-6 col-sm-6 col-6'>
                                                 <div className='info'>
                                                     <div className='box'>
                                                         <p className='para3'>Target</p>

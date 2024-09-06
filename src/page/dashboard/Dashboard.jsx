@@ -39,17 +39,21 @@ const Dashboard = ({ name, ...props }) => {
                 horizontalAlign: 'left', // Align legend to the left of the chart
                 offsetX: 0, // Adjust the horizontal offset
                 offsetY: 0, // Adjust the vertical offset
+                
             },
             responsive: [{
                 breakpoint: 480,
                 options: {
                     chart: {
-                        width: 200
+                        width: 300,
+                        // height: 300,
+                        margin: 'auto'
                     },
                     legend: {
                         position: 'bottom'
                     }
-                }
+                },
+                
             }]
         }
     });

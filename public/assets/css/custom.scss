@@ -1976,6 +1976,11 @@ input[type="file"] {
         width: 100%;
         margin-inline: auto;
         margin-top: 40px;
+        @media (max-width: 480px){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
     .heading2 {
         color: $text_black;
