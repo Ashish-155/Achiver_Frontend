@@ -236,7 +236,7 @@ const WeekTarget = ({ name, ...props }) => {
                                 <div className='goals_box mb-4'>
                                     <h3 className="heading3 mb-4">Set Your Goal</h3>
                                     <div className='row'>
-                                        <div className='col-lg-6 col-sm-6 col-6 mb-2'>
+                                        <div className='col-lg-6 col-sm-6 col-12 mb-2'>
                                             <label className='para3 textGray mb-1'>Your Goal Name<span className='red'>*</span></label>
                                             <input
                                                 className="form-control form_controlStyle2"
@@ -248,7 +248,7 @@ const WeekTarget = ({ name, ...props }) => {
                                             />
                                             {errors.goal && <p className="text-danger">{errors.goal}</p>}
                                         </div>
-                                        <div className='col-lg-6 col-sm-6 col-6 mb-2'>
+                                        <div className='col-lg-6 col-sm-6 col-12 mb-2'>
                                             <label className='para3 textGray mb-1'>Set Start Date<span className='red'>*</span></label>
                                             <input
                                                 type="date"
