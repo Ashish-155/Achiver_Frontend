@@ -259,6 +259,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                             <span className="para4">Lead Actual</span>
                                                             <span className="value">{goalData.lead_actual}</span>
                                                         </div>
+
                                                         <p className='para3 d-flex justify-content-start align-items-center gap-2 pt-2'>
                                                             {
                                                                 parseFloat(goalData.lead_execution_score) >= 0 ? (
@@ -278,6 +279,15 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                                 )
                                                             }
                                                         </p>
+
+                                                        <div className="measure mt-3">
+                                                            <span className="para4">Lead accumulate :</span>
+                                                            <span className="value">{goalDataContext.lead_actual}</span>
+                                                        </div>
+                                                        <div className="measure">
+                                                            <span className="para4"> Lag accumulate : </span>
+                                                            <span className="value">{goalDataContext.lag_actual}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,6 +321,14 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                                 )
                                                             }
                                                         </p>
+                                                        <div className="measure mt-3">
+                                                            <span className="para4">Lead accumulate :</span>
+                                                            <span className="value">{goalDataContext.lead_actual}</span>
+                                                        </div>
+                                                        <div className="measure">
+                                                            <span className="para4"> Lag accumulate : </span>
+                                                            <span className="value">{goalDataContext.lag_actual}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -327,7 +345,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 </div>
                                             </div>
 
-                                            <div className='col-md-12 mt-2'>
+                                            {/* <div className='col-md-12 mt-2'>
                                                 <div className='card border mb-3'>
                                                     <div className='card-body'>
                                                         <div className="measure">
@@ -341,7 +359,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <ToastContainer />
                                     </div>
