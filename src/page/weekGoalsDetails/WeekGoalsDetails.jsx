@@ -39,7 +39,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         day: '',
     });
     const [goalData, setGoalData] = useState({});
-    // console.log("goalData : ", goalData)
+    console.log("goalData : ", goalData)
 
     // Update formData when id changes
     useEffect(() => {
@@ -106,6 +106,26 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         }
     };
 
+    // cumulative api 
+    const [cumumlative, setCumulative] = useState({})
+    // console.log("Ashish API : ", cumumlative)
+    const cumulativeApi = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}/api/goal/cumulative-calculation?id=${goalData.goal_id}&week_goal_id=${id}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log("CumulativeApi : ", res)
+            setCumulative(res.data.data);
+
+        } catch (error) {
+            console.log("Error fetching cumulative goal:", error);
+        }
+    };
+
+
     const weekGoalDetails = async () => {
         if (!id) return; // Ensure id is available before making the API call
         try {
@@ -116,6 +136,16 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                 },
             });
             setGoalData(res.data.data);
+            // cumulativeApi();
+            const resp = await axios.get(`${BASE_URL}/api/goal/cumulative-calculation?goal_id=${res.data.data.goal_id}&week_goal_id=${id}`, {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            // console.log("CumulativeApi : ", resp)
+            setCumulative(resp.data.data);
+
             // console.log("WeekGoalDetails : ", res)
         } catch (error) {
             console.log("Error fetching goal details:", error);
@@ -137,12 +167,6 @@ const WeekGoalsDetails = ({ name, ...props }) => {
             console.log("Error deleting action:", error);
         }
     };
-
-    useEffect(() => {
-        if (id) {
-            weekGoalDetails();
-        }
-    }, [id]);
 
     const [goals, setGoals] = useState({});
 
@@ -242,7 +266,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                                         <i className="fi fi-rr-arrow-trend-up up"></i>
                                                                         <span className="up">
                                                                             {goalData.lead_execution_score}
-                                                                        </span> Lag score
+                                                                        </span> Lead score
                                                                     </>
                                                                 ) : (
                                                                     <>
@@ -307,12 +331,12 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 <div className='card border mb-3'>
                                                     <div className='card-body'>
                                                         <div className="measure">
-                                                            <span className="para4">Lead accumulate :</span>
-                                                            <span className="value">{goalDataContext.lead_actual}</span>
+                                                            <span className="para4">Cumulative Target :</span>
+                                                            <span className="value">{cumumlative.cumulativeLeadTarget}</span>
                                                         </div>
                                                         <div className="measure">
-                                                            <span className="para4"> Lag accumulate : </span>
-                                                            <span className="value">{goalDataContext.lag_actual}</span>
+                                                            <span className="para4"> Cumulative Actual : </span>
+                                                            <span className="value">{cumumlative.cumulativeLagActual}</span>
                                                         </div>
 
                                                     </div>
