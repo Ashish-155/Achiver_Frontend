@@ -174,10 +174,6 @@ const WeekGoalsDetails = ({ name, ...props }) => {
         return <div>No goals available</div>;
     }
 
-    // const currentIndex = goals.findIndex(goal => goal.id === parseInt(id));
-    // const previousId = currentIndex > 0 ? goals[currentIndex - 1].id : null;
-    // const nextId = currentIndex < goals.length - 1 ? goals[currentIndex + 1].id : null;
-
 
     return (
         <>
@@ -280,7 +276,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                             }
                                                         </p>
 
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -329,7 +325,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                                 )
                                                             }
                                                         </p>
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -361,6 +357,8 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                         <ToastContainer />
                                     </div>
