@@ -17,6 +17,7 @@ const Avatar = () => {
     const navigate = useNavigate();
     const removeToken = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem('token_expiration');
         toast.success("Logged out successfully!");
         navigate("/", { replace: true });
     };

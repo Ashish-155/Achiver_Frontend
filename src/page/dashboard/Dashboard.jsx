@@ -14,6 +14,7 @@ const Dashboard = ({ name, ...props }) => {
     const navigate = useNavigate();
     const removeToken = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem('token_expiration')
         toast.success("Logged out successfully!");
         navigate("/", { replace: true });
     };
@@ -39,7 +40,7 @@ const Dashboard = ({ name, ...props }) => {
                 horizontalAlign: 'left', // Align legend to the left of the chart
                 offsetX: 0, // Adjust the horizontal offset
                 offsetY: 0, // Adjust the vertical offset
-                
+
             },
             responsive: [{
                 breakpoint: 480,
@@ -53,7 +54,7 @@ const Dashboard = ({ name, ...props }) => {
                         position: 'bottom'
                     }
                 },
-                
+
             }]
         }
     });
@@ -124,7 +125,7 @@ const Dashboard = ({ name, ...props }) => {
                     <div className='container'>
                         <div className='d-flex justify-content-between align-items-center gap-1'>
                             <div className='d-flex justify-content-end align-items-center gap-2 ms-auto'>
-                            <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
+                                <Link to='/week-target' className=' primaryBtn mt-0 d-flex justify-content-center align-items-center gap-2 text-center'> <i className="fi fi-rr-plus-small d-flex justify-content-center align-items-center fs-5"></i>Add Goals</Link>
                                 <Link to='/dashboard' className=' textGray homeBox'> <i className="fi fi-br-house-chimney fs-5 d-flex"></i></Link>
                                 <Avatar />
                             </div>
@@ -168,14 +169,14 @@ const Dashboard = ({ name, ...props }) => {
 
                             <div className="chart_container">
                                 <h2 className='heading2'>Goals Distribution</h2>
-                            <div className="chart_wrap">
-                                <ApexCharts
-                                    options={chartData.options}
-                                    series={chartData.series}
-                                    type="pie"
-                                    height={350}
-                                />
-                            </div>
+                                <div className="chart_wrap">
+                                    <ApexCharts
+                                        options={chartData.options}
+                                        series={chartData.series}
+                                        type="pie"
+                                        height={350}
+                                    />
+                                </div>
                             </div>
 
 

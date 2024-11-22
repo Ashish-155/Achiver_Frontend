@@ -61,7 +61,7 @@ const Login = () => {
                     inpval
                 );
                 // console.log(res);
-                setLoginData(res.data.data);
+                // setLoginData(res.data.data);
                 toast.success("Login successful!", {
                     position: "top-center"
                 });

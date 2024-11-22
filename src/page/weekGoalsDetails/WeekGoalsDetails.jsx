@@ -280,21 +280,40 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className='col-md-12  d-sm-block d-md-none d-lg-none d-xl-none'>
+
+                                            <div className='col-md-12 d-sm-block d-md-none d-lg-none d-xl-none'>
                                                 <div className='card border mb-3'>
                                                     <div className='card-body'>
                                                         <div className="measure">
-                                                            <span className="para4">Lead accumulate :</span>
-                                                            <span className="value">{goalDataContext.lead_actual}</span>
+                                                            <span className="para4">Cumulative Target :</span>
+                                                            <span className="value">{cumumlative.cumulativeLeadTarget}</span>
                                                         </div>
                                                         <div className="measure">
-                                                            <span className="para4"> Lag accumulate : </span>
-                                                            <span className="value">{goalDataContext.lag_actual}</span>
+                                                            <span className="para4"> Cumulative Actual : </span>
+                                                            <span className="value">{cumumlative.cumulativeLagActual}</span>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            {/* <div className='col-md-12 mt-2 d-sm-none d-md-block d-lg-block d-xl-block'>
+                                                <div className='card border mb-3'>
+                                                    <div className='card-body'>
+                                                        <div className="measure">
+                                                            <span className="para4">Cumulative Target :</span>
+                                                            <span className="value">{cumumlative.cumulativeLeadTarget}</span>
+                                                        </div>
+                                                        <div className="measure">
+                                                            <span className="para4"> Cumulative Actual : </span>
+                                                            <span className="value">{cumumlative.cumulativeLagActual}</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div> */}
+
                                             <div className='col-md-6 mb-3'>
                                                 <div className='card border'>
                                                     <div className='card-body'>
@@ -327,6 +346,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                         </p>
 
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <div className='col-md-6'>
@@ -342,7 +362,7 @@ const WeekGoalsDetails = ({ name, ...props }) => {
                                                 </div>
                                             </div>
 
-                                            <div className='col-md-12 mt-2 d-sm-none d-md-block d-lg-block d-xl-block'>
+                                            <div className='col-md-12 mt-2 d-none d-sm-none d-md-block d-lg-block d-xl-block'>
                                                 <div className='card border mb-3'>
                                                     <div className='card-body'>
                                                         <div className="measure">
